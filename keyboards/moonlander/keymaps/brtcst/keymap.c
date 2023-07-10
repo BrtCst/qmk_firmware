@@ -1142,6 +1142,25 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     }
 }
 
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    // decide by combo->keycode
+    switch (combo->keycode) {
+        case BP_LCBR:
+        case BP_RCBR:
+            return COMBO_TERM_SHORT;
+    }
+
+    // or with combo index, i.e. its name from enum.
+    switch (index) {
+        case COMBO_10:
+        case COMBO_11:
+        case COMBO_14:
+        case COMBO_16:
+            return COMBO_TERM_SHORT;
+    }
+    return COMBO_TERM;
+}
+
 
 void leader_start_user(void) {
     // Do something when the leader key is pressed
