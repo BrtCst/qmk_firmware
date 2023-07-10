@@ -85,8 +85,8 @@ enum tap_dance_codes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, TO(5),                BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, QK_LEAD,              KC_TRNS, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
+    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, KC_HOME,              KC_END,  BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
     KC_LCTL, KC_LGUI, KC_LALT, MO(5),   LT(3,KC_DEL),   TD(D_0),                TD(D_2),          KC_BSPC, KC_TRNS, KC_LALT, MO(4),   KC_RCTL,
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT_moonlander(
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, BP_AT,                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, BP_DCIR,              KC_ENT,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, BP_DCIR,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_LCTL, KC_TRNS, KC_LALT, KC_TRNS, KC_TRNS,          KC_TRNS,              TD(D_4),          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -167,114 +167,116 @@ const uint16_t PROGMEM combo21[] = { BP_QUOT, BP_T, COMBO_END};
 const uint16_t PROGMEM combo22[] = { BP_C, BP_V, COMBO_END};
 const uint16_t PROGMEM combo23[] = { BP_E, BP_K, COMBO_END};
 const uint16_t PROGMEM combo24[] = { BP_S, BP_L, COMBO_END};
-const uint16_t PROGMEM combo25[] = { BP_T, BP_D, BP_L, COMBO_END};
-const uint16_t PROGMEM combo26[] = { BP_Q, BP_S, BP_R, COMBO_END};
 const uint16_t PROGMEM combo27[] = { BP_C, BP_T, BP_S, COMBO_END};
 const uint16_t PROGMEM combo28[] = { BP_U, BP_I, BP_E, COMBO_END};
 const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
 const uint16_t PROGMEM combo31[] = { BP_K, BP_DOT, COMBO_END};
 
-combo_t key_combos[] = {
-    COMBO(combo0, BP_MINS),
-    COMBO(combo1, BP_LBRC),
-    COMBO(combo2, BP_RBRC),
-    COMBO(combo3, BP_LPRN),
-    COMBO(combo4, BP_RPRN),
-    COMBO(combo5, BP_LCBR),
-    COMBO(combo6, BP_RCBR),
-    COMBO(combo7, CMC_0),
-    COMBO(combo8, CMC_1),
-    COMBO(combo9, BP_PLUS),
-    COMBO(combo10, BP_ASTR),
-    COMBO(combo11, BP_SLSH),
-    COMBO(combo12, BP_SCLN),
-    COMBO(combo13, BP_EQL),
-    COMBO(combo14, BP_HASH),
-    COMBO(combo15, KC_TAB),
-    COMBO(combo16, BP_BSLS),
-    COMBO(combo17, BP_LABK),
-    COMBO(combo18, BP_RABK),
-    COMBO(combo19, KC_PGUP),
-    COMBO(combo20, KC_PGDN),
-    COMBO(combo21, RALT(BP_COMM)),
-    COMBO(combo22, BP_DQUO),
-    COMBO(combo23, BP_GRV),
-    COMBO(combo24, BP_AT),
-    COMBO(combo25, KC_HOME),
-    COMBO(combo26, KC_END),
-    COMBO(combo27, BP_NDSH),
-    COMBO(combo28, BP_DLR),
-    COMBO(combo29, KC_ENTER),
-    COMBO(combo30, KC_ENTER),
-    COMBO(combo31, BP_COLN),
+enum combo_events {
+  COMBO_0,
+  COMBO_1,
+  COMBO_2,
+  COMBO_3,
+  COMBO_4,
+  COMBO_5,
+  COMBO_6,
+  COMBO_7,
+  COMBO_8,
+  COMBO_9,
+  COMBO_10,
+  COMBO_11,
+  COMBO_12,
+  COMBO_13,
+  COMBO_14,
+  COMBO_15,
+  COMBO_16,
+  COMBO_17,
+  COMBO_18,
+  COMBO_19,
+  COMBO_20,
+  COMBO_21,
+  COMBO_22,
+  COMBO_23,
+  COMBO_24,
+  COMBO_27,
+  COMBO_28,
+  COMBO_29,
+  COMBO_30,
+  COMBO_31
 };
+
+combo_t key_combos[] = {
+    [COMBO_0] = COMBO(combo0, BP_MINS),
+    [COMBO_1] = COMBO(combo1, BP_LBRC),
+    [COMBO_2] = COMBO(combo2, BP_RBRC),
+    [COMBO_3] = COMBO(combo3, BP_LPRN),
+    [COMBO_4] = COMBO(combo4, BP_RPRN),
+    [COMBO_5] = COMBO(combo5, BP_LCBR),
+    [COMBO_6] = COMBO(combo6, BP_RCBR),
+    [COMBO_7] = COMBO(combo7, CMC_0),
+    [COMBO_8] = COMBO(combo8, CMC_1),
+    [COMBO_9] = COMBO(combo9, BP_PLUS),
+    [COMBO_10] = COMBO(combo10, BP_ASTR),
+    [COMBO_11] = COMBO(combo11, BP_SLSH),
+    [COMBO_12] = COMBO(combo12, BP_SCLN),
+    [COMBO_13] = COMBO(combo13, BP_EQL),
+    [COMBO_14] = COMBO(combo14, BP_HASH),
+    [COMBO_15] = COMBO(combo15, KC_TAB),
+    [COMBO_16] = COMBO(combo16, BP_BSLS),
+    [COMBO_17] = COMBO(combo17, BP_LABK),
+    [COMBO_18] = COMBO(combo18, BP_RABK),
+    [COMBO_19] = COMBO(combo19, KC_PGUP),
+    [COMBO_20] = COMBO(combo20, KC_PGDN),
+    [COMBO_21] = COMBO(combo21, RALT(BP_COMM)),
+    [COMBO_22] = COMBO(combo22, BP_DQUO),
+    [COMBO_23] = COMBO(combo23, BP_GRV),
+    [COMBO_24] = COMBO(combo24, BP_AT),
+    [COMBO_27] = COMBO(combo27, BP_NDSH),
+    [COMBO_28] = COMBO(combo28, BP_DLR),
+    [COMBO_29] = COMBO(combo29, KC_ENTER),
+    [COMBO_30] = COMBO(combo30, KC_ENTER),
+    [COMBO_31] = COMBO(combo31, BP_COLN),
+};
+
+// Combos plus complexe, code si besoin
+
+// enum combo_events {
+//   EM_EMAIL,
+//   BSPC_LSFT_CLEAR,
+// };
+
+// const uint16_t PROGMEM email_combo[] = {KC_E, KC_M, COMBO_END};
+// const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
+
+// combo_t key_combos[] = {
+//   [EM_EMAIL] = COMBO_ACTION(email_combo),
+//   [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
+// };
+// /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
+
+// void process_combo_event(uint16_t combo_index, bool pressed) {
+//   switch(combo_index) {
+//     case EM_EMAIL:
+//       if (pressed) {
+//         SEND_STRING("john.doe@example.com");
+//       }
+//       break;
+//     case BSPC_LSFT_CLEAR:
+//       if (pressed) {
+//         tap_code16(KC_END);
+//         tap_code16(S(KC_HOME));
+//         tap_code16(KC_BSPC);
+//       }
+//       break;
+//   }
+// }
 
 
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
   rgb_matrix_mode(RGB_MATRIX_CUSTOM_BRTCST_CUSTOM);
 }
-
-// Transition to the next RGB matrix mode.
-/*void next_light_mode(void) {
-   switch(rgb_matrix_get_mode()) {
-      case RGB_MATRIX_NONE:
-         rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
-         break;
-      case RGB_MATRIX_SOLID_COLOR:
-         rgb_matrix_mode(RGB_MATRIX_CUSTOM_no_light);
-         break;
-      default:
-         rgb_matrix_mode(RGB_MATRIX_CUSTOM_no_light);
-         break;
-   }
-}*/
-
-
-/*
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    RGB_MATRIX_INDICATOR_SET_COLOR(index, red, green, blue);
-    return false;
-}
-
-
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    for (uint8_t i = led_min; i < led_max; i++) {
-        switch(get_highest_layer(layer_state|default_layer_state)) {
-            case 2:
-                rgb_matrix_set_color(i, RGB_BLUE);
-                break;
-            case 1:
-                rgb_matrix_set_color(i, RGB_YELLOW);
-                break;
-            default:
-                break;
-        }
-    }
-    return false;
-}
-*/
-
-/*
-void set_layer_color(int layer) {
-  for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    HSV hsv = {
-      .h = pgm_read_byte(&ledmap[layer][i][0]),
-      .s = pgm_read_byte(&ledmap[layer][i][1]),
-      .v = pgm_read_byte(&ledmap[layer][i][2]),
-    };
-    if (!hsv.h && !hsv.s && !hsv.v) {
-        rgb_matrix_set_color( i, 0, 0, 0 );
-    } else {
-        RGB rgb = hsv_to_rgb( hsv );
-        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
-    }
-  }
-}
-*/
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -1131,46 +1133,36 @@ tap_dance_action_t tap_dance_actions[] = {
 
 /* custom */
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /* combos only on layer 0*/
-    return layer_state_is(0);
+    switch (combo_index) {
+        case COMBO_30:
+            return layer_state_is(0) || layer_state_is(1);
+        default:
+            /* all combos on layer 0*/
+            return layer_state_is(0);
+    }
 }
 
-/*
-LEADER_EXTERNS();
 
-// Declare a boolean variable to keep track of whether any sequence
-// will have been matched.
-bool did_leader_succeed;
+void leader_start_user(void) {
+    // Do something when the leader key is pressed
+}
 
-void matrix_scan_user(void) {
-  LEADER_DICTIONARY() {
-    // Initialize did_leader_succeed as well as leading to be false
-    did_leader_succeed = leading = false;
-    // Replace the sequences below with your own sequences.
-    SEQ_ONE_KEY(BP_T) {
-      SEND_STRING("t");
-      // In each sequence, set our flag to true. This way, we'll
-      // know when any sequence was matched.
-      did_leader_succeed = true;
+void leader_end_user(void) {
+    if (leader_sequence_two_keys(BP_M, BP_B)) {
+        SEND_STRING("- [ ]");
+        //tap_code16(KC_LEFT);
+    } else if (leader_sequence_one_key(BP_AT)) {
+        SEND_STRING("bertrand.castelli@gmail.com");
     }
     
-    SEQ_TWO_KEYS(BP_S, BP_L) {
-      SEND_STRING("bertrand.castelli@gmail.com");
-      did_leader_succeed = true;
-    }
-    // Call leader_end at the end of the function, instead of at
-    // the start. This way, we're sure we have set did_leader_succeed.
-    leader_end();
-  }
+    /* else if (leader_sequence_two_keys(KC_D, KC_D)) {
+        // Leader, d, d => Ctrl+A, Ctrl+C
+        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
+    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
+        // Leader, d, d, s => Types the below string
+        SEND_STRING("https://start.duckduckgo.com\n");
+    } else if (leader_sequence_two_keys(KC_A, KC_S)) {
+        // Leader, a, s => GUI+S
+        tap_code16(LGUI(KC_S));
+    }*/
 }
-
-void leader_end(void) {
-
-    if (did_leader_succeed) {
-        //PLAY_SONG(leader_succeed_song);
-    } else {
-        //PLAY_SONG(leader_fail_song);
-    }
-
-}
-*/
