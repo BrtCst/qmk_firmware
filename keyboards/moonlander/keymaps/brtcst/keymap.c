@@ -1185,3 +1185,16 @@ void leader_end_user(void) {
         tap_code16(LGUI(KC_S));
     }*/
 }
+
+/* Gestion des leds */
+/*void led_update_ports(led_t led_state) {
+    ML_LED_5(led_state.num_lock);
+    ML_LED_6(led_state.caps_lock);
+}*/
+
+bool led_update_user(led_t led_state) {
+    ML_LED_5(led_state.num_lock);
+    ML_LED_6(led_state.caps_lock);
+    return false;
+}
+

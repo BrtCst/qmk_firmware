@@ -32,3 +32,7 @@
 #define LEADER_NO_TIMEOUT
 #define RGB_MATRIX_DEFAULT_HUE 0
 #define RGB_MATRIX_DEFAULT_SAT 0
+// pour avoir les indicator leds en custom
+#define MOONLANDER_USER_LEDS
+
+#undef CAPS_LOCK_STATUS
