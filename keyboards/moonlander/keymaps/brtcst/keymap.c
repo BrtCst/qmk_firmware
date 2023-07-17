@@ -276,6 +276,7 @@ combo_t key_combos[] = {
 void keyboard_post_init_user(void) {
   rgb_matrix_enable();
   rgb_matrix_mode(RGB_MATRIX_CUSTOM_BRTCST_CUSTOM);
+  led_update_ports(host_keyboard_led_state());
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -1188,7 +1189,7 @@ void leader_end_user(void) {
 
 /* Gestion des leds */
 /*void led_update_ports(led_t led_state) {
-    ML_LED_5(led_state.num_lock);
+    //ML_LED_5(led_state.num_lock);
     ML_LED_6(led_state.caps_lock);
 }*/
 
@@ -1198,3 +1199,28 @@ void leader_end_user(void) {
     return false;
 }*/
 
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+        ML_LED_6(host_keyboard_led_state().caps_lock);
+        ML_LED_5(!host_keyboard_led_state().num_lock);
+	return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  switch (get_highest_layer(state)) {
+    case 0:
+        ML_LED_1(false);
+        ML_LED_2(false);
+        ML_LED_3(false);
+        ML_LED_4(false);
+        break;
+    case 1:
+        ML_LED_1(false);
+        ML_LED_2(false);
+        ML_LED_3(true);
+        ML_LED_4(false);
+        break;
+    default: //  for any other layers, or the default layer
+        break;
+    }
+  return state;
+}
