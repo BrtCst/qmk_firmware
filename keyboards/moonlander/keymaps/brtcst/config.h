@@ -35,4 +35,3 @@
 // pour avoir les indicator leds en custom
 #define MOONLANDER_USER_LEDS
 
-#undef CAPS_LOCK_STATUS
