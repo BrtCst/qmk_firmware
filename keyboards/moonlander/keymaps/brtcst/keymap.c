@@ -51,7 +51,6 @@ enum custom_keycodes {
   BP_RSPC,
 };
 
-
 typedef struct {
     uint16_t tap;
     uint16_t hold;
@@ -59,9 +58,14 @@ typedef struct {
 } tap_dance_tap_hold_t;
 tap_dance_action_t *action;
 
+typedef struct {
+    bool is_press_action;
+    uint8_t step;
+} tap;
+
+static tap dance_state[22];
+
 enum tap_dance_codes {
-  D_19,
-  D_20,
   D_0,
   D_1,
   D_2,
@@ -81,15 +85,19 @@ enum tap_dance_codes {
   D_16,
   D_17,
   D_18,
+  D_19,
+  D_20,
+  D_21,
+  D_22
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, KC_HOME,              KC_END,  BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, KC_TRNS,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, MO(5),   MO(3),            TD(D_0),              TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_TRNS, TD(D_21),         TD(D_0),              TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,
                                         KC_SPC, SH_MON, TD(D_1),                TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander(
@@ -433,11 +441,6 @@ void tap_dance_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
 #define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
 
-typedef struct {
-    bool is_press_action;
-    uint8_t step;
-} tap;
-
 enum {
     SINGLE_TAP = 1,
     SINGLE_HOLD,
@@ -446,8 +449,6 @@ enum {
     DOUBLE_SINGLE_TAP,
     MORE_TAPS
 };
-
-static tap dance_state[19];
 
 uint8_t dance_step(tap_dance_state_t *state);
 
@@ -1108,9 +1109,32 @@ void dance_18_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[18].step = 0;
 }
 
+void on_dance_21(tap_dance_state_t *state, void *user_data);
+void dance_21_finished(tap_dance_state_t *state, void *user_data);
+void dance_21_reset(tap_dance_state_t *state, void *user_data);
+
+void on_dance_21(tap_dance_state_t *state, void *user_data) {
+    
+}
+
+void dance_21_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[21].step = dance_step(state);
+    switch (dance_state[21].step) {
+        case SINGLE_HOLD: layer_on(3); break;
+        case DOUBLE_HOLD: layer_on(5);
+    }
+}
+
+void dance_21_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[21].step) {
+        case SINGLE_HOLD: layer_off(3); break;
+        case DOUBLE_HOLD: layer_off(5);
+    }
+    dance_state[21].step = 0;
+}
+
 tap_dance_action_t tap_dance_actions[] = {
-        [D_19] = ACTION_TAP_DANCE_TAP_HOLD(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
-        [D_20] = ACTION_TAP_DANCE_TAP_HOLD(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
         [D_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
         [D_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
         [D_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
@@ -1130,6 +1154,10 @@ tap_dance_action_t tap_dance_actions[] = {
         [D_16] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_16, dance_16_finished, dance_16_reset),
         [D_17] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_17, dance_17_finished, dance_17_reset),
         [D_18] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_18, dance_18_finished, dance_18_reset),
+        [D_19] = ACTION_TAP_DANCE_TAP_HOLD(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
+        [D_20] = ACTION_TAP_DANCE_TAP_HOLD(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
+        [D_21] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_21, dance_21_finished, dance_21_reset),
+        [D_22] = ACTION_TAP_DANCE_DOUBLE(KC_END, KC_HOME),
 };
 
 /* custom */
