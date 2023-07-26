@@ -406,6 +406,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             rgblight_mode(1);
         }
         return false;*/
+    case TD(D_21):
+        action = &tap_dance_actions[TD_INDEX(keycode)];
+        if (record->event.pressed && !action->state.finished) {
+            switch (action->state.count) {
+                case 0: layer_on(3); break;
+                case 1: layer_on(5); break;
+            }
+        }
+        break;
   }
   return true;
 }
@@ -1109,28 +1118,17 @@ void dance_18_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[18].step = 0;
 }
 
-void on_dance_21(tap_dance_state_t *state, void *user_data);
 void dance_21_finished(tap_dance_state_t *state, void *user_data);
 void dance_21_reset(tap_dance_state_t *state, void *user_data);
 
-void on_dance_21(tap_dance_state_t *state, void *user_data) {
-    
-}
-
 void dance_21_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[21].step = dance_step(state);
-    switch (dance_state[21].step) {
-        case SINGLE_HOLD: layer_on(3); break;
-        case DOUBLE_HOLD: layer_on(5);
-    }
 }
 
 void dance_21_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
-    switch (dance_state[21].step) {
-        case SINGLE_HOLD: layer_off(3); break;
-        case DOUBLE_HOLD: layer_off(5);
-    }
+    layer_off(3);
+    layer_off(5);
     dance_state[21].step = 0;
 }
 
@@ -1156,7 +1154,7 @@ tap_dance_action_t tap_dance_actions[] = {
         [D_18] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_18, dance_18_finished, dance_18_reset),
         [D_19] = ACTION_TAP_DANCE_TAP_HOLD(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
         [D_20] = ACTION_TAP_DANCE_TAP_HOLD(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
-        [D_21] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_21, dance_21_finished, dance_21_reset),
+        [D_21] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_21_finished, dance_21_reset),
         [D_22] = ACTION_TAP_DANCE_DOUBLE(KC_END, KC_HOME),
 };
 
