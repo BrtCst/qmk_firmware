@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_NO,   DM_REC1, DM_RSTP, DM_PLY1, KC_NO,   RGB_VAD,              CMC_7,   KC_NO,   KC_KP_7, KC_KP_8, KC_KP_9, KC_NO,   KC_NO,
     KC_TRNS, KC_NO,   DM_REC2, DM_RSTP, DM_PLY2, CMC_4,   CMC_5,                CMC_8,   KC_NO,   KC_KP_4, KC_KP_5, KC_KP_6, KC_NO,   KC_NO,
     KC_TRNS, KC_NO,   KC_NO,   KC_NO,   CMC_6,   KC_NO,                                  CMC_9,   KC_KP_1, KC_KP_2, KC_KP_3, KC_NO,   KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_DELETE,        KC_TRNS,              LGUI(LSFT(BP_CCED)),KC_TRNS, KC_KP_0, BP_DOT, BP_COMM, KC_NO,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_TRNS,          KC_TRNS,              LGUI(LSFT(BP_CCED)),KC_TRNS, KC_KP_0, BP_DOT, BP_COMM, KC_NO,
                                         RALT(LSFT(KC_SPC)),KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS
     ),
   [3] = LAYOUT_moonlander(
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     BP_Z,    BP_J,    BP_L,    BP_D,    BP_V,    BP_DCIR, KC_TRNS,              KC_TRNS, CMC_10, CMC_11, CMC_12, CMC_13, KC_TRNS, KC_TRNS,
     BP_M,    BP_N,    BP_R,    BP_S,    BP_T,    BP_C,    KC_TRNS,              KC_TRNS, KC_TRNS, CMC_14, KC_NO,  CMC_15, KC_TRNS, KC_TRNS,
     OSM(MOD_LSFT), BP_F, BP_H, BP_G,    BP_Q,    BP_QUOT,                                CMC_16,  CMC_17,  CMC_18,  CMC_19,  KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, BP_W,    KC_BSPC,          LGUI(LSFT(BP_CCED)),  KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, BP_W,    KC_TRNS,          LGUI(LSFT(BP_CCED)),  KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                         KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS
     ),
   [6] = LAYOUT_moonlander(
