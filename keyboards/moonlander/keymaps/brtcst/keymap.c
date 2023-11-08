@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL, KC_TRNS, KC_LALT, KC_TRNS, KC_TRNS,          KC_TRNS,              TD(D_4),          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                         KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS
   ),
-  [2] = LAYOUT_moonlander(
+  [2] = LAYOUT_moonlander( //numpad & macros
     QK_BOOT, KC_NO,   CMC_2,   CMC_3,   KC_NO,   KC_NO,   RGB_VAI,              LGUI(LALT(BP_B)), KC_NO,   KC_NUM,  KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS,
     KC_TRNS, KC_NO,   DM_REC1, DM_RSTP, DM_PLY1, KC_NO,   RGB_VAD,              LSFT(LALT(LCTL(KC_F18))),   KC_NO,   KC_KP_7, KC_KP_8, KC_KP_9, KC_NO,   KC_NO,
     KC_TRNS, KC_NO,   DM_REC2, DM_RSTP, DM_PLY2, CMC_4,   CMC_5,                LSFT(LALT(LCTL(KC_F17))),   KC_NO,   KC_KP_4, KC_KP_5, KC_KP_6, KC_NO,   KC_NO,
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,   KC_TRNS,          KC_TRNS,              LGUI(LALT(KC_F13)),KC_TRNS, KC_KP_0, BP_DOT, BP_COMM, KC_NO,
                                         RALT(LSFT(KC_SPC)),KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS
     ),
-  [3] = LAYOUT_moonlander(
+  [3] = LAYOUT_moonlander( // Fx & arrows
     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_VOLU,               KC_NO,   KC_NO,   KC_NO,   KC_PGUP, KC_NO,   KC_NO,   KC_NO,
     KC_TRNS, TD(D_6), TD(D_7), TD(D_8), TD(D_9), KC_NO,  KC_VOLD,               KC_NO,   KC_NO,   KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_NO,
     KC_TRNS, TD(D_10), TD(D_11), TD(D_12), TD(D_13), KC_NO, KC_NO,              KC_NO,   LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), KC_NO,
@@ -124,11 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, OSM(MOD_MEH), KC_TRNS,   TD(D_18),               KC_TRNS,          LCTL(KC_BSPC),KC_NO, KC_NO, KC_NO,  KC_NO,
                                         KC_MPRV, TD(D_19), KC_MNXT,             LGUI(LCTL(KC_LEFT)),TD(D_20), LGUI(LCTL(KC_RIGHT))
     ),
-  [4] = LAYOUT_moonlander(
+  [4] = LAYOUT_moonlander( // arrows
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_HOME, KC_UP, KC_END, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PGUP, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                KC_TRNS, TD(D_22),KC_UP,   KC_PGDN, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS,              KC_TRNS,          KC_LEFT, KC_DOWN, KC_RGHT, KC_TRNS, KC_TRNS,
                                         KC_TRNS, KC_TRNS, KC_TRNS,              KC_TRNS, KC_TRNS, KC_TRNS
     ),
