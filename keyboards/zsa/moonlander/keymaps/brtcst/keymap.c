@@ -49,6 +49,7 @@ enum custom_keycodes {
   CMC_19,
   BP_LSPO,
   BP_RSPC,
+  CMC_END_RETURN
 };
 
 typedef struct {
@@ -165,7 +166,7 @@ const uint16_t PROGMEM combo11[] = { BP_G, BP_R, COMBO_END};
 const uint16_t PROGMEM combo12[] = { BP_E, BP_COMM, COMBO_END};
 const uint16_t PROGMEM combo13[] = { BP_T, BP_S, BP_R, COMBO_END};
 const uint16_t PROGMEM combo14[] = { BP_U, BP_I, COMBO_END};
-const uint16_t PROGMEM combo15[] = { BP_I, BP_E, COMBO_END};
+//const uint16_t PROGMEM combo15[] = { BP_I, BP_E, COMBO_END};
 const uint16_t PROGMEM combo16[] = { BP_S, BP_H, COMBO_END};
 const uint16_t PROGMEM combo17[] = { BP_P, BP_E, COMBO_END};
 const uint16_t PROGMEM combo18[] = { BP_T, BP_D, COMBO_END};
@@ -180,6 +181,7 @@ const uint16_t PROGMEM combo28[] = { BP_U, BP_I, BP_E, COMBO_END};
 const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
 const uint16_t PROGMEM combo31[] = { BP_K, BP_DOT, COMBO_END};
+const uint16_t PROGMEM combo32[] = { BP_Q, BP_G, BP_H, COMBO_END};
 
 enum combo_events {
   COMBO_0,
@@ -197,7 +199,7 @@ enum combo_events {
   COMBO_12,
   COMBO_13,
   COMBO_14,
-  COMBO_15,
+//  COMBO_15,
   COMBO_16,
   COMBO_17,
   COMBO_18,
@@ -211,7 +213,8 @@ enum combo_events {
   COMBO_28,
   COMBO_29,
   COMBO_30,
-  COMBO_31
+  COMBO_31,
+  COMBO_32
 };
 
 combo_t key_combos[] = {
@@ -245,6 +248,7 @@ combo_t key_combos[] = {
     [COMBO_29] = COMBO(combo29, KC_ENTER),
     [COMBO_30] = COMBO(combo30, KC_ENTER),
     [COMBO_31] = COMBO(combo31, BP_COLN),
+    [COMBO_32] = COMBO(combo32, CMC_END_RETURN),
 };
 
 // Combos plus complexe, code si besoin
@@ -387,6 +391,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CMC_19:
     if (record->event.pressed) {
       SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_8) ));
+    }
+    break;
+    case CMC_END_RETURN:
+    if (record->event.pressed) {
+      SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
     }
     break;
 
