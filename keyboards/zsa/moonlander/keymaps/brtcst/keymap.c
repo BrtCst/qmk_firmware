@@ -1208,7 +1208,7 @@ void leader_end_user(void) {
         SEND_STRING("- [ ]");
         //tap_code16(KC_LEFT);
     } else if (leader_sequence_one_key(BP_AT)) {
-        SEND_STRING("bertrand.castelli@gmail.com");
+        SEND_STRING("@brtcst.net");
     } else if (leader_sequence_one_key(BP_D)) {
         // utilisé avec Autohotkey pour insérer la date du jour
         tap_code16(KC_F13);
