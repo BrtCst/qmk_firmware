@@ -1,0 +1,13 @@
+[1mdiff --git a/keyboards/zsa/moonlander/keymaps/brtcst/keymap.c b/keyboards/zsa/moonlander/keymaps/brtcst/keymap.c[m
+[1mindex 9033ffd692..e91331f012 100644[m
+[1m--- a/keyboards/zsa/moonlander/keymaps/brtcst/keymap.c[m
+[1m+++ b/keyboards/zsa/moonlander/keymaps/brtcst/keymap.c[m
+[36m@@ -98,7 +98,7 @@[m [mconst uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[m
+     XXXXXXX, BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,[m
+     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,[m
+     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,[m
+[31m-    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,[m
+[32m+[m[32m    KC_LCTL, KC_LGUI, KC_LALT, TD(D_21),KC_TAB,         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,[m
+                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT[m
+   ),[m
+   [1] = LAYOUT_moonlander( //gaming[m

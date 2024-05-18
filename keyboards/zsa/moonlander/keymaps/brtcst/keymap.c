@@ -98,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,
+    KC_LCTL, KC_LGUI, KC_LALT, TD(D_21),KC_TAB,         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander( //gaming
