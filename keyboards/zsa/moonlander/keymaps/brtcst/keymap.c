@@ -81,7 +81,7 @@ enum tap_dance_codes {
   D_11,
   D_12,
   D_13,
-  D_14,
+  D_14,E
   D_15,
   D_16,
   D_17,
@@ -95,10 +95,10 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    XXXXXXX, BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    MO(5),   BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, TD(D_21),KC_TAB,         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL, KC_LALT, MO(4),   KC_RCTL,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander( //gaming
@@ -110,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______, _______, _______,              _______, _______, _______
   ),
   [2] = LAYOUT_moonlander( //numpad
-    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, KC_NUM,  KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS,
+    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, KC_NUM,  KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS,
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX,
-    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,                LSFT(LALT(LCTL(KC_F17))), XXXXXXX, KC_KP_4, KC_KP_5, KC_KP_6, XXXXXXX, XXXXXXX,
+    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), XXXXXXX, KC_KP_4, KC_KP_5, KC_KP_6, XXXXXXX, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                CMC_9,   KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, _______,
     _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, KC_KP_0, BP_DOT, BP_COMM, XXXXXXX,
                                         RALT(LSFT(KC_SPC)),_______, _______,    _______, _______, _______
@@ -134,19 +134,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______, _______, _______,              _______, _______, _______
     ),
   [5] = LAYOUT_moonlander(
-    BP_EQL,  BP_ASTR, BP_SLSH, BP_MINS, BP_PLUS, BP_AT,   TO(0),                _______, _______, _______, _______, _______, _______, _______,
-    BP_Z,    BP_J,    BP_L,    BP_D,    BP_V,    BP_DCIR, _______,              _______, CMC_10, CMC_11, CMC_12, CMC_13, _______, _______,
-    BP_M,    BP_N,    BP_R,    BP_S,    BP_T,    BP_C,    _______,              _______, _______, CMC_14, XXXXXXX,CMC_15, _______, _______,
-    OSM(MOD_LSFT), BP_F, BP_H, BP_G,    BP_Q,    BP_QUOT,                                CMC_16,  CMC_17,  CMC_18,  CMC_19,  _______, _______,
-    _______, _______, _______, _______,  _______,          LGUI(LSFT(BP_CCED)),  _______,          _______, _______, _______, _______, _______,
-                                        _______, _______, _______,              _______, _______, _______
-    ),
-  [6] = LAYOUT_moonlander(
-    _______, _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,                                _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______,          _______,              _______,          _______, _______, _______, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, _______, _______, _______, _______, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, CMC_10, CMC_11, CMC_12, CMC_13, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, _______, CMC_14, XXXXXXX,CMC_15, _______, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                CMC_16,  CMC_17,  CMC_18,  CMC_19,  _______, _______,
+    _______, _______, _______, _______, _______,          LGUI(LSFT(BP_CCED)),  _______,          _______, _______, _______, _______, _______,
                                         _______, _______, _______,              _______, _______, _______
     ),
 };
