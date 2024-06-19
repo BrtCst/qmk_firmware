@@ -81,7 +81,7 @@ enum tap_dance_codes {
   D_11,
   D_12,
   D_13,
-  D_14,E
+  D_14,
   D_15,
   D_16,
   D_17,
@@ -174,7 +174,8 @@ const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
 const uint16_t PROGMEM combo31[] = { BP_K, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo32[] = { BP_Q, BP_G, BP_H, COMBO_END};
-
+const uint16_t PROGMEM combo33[] = { BP_Y, BP_X, COMBO_END};
+const uint16_t PROGMEM combo34[] = { BP_G, BP_H, COMBO_END};
 enum combo_events {
   COMBO_0,
   COMBO_1,
@@ -206,7 +207,9 @@ enum combo_events {
   COMBO_29,
   COMBO_30,
   COMBO_31,
-  COMBO_32
+  COMBO_32,
+  COMBO_33,
+  COMBO_34
 };
 
 combo_t key_combos[] = {
@@ -241,6 +244,8 @@ combo_t key_combos[] = {
     [COMBO_30] = COMBO(combo30, KC_ENTER),
     [COMBO_31] = COMBO(combo31, BP_COLN),
     [COMBO_32] = COMBO(combo32, CMC_END_RETURN),
+    [COMBO_33] = COMBO(combo33, KC_ENTER),
+    [COMBO_34] = COMBO(combo34, KC_ENTER),
 };
 
 // Combos plus complexe, code si besoin
