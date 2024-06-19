@@ -95,8 +95,8 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    MO(5),   BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              TD(D_22),BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
-    KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, BP_W,                 BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
+    TD(D_22),BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
     KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
@@ -110,18 +110,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______, _______, _______,              _______, _______, _______
   ),
   [2] = LAYOUT_moonlander( //numpad
-    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, KC_NUM,  KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS,
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX,
-    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), XXXXXXX, KC_KP_4, KC_KP_5, KC_KP_6, XXXXXXX, XXXXXXX,
+    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), KC_PPLS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, XXXXXXX,
+    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PSLS, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                CMC_9,   KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, _______,
     _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, KC_KP_0, BP_DOT, BP_COMM, XXXXXXX,
                                         RALT(LSFT(KC_SPC)),_______, _______,    _______, _______, _______
     ),
   [3] = LAYOUT_moonlander( // Fx & arrows
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_VOLU,               XXXXXXX, XXXXXXX, XXXXXXX, KC_PGUP, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, TD(D_6), TD(D_7), TD(D_8), TD(D_9), XXXXXXX,KC_VOLD,               XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX, XXXXXXX,
-    _______, TD(D_10), TD(D_11), TD(D_12), TD(D_13), XXXXXXX, TD(D_18),              XXXXXXX, LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), XXXXXXX,
-    _______, TD(D_14), TD(D_15), TD(D_16), TD(D_17), XXXXXXX,                            XXXXXXX, XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX, _______,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_VOLU,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, TD(D_6), TD(D_7), TD(D_8), TD(D_9), XXXXXXX,KC_VOLD,               XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_PGUP,  XXXXXXX, XXXXXXX,
+    _______, TD(D_10), TD(D_11), TD(D_12), TD(D_13), XXXXXXX, TD(D_18),         XXXXXXX, LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), XXXXXXX,
+    _______, TD(D_14), TD(D_15), TD(D_16), TD(D_17), XXXXXXX,                            XXXXXXX, KC_END, XXXXXXX , KC_PGDN, XXXXXXX, _______,
     _______, _______, _______, _______, _______,           XXXXXXX,             _______,          LCTL(KC_BSPC),XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,
                                         KC_MPRV, TD(D_19), KC_MNXT,             LGUI(LCTL(KC_LEFT)),TD(D_20), LGUI(LCTL(KC_RIGHT))
     ),
@@ -170,8 +170,8 @@ const uint16_t PROGMEM combo23[] = { BP_E, BP_K, COMBO_END};
 const uint16_t PROGMEM combo24[] = { BP_S, BP_L, COMBO_END};
 const uint16_t PROGMEM combo27[] = { BP_C, BP_T, BP_S, COMBO_END};
 const uint16_t PROGMEM combo28[] = { BP_U, BP_I, BP_E, COMBO_END};
-const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
-const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
+//const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
+//const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
 const uint16_t PROGMEM combo31[] = { BP_K, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo32[] = { BP_Q, BP_G, BP_H, COMBO_END};
 const uint16_t PROGMEM combo33[] = { BP_Y, BP_X, COMBO_END};
@@ -204,8 +204,8 @@ enum combo_events {
   COMBO_24,
   COMBO_27,
   COMBO_28,
-  COMBO_29,
-  COMBO_30,
+  //COMBO_29,
+  //COMBO_30,
   COMBO_31,
   COMBO_32,
   COMBO_33,
@@ -240,8 +240,8 @@ combo_t key_combos[] = {
     [COMBO_24] = COMBO(combo24, BP_AT),
     [COMBO_27] = COMBO(combo27, BP_NDSH),
     [COMBO_28] = COMBO(combo28, BP_DLR),
-    [COMBO_29] = COMBO(combo29, KC_ENTER),
-    [COMBO_30] = COMBO(combo30, KC_ENTER),
+    //[COMBO_29] = COMBO(combo29, KC_ENTER),
+    //[COMBO_30] = COMBO(combo30, KC_ENTER),
     [COMBO_31] = COMBO(combo31, BP_COLN),
     [COMBO_32] = COMBO(combo32, CMC_END_RETURN),
     [COMBO_33] = COMBO(combo33, KC_ENTER),
@@ -1167,13 +1167,15 @@ tap_dance_action_t tap_dance_actions[] = {
 
 /* custom */
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    switch (combo_index) {
+    /*switch (combo_index) {
         case COMBO_30:
             return layer_state_is(0) || layer_state_is(1);
         default:
-            /* all combos on layer 0*/
+            // all combos on layer 0
             return layer_state_is(0);
-    }
+    }*/
+    // no combos on layer 1 (gaming)
+    return !layer_state_is(1);
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
