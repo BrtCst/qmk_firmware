@@ -49,7 +49,8 @@ enum custom_keycodes {
   CMC_19,
   BP_LSPO,
   BP_RSPC,
-  CMC_END_RETURN
+  CMC_END_RETURN,
+  CMC_SLASH
 };
 
 typedef struct {
@@ -95,7 +96,7 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    TD(D_22),BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    TD(D_22),BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, CMC_SLASH,              BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
     KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
@@ -288,6 +289,9 @@ void keyboard_post_init_user(void) {
   led_update_ports(host_keyboard_led_state());
 }
 
+// pour stockage de l’état des modificateurs (shift, alt, ctrl…)
+uint8_t mod_state;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case CMC_0:
@@ -393,6 +397,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case CMC_END_RETURN:
     if (record->event.pressed) {
       SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
+    }
+    break;
+    case CMC_SLASH:
+    static bool agrav_registered;
+    static bool slash_registered;
+    if (record->event.pressed) {
+      mod_state = get_mods();
+      if (mod_state == MOD_BIT(KC_RALT)) {
+        // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
+        // puisqu’il est activé ici
+        register_code(BP_AGRV);
+        agrav_registered = true;
+      } else {
+        register_code(BP_SLSH);
+        slash_registered = true;
+      }
+      return false;
+    } else {
+      if (agrav_registered) {
+        unregister_code(BP_AGRV);
+        agrav_registered = false;
+      }
+      if (slash_registered) {
+        unregister_code(BP_SLSH);
+        slash_registered = false;
+      }
     }
     break;
 
