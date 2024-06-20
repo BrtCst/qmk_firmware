@@ -50,7 +50,7 @@ enum custom_keycodes {
   BP_LSPO,
   BP_RSPC,
   CMC_END_RETURN,
-  CMC_SLASH
+  CMC_SLASH_TAB
 };
 
 typedef struct {
@@ -96,10 +96,10 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    CMC_SLASH,BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, TD(D_22),              BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, TD(D_22),             BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,  TD(D_21),         LGUI(BP_SCLN),        TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
+    KC_LCTL, KC_LGUI, KC_LALT, CMC_SLASH_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander( //gaming
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-const uint16_t PROGMEM combo0[] = { BP_T, BP_S, COMBO_END};
+const uint16_t PROGMEM combo0[] = { BP_T, BP_S, COMBO_END}; //short term
 const uint16_t PROGMEM combo1[] = { BP_O, BP_EACU, BP_P, COMBO_END};
 const uint16_t PROGMEM combo2[] = { BP_V, BP_L, BP_D, COMBO_END};
 const uint16_t PROGMEM combo3[] = { BP_P, BP_O, COMBO_END};
@@ -154,13 +154,13 @@ const uint16_t PROGMEM combo6[] = { BP_D, BP_L, COMBO_END};
 const uint16_t PROGMEM combo7[] = { BP_I, BP_DOT, COMBO_END};
 const uint16_t PROGMEM combo8[] = { BP_Q, BP_S, COMBO_END};
 const uint16_t PROGMEM combo9[] = { BP_C, BP_T, COMBO_END};
-const uint16_t PROGMEM combo10[] = { BP_S, BP_R, COMBO_END};
-const uint16_t PROGMEM combo11[] = { BP_G, BP_R, COMBO_END};
+const uint16_t PROGMEM combo10[] = { BP_S, BP_R, COMBO_END}; //short term
+//const uint16_t PROGMEM combo11[] = { BP_D, BP_R, COMBO_END};
 const uint16_t PROGMEM combo12[] = { BP_E, BP_COMM, COMBO_END};
 const uint16_t PROGMEM combo13[] = { BP_T, BP_S, BP_R, COMBO_END};
-const uint16_t PROGMEM combo14[] = { BP_U, BP_I, COMBO_END};
+const uint16_t PROGMEM combo14[] = { BP_U, BP_I, COMBO_END}; //short term
 //const uint16_t PROGMEM combo15[] = { BP_I, BP_E, COMBO_END};
-const uint16_t PROGMEM combo16[] = { BP_S, BP_H, COMBO_END};
+//const uint16_t PROGMEM combo16[] = { BP_S, BP_H, COMBO_END};
 const uint16_t PROGMEM combo17[] = { BP_P, BP_E, COMBO_END};
 const uint16_t PROGMEM combo18[] = { BP_T, BP_D, COMBO_END};
 const uint16_t PROGMEM combo19[] = { KC_HOME, KC_UP, COMBO_END};
@@ -168,7 +168,7 @@ const uint16_t PROGMEM combo20[] = { KC_LEFT, KC_DOWN, COMBO_END};
 const uint16_t PROGMEM combo21[] = { BP_QUOT, BP_T, COMBO_END};
 const uint16_t PROGMEM combo22[] = { BP_C, BP_V, COMBO_END};
 const uint16_t PROGMEM combo23[] = { BP_E, BP_K, COMBO_END};
-const uint16_t PROGMEM combo24[] = { BP_S, BP_L, COMBO_END};
+const uint16_t PROGMEM combo24[] = { BP_S, BP_L, COMBO_END}; //short term
 const uint16_t PROGMEM combo27[] = { BP_C, BP_T, BP_S, COMBO_END};
 const uint16_t PROGMEM combo28[] = { BP_U, BP_I, BP_E, COMBO_END};
 //const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
@@ -189,12 +189,12 @@ enum combo_events {
   COMBO_8,
   COMBO_9,
   COMBO_10,
-  COMBO_11,
+//  COMBO_11,
   COMBO_12,
   COMBO_13,
   COMBO_14,
 //  COMBO_15,
-  COMBO_16,
+//  COMBO_16,
   COMBO_17,
   COMBO_18,
   COMBO_19,
@@ -225,12 +225,12 @@ combo_t key_combos[] = {
     [COMBO_8] = COMBO(combo8, CMC_1),
     [COMBO_9] = COMBO(combo9, BP_PLUS),
     [COMBO_10] = COMBO(combo10, BP_ASTR),
-    [COMBO_11] = COMBO(combo11, BP_SLSH),
+    //[COMBO_11] = COMBO(combo11, BP_SLSH),
     [COMBO_12] = COMBO(combo12, BP_SCLN),
     [COMBO_13] = COMBO(combo13, BP_EQL),
     [COMBO_14] = COMBO(combo14, BP_HASH),
     //[COMBO_15] = COMBO(combo15, KC_TAB),
-    [COMBO_16] = COMBO(combo16, BP_BSLS),
+    //[COMBO_16] = COMBO(combo16, BP_BSLS),
     [COMBO_17] = COMBO(combo17, BP_LABK),
     [COMBO_18] = COMBO(combo18, BP_RABK),
     [COMBO_19] = COMBO(combo19, KC_PGUP),
@@ -248,6 +248,37 @@ combo_t key_combos[] = {
     [COMBO_33] = COMBO(combo33, KC_ENTER),
     [COMBO_34] = COMBO(combo34, KC_ENTER),
 };
+
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    /*switch (combo_index) {
+        case COMBO_30:
+            return layer_state_is(0) || layer_state_is(1);
+        default:
+            // all combos on layer 0
+            return layer_state_is(0);
+    }*/
+    // no combos on layer 1 (gaming)
+    return !layer_state_is(1);
+}
+
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    // decide by combo->keycode
+    /*switch (combo->keycode) {
+        case BP_LCBR:
+        case BP_RCBR:
+            return COMBO_TERM_SHORT;
+    }*/
+
+    // or with combo index, i.e. its name from enum.
+    switch (index) {
+        case COMBO_0:
+        case COMBO_10:
+        case COMBO_14:
+        case COMBO_24:
+            return COMBO_TERM_SHORT;
+    }
+    return COMBO_TERM;
+}
 
 // Combos plus complexe, code si besoin
 
@@ -399,9 +430,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
     }
     break;
-    case CMC_SLASH:
+    case CMC_SLASH_TAB:
     static bool agrav_registered;
     static bool slash_registered;
+    static bool tab_registered;
     if (record->event.pressed) {
       mod_state = get_mods();
       if (mod_state == MOD_BIT(KC_RALT)) {
@@ -409,6 +441,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // puisqu’il est activé ici
         register_code(BP_AGRV);
         agrav_registered = true;
+      } else if (mod_state == MOD_BIT(KC_LALT)) {
+        // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
+        // puisqu’il est activé ici
+        register_code(KC_TAB);
+        tab_registered = true;
       } else {
         register_code(BP_SLSH);
         slash_registered = true;
@@ -422,6 +459,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (slash_registered) {
         unregister_code(BP_SLSH);
         slash_registered = false;
+      }
+      if (tab_registered) {
+        unregister_code(KC_TAB);
+        tab_registered = false;
       }
     }
     break;
@@ -1196,36 +1237,7 @@ tap_dance_action_t tap_dance_actions[] = {
 };
 
 /* custom */
-bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /*switch (combo_index) {
-        case COMBO_30:
-            return layer_state_is(0) || layer_state_is(1);
-        default:
-            // all combos on layer 0
-            return layer_state_is(0);
-    }*/
-    // no combos on layer 1 (gaming)
-    return !layer_state_is(1);
-}
 
-uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-    // decide by combo->keycode
-    switch (combo->keycode) {
-        case BP_LCBR:
-        case BP_RCBR:
-            return COMBO_TERM_SHORT;
-    }
-
-    // or with combo index, i.e. its name from enum.
-    switch (index) {
-        case COMBO_10:
-        case COMBO_11:
-        case COMBO_14:
-        case COMBO_16:
-            return COMBO_TERM_SHORT;
-    }
-    return COMBO_TERM;
-}
 
 
 void leader_start_user(void) {
