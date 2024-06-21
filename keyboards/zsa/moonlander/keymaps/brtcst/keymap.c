@@ -287,25 +287,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case CMC_0:
       if (record->event.pressed) {
+        // '« '
         SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
       }
       break;
     case CMC_1:
       if (record->event.pressed) {
+        // ' »'
         SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
       }
       break;
     case CMC_6:
+      // ' :'
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
       }
       break;
     case CMC_END_RETURN:
+      // END puis enter
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
       }
       break;
     case CMC_SLASH_TAB:
+      // / si pas de modifier
+      // \ si altGr
+      // TAB pour tous les autres modifiers
       static bool agrav_registered;
       static bool slash_registered;
       static bool tab_registered;
@@ -368,6 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     case TD(D_22):
+      // END si tap, HOME si double tap
       action = &tap_dance_actions[TD_INDEX(keycode)];
       if (!record->event.pressed && !action->state.finished) {
           switch (action->state.count) {
