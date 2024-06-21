@@ -29,24 +29,7 @@ enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
   CMC_0,
   CMC_1,
-  //CMC_2,
-  //CMC_3,
-  //CMC_4,
-  //CMC_5,
   CMC_6,
-  CMC_7,
-  CMC_8,
-  CMC_9,
-  CMC_10,
-  CMC_11,
-  CMC_12,
-  CMC_13,
-  CMC_14,
-  CMC_15,
-  CMC_16,
-  CMC_17,
-  CMC_18,
-  CMC_19,
   BP_LSPO,
   BP_RSPC,
   CMC_END_RETURN,
@@ -73,7 +56,6 @@ enum tap_dance_codes {
   D_2,
   D_3,
   D_4,
-  D_5, //dispo
   D_6,
   D_7,
   D_8,
@@ -112,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_moonlander( //numpad
     QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), KC_PPLS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, XXXXXXX,
-    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PMNS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PSLS, XXXXXXX,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                CMC_9,   KC_KP_1, KC_KP_2, KC_KP_3, XXXXXXX, _______,
+    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX,
+    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
     _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, KC_KP_0, BP_DOT, BP_COMM, XXXXXXX,
                                         RALT(LSFT(KC_SPC)),_______, _______,    _______, _______, _______
     ),
@@ -133,120 +115,98 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                                _______, TD(D_22),KC_UP,   KC_PGDN, _______, _______,
     _______, _______, _______, _______, _______,          _______,              _______,          KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
                                         _______, _______, _______,              _______, _______, _______
-    ),
-  [5] = LAYOUT_moonlander(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, _______, _______, _______, _______, _______, _______,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, CMC_10, CMC_11, CMC_12, CMC_13, _______, _______,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              _______, _______, CMC_14, XXXXXXX,CMC_15, _______, _______,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                CMC_16,  CMC_17,  CMC_18,  CMC_19,  _______, _______,
-    _______, _______, _______, _______, _______,          LGUI(LSFT(BP_CCED)),  _______,          _______, _______, _______, _______, _______,
-                                        _______, _______, _______,              _______, _______, _______
-    ),
+    )
 };
 
-const uint16_t PROGMEM combo0[] = { BP_T, BP_S, COMBO_END}; //short term
-const uint16_t PROGMEM combo1[] = { BP_O, BP_EACU, BP_P, COMBO_END};
-const uint16_t PROGMEM combo2[] = { BP_V, BP_L, BP_D, COMBO_END};
-const uint16_t PROGMEM combo3[] = { BP_P, BP_O, COMBO_END};
-const uint16_t PROGMEM combo4[] = { BP_V, BP_D, COMBO_END};
-const uint16_t PROGMEM combo5[] = { BP_EACU, BP_P, COMBO_END};
-const uint16_t PROGMEM combo6[] = { BP_D, BP_L, COMBO_END};
-const uint16_t PROGMEM combo7[] = { BP_I, BP_DOT, COMBO_END};
-const uint16_t PROGMEM combo8[] = { BP_Q, BP_S, COMBO_END};
-const uint16_t PROGMEM combo9[] = { BP_C, BP_T, COMBO_END};
-const uint16_t PROGMEM combo10[] = { BP_S, BP_R, COMBO_END}; //short term
-//const uint16_t PROGMEM combo11[] = { BP_D, BP_R, COMBO_END};
-const uint16_t PROGMEM combo12[] = { BP_E, BP_COMM, COMBO_END};
-const uint16_t PROGMEM combo13[] = { BP_T, BP_S, BP_R, COMBO_END};
-const uint16_t PROGMEM combo14[] = { BP_U, BP_I, COMBO_END}; //short term
-//const uint16_t PROGMEM combo15[] = { BP_I, BP_E, COMBO_END};
-//const uint16_t PROGMEM combo16[] = { BP_S, BP_H, COMBO_END};
-const uint16_t PROGMEM combo17[] = { BP_P, BP_E, COMBO_END};
-const uint16_t PROGMEM combo18[] = { BP_T, BP_D, COMBO_END};
-const uint16_t PROGMEM combo19[] = { KC_HOME, KC_UP, COMBO_END};
-const uint16_t PROGMEM combo20[] = { KC_LEFT, KC_DOWN, COMBO_END};
-const uint16_t PROGMEM combo21[] = { BP_QUOT, BP_T, COMBO_END};
-const uint16_t PROGMEM combo22[] = { BP_C, BP_V, COMBO_END};
-const uint16_t PROGMEM combo23[] = { BP_E, BP_K, COMBO_END};
-const uint16_t PROGMEM combo24[] = { BP_S, BP_L, COMBO_END}; //short term
-const uint16_t PROGMEM combo27[] = { BP_C, BP_T, BP_S, COMBO_END};
-const uint16_t PROGMEM combo28[] = { BP_U, BP_I, BP_E, COMBO_END};
-//const uint16_t PROGMEM combo29[] = { BP_X, BP_DOT, COMBO_END};
-//const uint16_t PROGMEM combo30[] = { BP_Q, BP_G, COMBO_END};
-const uint16_t PROGMEM combo31[] = { BP_K, BP_DOT, COMBO_END};
-const uint16_t PROGMEM combo32[] = { BP_Q, BP_G, BP_H, COMBO_END};
-const uint16_t PROGMEM combo33[] = { BP_Y, BP_X, COMBO_END};
-const uint16_t PROGMEM combo34[] = { BP_G, BP_H, COMBO_END};
 enum combo_events {
-  COMBO_0,
-  COMBO_1,
-  COMBO_2,
-  COMBO_3,
-  COMBO_4,
-  COMBO_5,
-  COMBO_6,
-  COMBO_7,
-  COMBO_8,
-  COMBO_9,
-  COMBO_10,
-//  COMBO_11,
-  COMBO_12,
-  COMBO_13,
-  COMBO_14,
-//  COMBO_15,
-//  COMBO_16,
-  COMBO_17,
-  COMBO_18,
-  COMBO_19,
-  COMBO_20,
-  COMBO_21,
-  COMBO_22,
-  COMBO_23,
-  COMBO_24,
-  COMBO_27,
-  COMBO_28,
-  //COMBO_29,
-  //COMBO_30,
-  COMBO_31,
-  COMBO_32,
-  COMBO_33,
-  COMBO_34
+  ST_HYPHEN,
+  OÉP_LBRACKET,
+  VLD_RBRACKET,
+  PO_LPARENTHESIS,
+  VD_LPARENTHESIS,
+  ÉP_LCURL,
+  DL_RCURL,
+  IDOT_CMC_0,
+  QS_CMC_1,
+  CT_PLUS,
+  SR_ASTERISK,
+  ECOMMA_SEMICOLON,
+  TSR_EQUALS,
+  UI_HASSH,
+  PE_LCHEVRON,
+  TD_RCHEVRON,
+  HOME_UO_PGUP,
+  LEFT_DOWN_PGDN,
+  QUOTE_T_ALTCOMMA,
+  CV_DOUBLEQUOTE,
+  EK_BACKTICK,
+  SL_AROBASE,
+  CTS_DEMICADRATIN,
+  UIE_DOLLAR,
+  KDOT_COLON,
+  QGH_END_RETURN,
+  YX_ENTER,
+  GH_ENTER
 };
+
+const uint16_t PROGMEM st_combo[] = { BP_T, BP_S, COMBO_END}; //short term
+const uint16_t PROGMEM oép_combo[] = { BP_O, BP_EACU, BP_P, COMBO_END};
+const uint16_t PROGMEM vld_combo[] = { BP_V, BP_L, BP_D, COMBO_END};
+const uint16_t PROGMEM po_combo[] = { BP_P, BP_O, COMBO_END};
+const uint16_t PROGMEM vd_combo[] = { BP_V, BP_D, COMBO_END};
+const uint16_t PROGMEM ép_combo[] = { BP_EACU, BP_P, COMBO_END};
+const uint16_t PROGMEM dl_combo[] = { BP_D, BP_L, COMBO_END};
+const uint16_t PROGMEM idot_combo[] = { BP_I, BP_DOT, COMBO_END};
+const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S, COMBO_END};
+const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T, COMBO_END};
+const uint16_t PROGMEM sr_combo[] = { BP_S, BP_R, COMBO_END}; //short term
+const uint16_t PROGMEM ecomma_combo[] = { BP_E, BP_COMM, COMBO_END};
+const uint16_t PROGMEM tsr_combo[] = { BP_T, BP_S, BP_R, COMBO_END};
+const uint16_t PROGMEM ui_combo[] = { BP_U, BP_I, COMBO_END}; //short term
+const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E, COMBO_END};
+const uint16_t PROGMEM td_combo[] = { BP_T, BP_D, COMBO_END};
+const uint16_t PROGMEM home_up_combo[] = { KC_HOME, KC_UP, COMBO_END};
+const uint16_t PROGMEM left_down_combo[] = { KC_LEFT, KC_DOWN, COMBO_END};
+const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T, COMBO_END};
+const uint16_t PROGMEM cv_combo[] = { BP_C, BP_V, COMBO_END};
+const uint16_t PROGMEM ek_combo[] = { BP_E, BP_K, COMBO_END};
+const uint16_t PROGMEM sl_combo[] = { BP_S, BP_L, COMBO_END}; //short term
+const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T, BP_S, COMBO_END};
+const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I, BP_E, COMBO_END};
+const uint16_t PROGMEM kdot_combo[] = { BP_K, BP_DOT, COMBO_END};
+const uint16_t PROGMEM qgh_combo[] = { BP_Q, BP_G, BP_H, COMBO_END};
+const uint16_t PROGMEM yx_combo[] = { BP_Y, BP_X, COMBO_END};
+const uint16_t PROGMEM gh_combo[] = { BP_G, BP_H, COMBO_END};
 
 combo_t key_combos[] = {
-    [COMBO_0] = COMBO(combo0, BP_MINS),
-    [COMBO_1] = COMBO(combo1, BP_LBRC),
-    [COMBO_2] = COMBO(combo2, BP_RBRC),
-    [COMBO_3] = COMBO(combo3, BP_LPRN),
-    [COMBO_4] = COMBO(combo4, BP_RPRN),
-    [COMBO_5] = COMBO(combo5, BP_LCBR),
-    [COMBO_6] = COMBO(combo6, BP_RCBR),
-    [COMBO_7] = COMBO(combo7, CMC_0),
-    [COMBO_8] = COMBO(combo8, CMC_1),
-    [COMBO_9] = COMBO(combo9, BP_PLUS),
-    [COMBO_10] = COMBO(combo10, BP_ASTR),
-    //[COMBO_11] = COMBO(combo11, BP_SLSH),
-    [COMBO_12] = COMBO(combo12, BP_SCLN),
-    [COMBO_13] = COMBO(combo13, BP_EQL),
-    [COMBO_14] = COMBO(combo14, BP_HASH),
-    //[COMBO_15] = COMBO(combo15, KC_TAB),
-    //[COMBO_16] = COMBO(combo16, BP_BSLS),
-    [COMBO_17] = COMBO(combo17, BP_LABK),
-    [COMBO_18] = COMBO(combo18, BP_RABK),
-    [COMBO_19] = COMBO(combo19, KC_PGUP),
-    [COMBO_20] = COMBO(combo20, KC_PGDN),
-    [COMBO_21] = COMBO(combo21, RALT(BP_COMM)),
-    [COMBO_22] = COMBO(combo22, BP_DQUO),
-    [COMBO_23] = COMBO(combo23, BP_GRV),
-    [COMBO_24] = COMBO(combo24, BP_AT),
-    [COMBO_27] = COMBO(combo27, BP_NDSH),
-    [COMBO_28] = COMBO(combo28, BP_DLR),
-    //[COMBO_29] = COMBO(combo29, KC_ENTER),
-    //[COMBO_30] = COMBO(combo30, KC_ENTER),
-    [COMBO_31] = COMBO(combo31, BP_COLN),
-    [COMBO_32] = COMBO(combo32, CMC_END_RETURN),
-    [COMBO_33] = COMBO(combo33, KC_ENTER),
-    [COMBO_34] = COMBO(combo34, KC_ENTER),
+  [ST_HYPHEN] = COMBO(st_combo, BP_MINS),
+  [OÉP_LBRACKET] = COMBO(oép_combo, BP_LBRC),
+  [VLD_RBRACKET] = COMBO(vld_combo, BP_RBRC),
+  [PO_LPARENTHESIS] = COMBO(po_combo, BP_LPRN),
+  [VD_LPARENTHESIS] = COMBO(vd_combo, BP_RPRN),
+  [ÉP_LCURL] = COMBO(ép_combo, BP_LCBR),
+  [DL_RCURL] = COMBO(dl_combo, BP_RCBR),
+  [IDOT_CMC_0] = COMBO(idot_combo, CMC_0),
+  [QS_CMC_1] = COMBO(qs_combo, CMC_1),
+  [CT_PLUS] = COMBO(ct_combo, BP_PLUS),
+  [SR_ASTERISK] = COMBO(sr_combo, BP_ASTR),
+  [ECOMMA_SEMICOLON] = COMBO(ecomma_combo, BP_SCLN),
+  [TSR_EQUALS] = COMBO(tsr_combo, BP_EQL),
+  [UI_HASSH] = COMBO(ui_combo, BP_HASH),
+  [PE_LCHEVRON] = COMBO(pe_combo, BP_LABK),
+  [TD_RCHEVRON] = COMBO(td_combo, BP_RABK),
+  [HOME_UO_PGUP] = COMBO(home_up_combo, KC_PGUP),
+  [LEFT_DOWN_PGDN] = COMBO(left_down_combo, KC_PGDN),
+  [QUOTE_T_ALTCOMMA] = COMBO(quote_t_combo, RALT(BP_COMM)),
+  [CV_DOUBLEQUOTE] = COMBO(cv_combo, BP_DQUO),
+  [EK_BACKTICK] = COMBO(ek_combo, BP_GRV),
+  [SL_AROBASE] = COMBO(sl_combo, BP_AT),
+  [CTS_DEMICADRATIN] = COMBO(cts_combo, BP_NDSH),
+  [UIE_DOLLAR] = COMBO(uie_combo, BP_DLR),
+  [KDOT_COLON] = COMBO(kdot_combo, BP_COLN),
+  [QGH_END_RETURN] = COMBO(qgh_combo, CMC_END_RETURN),
+  [YX_ENTER] = COMBO(yx_combo, KC_ENTER),
+  [GH_ENTER] = COMBO(gh_combo, KC_ENTER),
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
@@ -271,10 +231,10 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
     // or with combo index, i.e. its name from enum.
     switch (index) {
-        case COMBO_0:
-        case COMBO_10:
-        case COMBO_14:
-        case COMBO_24:
+        case ST_HYPHEN:
+        case SR_ASTERISK:
+        case UI_HASSH:
+        case SL_AROBASE:
             return COMBO_TERM_SHORT;
     }
     return COMBO_TERM;
@@ -326,155 +286,70 @@ uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case CMC_0:
-    if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
-    }
-    break;
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
+      }
+      break;
     case CMC_1:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
-    }
-    break;
-    //case CMC_2:
-    //if (record->event.pressed) {
-    //  SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
-    //}
-    //break;
-    //case CMC_3:
-    //if (record->event.pressed) {
-    //  SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
-    //}
-    //break;
-    //case CMC_4:
-    //if (record->event.pressed) {
-    //  SEND_STRING(SS_LSFT(SS_TAP(X_SPACE)) SS_DELAY(5) SS_LSFT(SS_TAP(X_G)));
-    //}
-    //break;
-    //case CMC_5:
-    //if (record->event.pressed) {
-    //  SEND_STRING(SS_TAP(X_END) SS_DELAY(5) SS_TAP(X_ENTER));
-    //}
-    break;
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
+      }
+      break;
     case CMC_6:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
-    }
-    break;
-    case CMC_7:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_LCTL(SS_LSFT(SS_TAP(X_F18)))) SS_DELAY(5) SS_LALT(SS_LGUI(SS_TAP(X_Q))));
-    }
-    break;
-    case CMC_8:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_LCTL(SS_LSFT(SS_TAP(X_F17)))) SS_DELAY(5) SS_LALT(SS_LGUI(SS_TAP(X_Q))));
-    }
-    break;
-    case CMC_9:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_2) SS_TAP(X_KP_8) ));
-    }
-    break;
-    case CMC_10:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_SPACE)) SS_DELAY(5) SS_LSFT(SS_TAP(X_Y)));
-    }
-    break;
-    case CMC_11:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_6) ));
-    }
-    break;
-    case CMC_12:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_1) ));
-    }
-    break;
-    case CMC_13:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_7) ));
-    }
-    break;
-    case CMC_14:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_0) ));
-    }
-    break;
-    case CMC_15:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_2) ));
-    }
-    break;
-    case CMC_16:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_SPACE)) SS_DELAY(5) SS_LSFT(SS_TAP(X_N)));
-    }
-    break;
-    case CMC_17:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_9) ));
-    }
-    break;
-    case CMC_18:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_3) ));
-    }
-    break;
-    case CMC_19:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_KP_PLUS) SS_TAP(X_KP_2) SS_TAP(X_KP_1) SS_TAP(X_KP_9) SS_TAP(X_KP_8) ));
-    }
-    break;
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
+      }
+      break;
     case CMC_END_RETURN:
-    if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
-    }
-    break;
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
+      }
+      break;
     case CMC_SLASH_TAB:
-    static bool agrav_registered;
-    static bool slash_registered;
-    static bool tab_registered;
-    if (record->event.pressed) {
-      mod_state = get_mods();
-      if (mod_state == MOD_BIT(KC_RALT)) {
-        // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-        // puisqu’il est activé ici
-        register_code(BP_AGRV);
-        agrav_registered = true;
-      } else if (mod_state == MOD_BIT(KC_LALT)) {
-        // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-        // puisqu’il est activé ici
-        register_code(KC_TAB);
-        tab_registered = true;
+      static bool agrav_registered;
+      static bool slash_registered;
+      static bool tab_registered;
+      if (record->event.pressed) {
+        mod_state = get_mods();
+        if (mod_state == MOD_BIT(KC_RALT)) {
+          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
+          // puisqu’il est activé ici
+          register_code(BP_AGRV);
+          agrav_registered = true;
+        } else if (mod_state == 0) {
+          register_code(BP_SLSH);
+          slash_registered = true;
+        } else {
+          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
+          // puisqu’il est activé ici
+          register_code(KC_TAB);
+          tab_registered = true;
+        }
+        return false;
       } else {
-        register_code(BP_SLSH);
-        slash_registered = true;
+        if (agrav_registered) {
+          unregister_code(BP_AGRV);
+          agrav_registered = false;
+        }
+        if (slash_registered) {
+          unregister_code(BP_SLSH);
+          slash_registered = false;
+        }
+        if (tab_registered) {
+          unregister_code(KC_TAB);
+          tab_registered = false;
+        }
       }
-      return false;
-    } else {
-      if (agrav_registered) {
-        unregister_code(BP_AGRV);
-        agrav_registered = false;
-      }
-      if (slash_registered) {
-        unregister_code(BP_SLSH);
-        slash_registered = false;
-      }
-      if (tab_registered) {
-        unregister_code(KC_TAB);
-        tab_registered = false;
-      }
-    }
-    break;
+      break;
 
     case TD(D_19):
     case TD(D_20):
-        action = &tap_dance_actions[TD_INDEX(keycode)];
-        if (!record->event.pressed && action->state.count && !action->state.finished) {
-            tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
-            tap_code16(tap_hold->tap);
-        }
-        break;
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && action->state.count && !action->state.finished) {
+          tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+          tap_code16(tap_hold->tap);
+      }
+      break;
     /*case RGB_SLD:
         if (rawhid_state.rgb_control) {
             return false;
@@ -484,23 +359,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;*/
     case TD(D_21):
-        action = &tap_dance_actions[TD_INDEX(keycode)];
-        if (record->event.pressed && !action->state.finished) {
-            switch (action->state.count) {
-                case 0: layer_on(3); break;
-                case 1: layer_on(5); break;
-            }
-        }
-        break;
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 0: layer_on(3); break;
+              case 1: layer_on(5); break;
+          }
+      }
+      break;
     case TD(D_22):
-        action = &tap_dance_actions[TD_INDEX(keycode)];
-        if (!record->event.pressed && !action->state.finished) {
-            switch (action->state.count) {
-                case 1: tap_code16(KC_END); break;
-                case 2: tap_code16(KC_HOME); break;
-            }
-        }
-        break;
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 1: tap_code16(KC_END); break;
+              case 2: tap_code16(KC_HOME); break;
+          }
+      }
+      break;
   }
   return true;
 }
@@ -1216,7 +1091,6 @@ tap_dance_action_t tap_dance_actions[] = {
         [D_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
         [D_3] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
         [D_4] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
-        [D_5] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_5, dance_5_finished, dance_5_reset),
         [D_6] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_6, dance_6_finished, dance_6_reset),
         [D_7] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_7, dance_7_finished, dance_7_reset),
         [D_8] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_8, dance_8_finished, dance_8_reset),
