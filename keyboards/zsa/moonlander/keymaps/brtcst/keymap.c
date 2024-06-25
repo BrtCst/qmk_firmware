@@ -33,7 +33,7 @@ enum custom_keycodes {
   BP_LSPO,
   BP_RSPC,
   CMC_END_RETURN,
-  CMC_SLASH_TAB
+  CMC_SLASH
 };
 
 typedef struct {
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, TD(D_22),             BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, CMC_SLASH_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  XXXXXXX, MO(4),   KC_RCTL,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander( //gaming
@@ -309,13 +309,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
       }
       break;
-    case CMC_SLASH_TAB:
+    case CMC_SLASH:
       // / si pas de modifier
       // \ si altGr
-      // TAB pour tous les autres modifiers
       static bool agrav_registered;
       static bool slash_registered;
-      static bool tab_registered;
       if (record->event.pressed) {
         mod_state = get_mods();
         if (mod_state == MOD_BIT(KC_RALT)) {
@@ -326,11 +324,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else if (mod_state == 0) {
           register_code(BP_SLSH);
           slash_registered = true;
-        } else {
-          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-          // puisqu’il est activé ici
-          register_code(KC_TAB);
-          tab_registered = true;
         }
         return false;
       } else {
@@ -341,10 +334,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (slash_registered) {
           unregister_code(BP_SLSH);
           slash_registered = false;
-        }
-        if (tab_registered) {
-          unregister_code(KC_TAB);
-          tab_registered = false;
         }
       }
       break;
