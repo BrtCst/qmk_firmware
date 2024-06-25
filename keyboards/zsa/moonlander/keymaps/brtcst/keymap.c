@@ -56,6 +56,7 @@ enum tap_dance_codes {
   D_2,
   D_3,
   D_4,
+  D_5,
   D_6,
   D_7,
   D_8,
@@ -78,8 +79,8 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    KC_TAB,  BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, TD(D_22),             BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
-    KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
+    XXXXXXX, BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, TD(D_22),             BP_W,    BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    KC_CAPS, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, TD(D_5),              BP_CCED, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
     KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   KC_RCTL,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
@@ -87,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [1] = LAYOUT_moonlander( //gaming
     _______, _______, _______, _______, _______, _______, BP_AT,                _______, _______, _______, _______, _______, _______, _______,
     KC_TAB,  _______, _______, _______, _______, _______, BP_DCIR,              _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, KC_ENTER,             _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                                _______, _______, _______, _______, _______, _______,
     KC_LCTL, _______, KC_LALT, _______, _______,          _______,              TD(D_4),          _______, _______, _______, _______, _______,
                                         _______, _______, _______,              _______, _______, _______
@@ -337,7 +338,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       break;
-
+    case TD(D_5):
+      // Enter si double tap
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 2: tap_code16(KC_ENTER); break;
+          }
+      }
+      break;
     case TD(D_19):
     case TD(D_20):
       action = &tap_dance_actions[TD_INDEX(keycode)];
