@@ -281,112 +281,6 @@ void keyboard_post_init_user(void) {
   led_update_ports(host_keyboard_led_state());
 }
 
-// pour stockage de l’état des modificateurs (shift, alt, ctrl…)
-uint8_t mod_state;
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case CMC_0:
-      if (record->event.pressed) {
-        // '« '
-        SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
-      }
-      break;
-    case CMC_1:
-      if (record->event.pressed) {
-        // ' »'
-        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
-      }
-      break;
-    case CMC_6:
-      // ' :'
-      if (record->event.pressed) {
-        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
-      }
-      break;
-    case CMC_END_RETURN:
-      // END puis enter
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
-      }
-      break;
-    case CMC_SLASH:
-      // / si pas de modifier
-      // \ si altGr
-      static bool agrav_registered;
-      static bool slash_registered;
-      if (record->event.pressed) {
-        mod_state = get_mods();
-        if (mod_state == MOD_BIT(KC_RALT)) {
-          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-          // puisqu’il est activé ici
-          register_code(BP_AGRV);
-          agrav_registered = true;
-        } else if (mod_state == 0) {
-          register_code(BP_SLSH);
-          slash_registered = true;
-        }
-        return false;
-      } else {
-        if (agrav_registered) {
-          unregister_code(BP_AGRV);
-          agrav_registered = false;
-        }
-        if (slash_registered) {
-          unregister_code(BP_SLSH);
-          slash_registered = false;
-        }
-      }
-      break;
-    case TD(D_5):
-      // Enter si double tap
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 2: tap_code16(KC_ENTER); break;
-          }
-      }
-      break;
-    case TD(D_19):
-    case TD(D_20):
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && action->state.count && !action->state.finished) {
-          tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
-          tap_code16(tap_hold->tap);
-      }
-      break;
-    /*case RGB_SLD:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-        }
-        return false;*/
-    case TD(D_21):
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 0: layer_on(3); break;
-              case 1: layer_on(5); break;
-          }
-      }
-      break;
-    case TD(D_22):
-      // END si tap, HOME si double tap
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 1: tap_code16(KC_END); break;
-              case 2: tap_code16(KC_HOME); break;
-          }
-      }
-      break;
-  }
-  return true;
-}
-
-
 void tap_dance_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
     tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
 
@@ -1184,3 +1078,109 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
   return state;
 }
+
+// pour stockage de l’état des modificateurs (shift, alt, ctrl…)
+uint8_t mod_state;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case CMC_0:
+      if (record->event.pressed) {
+        // '« '
+        SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
+      }
+      break;
+    case CMC_1:
+      if (record->event.pressed) {
+        // ' »'
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
+      }
+      break;
+    case CMC_6:
+      // ' :'
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
+      }
+      break;
+    case CMC_END_RETURN:
+      // END puis enter
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
+      }
+      break;
+    case CMC_SLASH:
+      // / si pas de modifier
+      // \ si altGr
+      static bool agrav_registered;
+      static bool slash_registered;
+      if (record->event.pressed) {
+        mod_state = get_mods();
+        if (mod_state == MOD_BIT(KC_RALT)) {
+          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
+          // puisqu’il est activé ici
+          register_code(BP_AGRV);
+          agrav_registered = true;
+        } else if (mod_state == 0) {
+          register_code(BP_SLSH);
+          slash_registered = true;
+        }
+        return false;
+      } else {
+        if (agrav_registered) {
+          unregister_code(BP_AGRV);
+          agrav_registered = false;
+        }
+        if (slash_registered) {
+          unregister_code(BP_SLSH);
+          slash_registered = false;
+        }
+      }
+      break;
+    case TD(D_5):
+      // Enter si double tap
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 2: tap_code16(KC_ENTER); break;
+          }
+      }
+      break;
+    case TD(D_19):
+    case TD(D_20):
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && action->state.count && !action->state.finished) {
+          tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+          tap_code16(tap_hold->tap);
+      }
+      break;
+    /*case RGB_SLD:
+        if (rawhid_state.rgb_control) {
+            return false;
+        }
+        if (record->event.pressed) {
+            rgblight_mode(1);
+        }
+        return false;*/
+    case TD(D_21):
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 0: layer_on(3); break;
+              case 1: layer_on(5); break;
+          }
+      }
+      break;
+    case TD(D_22):
+      // END si tap, HOME si double tap
+      action = &tap_dance_actions[TD_INDEX(keycode)];
+      if (!record->event.pressed && !action->state.finished) {
+          switch (action->state.count) {
+              case 1: tap_code16(KC_END); break;
+              case 2: tap_code16(KC_HOME); break;
+          }
+      }
+      break;
+  }
+  return true;
+}
+
