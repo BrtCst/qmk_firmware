@@ -2,7 +2,6 @@ RGB_MATRIX_EFFECT(BRTCST_CUSTOM)
 
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
-#include "quantum.h"
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 

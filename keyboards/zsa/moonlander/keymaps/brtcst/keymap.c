@@ -7,6 +7,10 @@
 // pour que la méthode send_string utilise le layout bépo et pas l’ascii
 #include "sendstring_bepo.h"
 
+// Bug, visiblement l’include ne fonctionne pas en auto
+#include "mcp23018.h"
+#include "mcp23018.c"
+
 #define KC_MAC_UNDO LGUI(KC_Z)
 #define KC_MAC_CUT LGUI(KC_X)
 #define KC_MAC_COPY LGUI(KC_C)
@@ -276,8 +280,8 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 
 void keyboard_post_init_user(void) {
-  rgb_matrix_enable();
-  rgb_matrix_mode(RGB_MATRIX_CUSTOM_BRTCST_CUSTOM);
+  //rgb_matrix_enable();
+  //rgb_matrix_mode(RGB_MATRIX_CUSTOM_BRTCST_CUSTOM);
   led_update_ports(host_keyboard_led_state());
 }
 
@@ -1120,7 +1124,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           // puisqu’il est activé ici
           register_code(BP_AGRV);
           agrav_registered = true;
-        } else if (mod_state == 0) {
+        } else if (mod_state & MOD_MASK_SHIFT) {
+          del_mods(MOD_MASK_SHIFT);
+          set_mods(MOD_RALT);
+          register_code(BP_AGRV);
+          del_mods(MOD_RALT);
+          agrav_registered = true;
+        } else if (mod_state == 0 ) {
           register_code(BP_SLSH);
           slash_registered = true;
         }
@@ -1139,11 +1149,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TD(D_5):
       // Enter si double tap
       action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 2: tap_code16(KC_ENTER); break;
-          }
-      }
+      if (!record->event.pressed && !action->state.finished) 
+          switch (action->state.count) 
+              case 2: tap_code16(KC_ENTER); break;///\\\\æ€¨€€€¨€
+          
+      
       break;
     case TD(D_19):
     case TD(D_20):
