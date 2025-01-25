@@ -121,18 +121,22 @@ static bool BRTCST_CUSTOM(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     int layer = get_highest_layer(layer_state|default_layer_state);
     for (uint8_t i = led_min; i < led_max; i++) {
-        HSV hsv = {
-        .h = pgm_read_byte(&ledmap[layer][i][0]),
-        .s = pgm_read_byte(&ledmap[layer][i][1]),
-        .v = pgm_read_byte(&ledmap[layer][i][2]),
-        };
-        if (!hsv.h && !hsv.s && !hsv.v) {
-            rgb_matrix_set_color( i, 0, 0, 0 );
+        if (layer == 0) {
+            rgb_matrix_set_color( i, 0, 0, 2 );
         } else {
-            RGB rgb = hsv_to_rgb( hsv );
-            float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-            RGB_MATRIX_TEST_LED_FLAGS();
-            rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+            HSV hsv = {
+            .h = pgm_read_byte(&ledmap[layer][i][0]),
+            .s = pgm_read_byte(&ledmap[layer][i][1]),
+            .v = pgm_read_byte(&ledmap[layer][i][2]),
+            };
+            if (!hsv.h && !hsv.s && !hsv.v) {
+                rgb_matrix_set_color( i, 0, 0, 0 );
+            } else {
+                RGB rgb = hsv_to_rgb( hsv );
+                float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+                RGB_MATRIX_TEST_LED_FLAGS();
+                rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+            }
         }
     }
 
