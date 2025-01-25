@@ -122,7 +122,7 @@ static bool BRTCST_CUSTOM(effect_params_t* params) {
     int layer = get_highest_layer(layer_state|default_layer_state);
     for (uint8_t i = led_min; i < led_max; i++) {
         if (layer == 0) {
-            rgb_matrix_set_color( i, 0, 0, 2 );
+            rgb_matrix_set_color( i, 0, 0, 0 );
         } else {
             HSV hsv = {
             .h = pgm_read_byte(&ledmap[layer][i][0]),
