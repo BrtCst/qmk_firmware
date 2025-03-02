@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT_moonlander( //gaming
     _______, _______, _______, _______, _______, _______, BP_AT,                _______, _______, _______, _______, _______, _______, _______,
-    KC_TAB,  _______, _______, _______, _______, _______, BP_DCIR,              _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, BP_DCIR,              _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, KC_ENTER,             _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                                _______, _______, _______, _______, _______, _______,
     KC_LCTL, _______, KC_LALT, _______, _______,          _______,              TD(D_4),          _______, _______, _______, _______, _______,
@@ -151,7 +151,9 @@ enum combo_events {
   KDOT_COLON,
   QGH_END_RETURN,
   YX_ENTER,
-  GH_ENTER
+  GH_ENTER,
+  XDOT_W,
+  QG_Ç
 };
 
 const uint16_t PROGMEM st_combo[] = { BP_T, BP_S, COMBO_END}; //short term
@@ -182,6 +184,8 @@ const uint16_t PROGMEM kdot_combo[] = { BP_K, BP_DOT, COMBO_END};
 const uint16_t PROGMEM qgh_combo[] = { BP_Q, BP_G, BP_H, COMBO_END};
 const uint16_t PROGMEM yx_combo[] = { BP_Y, BP_X, COMBO_END};
 const uint16_t PROGMEM gh_combo[] = { BP_G, BP_H, COMBO_END};
+const uint16_t PROGMEM xdot_combo[] = { BP_X, BP_DOT, COMBO_END};
+const uint16_t PROGMEM qg_combo[] = { BP_Q, BP_G, COMBO_END};
 
 combo_t key_combos[] = {
   [ST_HYPHEN] = COMBO(st_combo, BP_MINS),
@@ -212,6 +216,8 @@ combo_t key_combos[] = {
   [QGH_END_RETURN] = COMBO(qgh_combo, CMC_END_RETURN),
   [YX_ENTER] = COMBO(yx_combo, KC_ENTER),
   [GH_ENTER] = COMBO(gh_combo, KC_ENTER),
+  [XDOT_W] = COMBO(xdot_combo, BP_W),
+  [QG_Ç] = COMBO(qg_combo, BP_CCED),
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
