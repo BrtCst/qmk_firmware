@@ -109,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_VOLU,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, TD(D_6), TD(D_7), TD(D_8), TD(D_9), LCTL(BP_X),KC_VOLD,               XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_PGUP,  XXXXXXX, XXXXXXX,
     _______, TD(D_10), TD(D_11), TD(D_12), TD(D_13), LCTL(BP_C), TD(D_18),         XXXXXXX, LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), XXXXXXX,
-    _______, TD(D_14), TD(D_15), TD(D_16), TD(D_17), LCTL(BP_V),                            XXXXXXX, KC_END, XXXXXXX , KC_PGDN, XXXXXXX, _______,
+    KC_CAPS_LOCK, TD(D_14), TD(D_15), TD(D_16), TD(D_17), LCTL(BP_V),                            XXXXXXX, KC_END, XXXXXXX , KC_PGDN, XXXXXXX, _______,
     _______, _______, _______, _______, _______,           XXXXXXX,             _______,          LCTL(KC_BSPC),XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,
                                         KC_MPRV, TD(D_19), KC_MNXT,             LGUI(LCTL(KC_LEFT)),TD(D_20), LGUI(LCTL(KC_RIGHT))
     ),
