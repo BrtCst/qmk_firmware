@@ -8,27 +8,48 @@
 #include "sendstring_bepo.h"
 #include "tapdance.h"
 
-// Bug, visiblement l’include ne fonctionne pas en auto
-#include "mcp23018.h"
-#include "mcp23018.c"
+#define BP_E_LSFT MT(MOD_LSFT, BP_E)
+#define BP_T_RSFT MT(MOD_RSFT, BP_T)
+#define BP_I_LCTL MT(MOD_LCTL, BP_I)
+#define BP_S_RCTL MT(MOD_RCTL, BP_S)
+#define BP_U_LALT MT(MOD_LALT, BP_U)
+#define BP_R_LALT MT(MOD_LALT, BP_R)
+#define BP_A_LGUI MT(MOD_LGUI, BP_A)
+#define BP_N_RGUI MT(MOD_RGUI, BP_N)
 
-#define KC_MAC_UNDO LGUI(KC_Z)
-#define KC_MAC_CUT LGUI(KC_X)
-#define KC_MAC_COPY LGUI(KC_C)
-#define KC_MAC_PASTE LGUI(KC_V)
-#define KC_PC_UNDO LCTL(KC_Z)
-#define KC_PC_CUT LCTL(KC_X)
-#define KC_PC_COPY LCTL(KC_C)
-#define KC_PC_PASTE LCTL(KC_V)
-#define ES_LESS_MAC KC_GRAVE
-#define ES_GRTR_MAC LSFT(KC_GRAVE)
-#define ES_BSLS_MAC ALGR(KC_6)
-#define NO_PIPE_ALT KC_GRAVE
-#define NO_BSLS_ALT KC_EQUAL
-#define LSA_T(kc) MT(MOD_LSFT | MOD_LALT, kc)
-#define BP_NDSH_MAC ALGR(KC_8)
-#define SE_SECT_MAC ALGR(KC_6)
-#define MOON_LED_LEVEL LED_LEVEL
+
+// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) { 
+    switch (keycode) {
+        case BP_E_LSFT:
+        case BP_T_RSFT:
+            // Immediately select the hold action when another key is tapped.
+            return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
+// par rapport à la configuration par défaut, on désactive la touche espace
+// https://docs.qmk.fm/tap_hold#flow-tap
+bool is_flow_tap_key(uint16_t keycode) {
+    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
+        return false; // Disable Flow Tap on hotkeys.
+    }
+    switch (get_tap_keycode(keycode)) {
+        //case KC_SPC:
+        case KC_A ... KC_Z:
+        case KC_DOT:
+        case KC_COMM:
+        case KC_SCLN:
+        case KC_SLSH:
+            return true;
+    }
+    return false;
+}
+
+extern bool is_launching;
 
 enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
@@ -40,20 +61,6 @@ enum custom_keycodes {
   CMC_END_RETURN,
   CMC_SLASH
 };
-
-typedef struct {
-    uint16_t tap;
-    uint16_t hold;
-    uint16_t held;
-} tap_dance_tap_hold_t;
-tap_dance_action_t *action;
-
-typedef struct {
-    bool is_press_action;
-    uint8_t step;
-} tap;
-
-static tap dance_state[23];
 
 enum tap_dance_codes {
   D_0,
@@ -74,23 +81,37 @@ enum tap_dance_codes {
   D_15,
   D_16,
   D_17,
-  D_18,
   D_19,
-  D_20,
-  D_21,
-  D_22
+  D_20
 };
 
+enum layers {
+    BASE,
+    GAMING,
+    NUMPAD,
+    FXARROWS,
+    ARROWSMACROS
+};
+
+char chordal_hold_handedness(keypos_t key) {
+    //if (key.col == 0 || key.col == MATRIX_COLS - 1) {
+    //    return '*';  // Exempt the outer columns.
+    //}
+    // On split keyboards, typically, the first half of the rows are on the
+    // left, and the other half are on the right.
+    return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_moonlander(
+  [BASE] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    BP_W,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
-    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
-    KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   KC_RCTL,
+    XXXXXXX,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    KC_TAB, BP_A_LGUI,    BP_U_LALT,    BP_I_LCTL,    BP_E_LSFT,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T_RSFT,    BP_S_RCTL,    BP_R_LALT,    BP_N_RGUI,    BP_M,
+    CW_TOGG, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,MO(3),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   XXXXXXX,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
-  [1] = LAYOUT_moonlander( //gaming
+  [GAMING] = LAYOUT_moonlander( //gaming
     _______, _______, _______, _______, _______, _______, BP_AT,                _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, BP_DCIR,              _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, KC_ENTER,             _______, _______, _______, _______, _______, _______, _______,
@@ -98,27 +119,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL, _______, KC_LALT, _______, _______,          _______,              TD(D_4),          _______, _______, _______, _______, _______,
                                         _______, _______, _______,              _______, _______, _______
   ),
-  [2] = LAYOUT_moonlander( //numpad
+  [NUMPAD] = LAYOUT_moonlander( //numpad
     QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX, KC_NUM,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, XXXXXXX, XXXXXXX,
-    BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
-    _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, KC_KP_0, BP_DOT, BP_COMM, XXXXXXX,
+    _______,  _______, _______, _______, _______, _______, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, BP_PLUS, BP_MINS, BP_SLSH, BP_EQL, BP_PERC,
+    _______, _______,   _______, _______, _______, _______, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PPLS, BP_LPRN,BP_RPRN, BP_AT, KC_PAST, XXXXXXX,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                KC_PMNS, BP_DQUO, BP_LDAQ, BP_RDAQ, KC_PSLS, _______,
+    _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, BP_ASTR, BP_DOT, BP_COMM, XXXXXXX,
                                         RALT(LSFT(KC_SPC)),_______, _______,    _______, _______, _______
     ),
-  [3] = LAYOUT_moonlander( // Fx & arrows
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,KC_VOLU,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
+    // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
+    // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
+  [FXARROWS] = LAYOUT_moonlander( // Fx & arrows
+    DT_UP, DT_DOWN, DT_PRNT, XXXXXXX, XXXXXXX, XXXXXXX,KC_VOLU,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, TD(D_6), TD(D_7), TD(D_8), TD(D_9), LCTL(BP_X),KC_VOLD,               XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_PGUP,  XXXXXXX, XXXXXXX,
-    _______, TD(D_10), TD(D_11), TD(D_12), TD(D_13), LCTL(BP_C), TD(D_18),         XXXXXXX, LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), XXXXXXX,
-    KC_CAPS_LOCK, TD(D_14), TD(D_15), TD(D_16), TD(D_17), LCTL(BP_V),                            XXXXXXX, KC_END, XXXXXXX , KC_PGDN, XXXXXXX, _______,
+    _______, TD(D_10), TD(D_11), TD(D_12), TD(D_13), LCTL(BP_C), XXXXXXX,         XXXXXXX, LCTL(KC_LEFT), KC_LEFT, KC_DOWN, KC_RIGHT, LCTL(KC_RIGHT), XXXXXXX,
+    _______, TD(D_14), TD(D_15), TD(D_16), TD(D_17), LCTL(BP_V),                            XXXXXXX, KC_END, XXXXXXX , KC_PGDN, XXXXXXX, _______,
     _______, _______, _______, _______, _______,           XXXXXXX,             _______,          LCTL(KC_BSPC),XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX,
                                         KC_MPRV, TD(D_19), KC_MNXT,             LGUI(LCTL(KC_LEFT)),TD(D_20), LGUI(LCTL(KC_RIGHT))
     ),
-  [4] = LAYOUT_moonlander( // arrows & macros
+  [ARROWSMACROS] = LAYOUT_moonlander( // arrows & macros
     _______, _______, _______, _______, _______, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
     _______, _______, DM_REC1, DM_RSTP, DM_PLY1, _______, _______,              _______, _______, _______, _______, _______, _______, _______,
     _______, _______, DM_REC2, DM_RSTP, DM_PLY2, _______, _______,              _______, _______, _______, _______, KC_PGUP, _______, _______,
-    _______, _______, _______, _______, _______, _______,                                _______, TD(D_22),KC_UP,   KC_PGDN, _______, _______,
+    _______, _______, _______, _______, _______, _______,                                _______, KC_HOME,KC_UP,   KC_PGDN, _______, _______,
     _______, _______, _______, _______, _______,          _______,              _______,          KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,
                                         _______, _______, _______,              _______, _______, _______
     )
@@ -157,30 +181,30 @@ enum combo_events {
   QG_Ç
 };
 
-const uint16_t PROGMEM st_combo[] = { BP_T, BP_S, COMBO_END}; //short term
+const uint16_t PROGMEM st_combo[] = { BP_T_RSFT, BP_S_RCTL, COMBO_END}; //short term
 const uint16_t PROGMEM oép_combo[] = { BP_O, BP_EACU, BP_P, COMBO_END};
 const uint16_t PROGMEM vld_combo[] = { BP_V, BP_L, BP_D, COMBO_END};
 const uint16_t PROGMEM po_combo[] = { BP_P, BP_O, COMBO_END};
 const uint16_t PROGMEM vd_combo[] = { BP_V, BP_D, COMBO_END};
 const uint16_t PROGMEM ép_combo[] = { BP_EACU, BP_P, COMBO_END};
 const uint16_t PROGMEM dl_combo[] = { BP_D, BP_L, COMBO_END};
-const uint16_t PROGMEM idot_combo[] = { BP_I, BP_DOT, COMBO_END};
-const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S, COMBO_END};
-const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T, COMBO_END};
-const uint16_t PROGMEM sr_combo[] = { BP_S, BP_R, COMBO_END}; //short term
-const uint16_t PROGMEM ecomma_combo[] = { BP_E, BP_COMM, COMBO_END};
-const uint16_t PROGMEM tsr_combo[] = { BP_T, BP_S, BP_R, COMBO_END};
-const uint16_t PROGMEM ui_combo[] = { BP_U, BP_I, COMBO_END}; //short term
-const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E, COMBO_END};
-const uint16_t PROGMEM td_combo[] = { BP_T, BP_D, COMBO_END};
+const uint16_t PROGMEM idot_combo[] = { BP_I_LCTL, BP_DOT, COMBO_END};
+const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S_RCTL, COMBO_END};
+const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T_RSFT, COMBO_END};
+const uint16_t PROGMEM sr_combo[] = { BP_S_RCTL, BP_R_LALT, COMBO_END}; //short term
+const uint16_t PROGMEM ecomma_combo[] = { BP_E_LSFT, BP_COMM, COMBO_END};
+const uint16_t PROGMEM tsr_combo[] = { BP_T_RSFT, BP_S_RCTL, BP_R_LALT, COMBO_END};
+const uint16_t PROGMEM ui_combo[] = { BP_U_LALT, BP_I_LCTL, COMBO_END}; //short term
+const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E_LSFT, COMBO_END};
+const uint16_t PROGMEM td_combo[] = { BP_T_RSFT, BP_D, COMBO_END};
 const uint16_t PROGMEM home_up_combo[] = { KC_HOME, KC_UP, COMBO_END};
 const uint16_t PROGMEM left_down_combo[] = { KC_LEFT, KC_DOWN, COMBO_END};
-const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T, COMBO_END};
+const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T_RSFT, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = { BP_C, BP_V, COMBO_END};
 const uint16_t PROGMEM ek_combo[] = { BP_E, BP_K, COMBO_END};
 const uint16_t PROGMEM sl_combo[] = { BP_S, BP_L, COMBO_END}; //short term
-const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T, BP_S, COMBO_END};
-const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I, BP_E, COMBO_END};
+const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T_RSFT, BP_S, COMBO_END};
+const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I, BP_E_LSFT, COMBO_END};
 const uint16_t PROGMEM kdot_combo[] = { BP_K, BP_DOT, COMBO_END};
 const uint16_t PROGMEM qgh_combo[] = { BP_Q, BP_G, BP_H, COMBO_END};
 const uint16_t PROGMEM yx_combo[] = { BP_Y, BP_X, COMBO_END};
@@ -189,7 +213,7 @@ const uint16_t PROGMEM xdot_combo[] = { BP_X, BP_DOT, COMBO_END};
 const uint16_t PROGMEM qg_combo[] = { BP_Q, BP_G, COMBO_END};
 
 combo_t key_combos[] = {  
-  [ST_HYPHEN] = COMBO(st_combo, BP_MINS),
+  [ST_HYPHEN] = COMBO(st_combo, MT(MOD_RSFT|MOD_RCTL, BP_MINS)),
   [OÉP_LBRACKET] = COMBO(oép_combo, BP_LBRC),
   [VLD_RBRACKET] = COMBO(vld_combo, BP_RBRC),
   [PO_LPARENTHESIS] = COMBO(po_combo, BP_LPRN),
@@ -230,7 +254,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
             return layer_state_is(0);
     }*/
     // no combos on layer 1 (gaming)
-    return !layer_state_is(1);
+    return !layer_state_is(GAMING);
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
@@ -287,35 +311,32 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 
 void keyboard_post_init_user(void) {
-  rgb_matrix_enable();
-  rgb_matrix_mode(RGB_MATRIX_CUSTOM_BRTCST_CUSTOM);
-  led_update_ports(host_keyboard_led_state());
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
 
 tap_dance_action_t tap_dance_actions[] = {
-        [D_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
-        [D_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
-        [D_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
-        [D_3] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
-        [D_4] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
-        [D_6] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_6, dance_6_finished, dance_6_reset),
-        [D_7] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_7, dance_7_finished, dance_7_reset),
-        [D_8] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_8, dance_8_finished, dance_8_reset),
-        [D_9] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_9, dance_9_finished, dance_9_reset),
-        [D_10] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_10, dance_10_finished, dance_10_reset),
-        [D_11] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_11, dance_11_finished, dance_11_reset),
-        [D_12] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_12, dance_12_finished, dance_12_reset),
-        [D_13] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_13, dance_13_finished, dance_13_reset),
-        [D_14] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_14, dance_14_finished, dance_14_reset),
-        [D_15] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_15, dance_15_finished, dance_15_reset),
-        [D_16] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_16, dance_16_finished, dance_16_reset),
-        [D_17] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_17, dance_17_finished, dance_17_reset),
-        [D_18] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_18, dance_18_finished, dance_18_reset),
-        [D_19] = ACTION_TAP_DANCE_TAP_HOLD(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
-        [D_20] = ACTION_TAP_DANCE_TAP_HOLD(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
-        [D_21] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_21_finished, dance_21_reset),
-        [D_22] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_22_finished, dance_22_reset)
+        [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),
+        [D_1] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_ESCAPE, KC_ESCAPE, KC_ESCAPE, LGUI(BP_L)),
+        [D_2] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), GAMING),
+        [D_3] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_INSERT, LGUI(LSFT(BP_S)), LGUI(LALT(BP_K)), KC_PSCR),
+        [D_4] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), BASE),
+        [D_5] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS_LOCK, KC_ENTER),
+        [D_6] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F1, KC_F13),
+        [D_7] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F2, KC_F14),
+        [D_8] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F3, KC_F15),
+        [D_9] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F4, KC_F16),
+        [D_10] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F5, KC_F17),
+        [D_11] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F6, KC_F18),
+        [D_12] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F7, KC_F19),
+        [D_13] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F8, KC_F20),
+        [D_14] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F9, KC_F21),
+        [D_15] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F10, KC_F22),
+        [D_16] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F11, KC_F23),
+        [D_17] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F12, KC_F24),
+        [D_19] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
+        [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4)))
 };
 
 /* custom */
@@ -361,25 +382,49 @@ void leader_end_user(void) {
     return false;
 }*/
 
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    // MOITIÉ GAUCHE
+    // LEDs commencent à 0 en haut à gauche
+    // les thumbs noirs sont 32, 33, 34
+    // le thumb rouge est 35
+    // MOITIÉ DROITE
+    // LEDs commencent à 36 en haut à droite
+    // les thumbs noirs sont 68, 69, 70
+    // le thumb rouge est 71
+    if (!is_launching) {
         ML_LED_6(host_keyboard_led_state().caps_lock);
         ML_LED_5(!host_keyboard_led_state().num_lock);
-	return true;
+
+        if (host_keyboard_led_state().caps_lock) {
+            rgb_matrix_set_color(3, RGB_RED);
+            rgb_matrix_set_color(39, RGB_RED);
+        }
+    }
+    switch(get_highest_layer(layer_state)) {
+            case GAMING:
+                rgb_matrix_set_color(71, RGB_RED);
+                break;
+            default:
+                break;
+        }
+	return false;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   switch (get_highest_layer(state)) {
-    case 0:
+    case BASE:
         ML_LED_1(false);
         ML_LED_2(false);
         ML_LED_3(false);
         ML_LED_4(false);
         break;
-    case 1:
+    case GAMING:
         ML_LED_1(false);
         ML_LED_2(false);
         ML_LED_3(true);
         ML_LED_4(false);
+        
         break;
     default: //  for any other layers, or the default layer
         break;
@@ -391,7 +436,42 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 uint8_t mod_state;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // Stockage de l'état des modificateurs
+  mod_state = get_mods();
+
+  
   switch (keycode) {
+// Inversion du modificateur shift pour la ligne des chiffres
+    case BP_DQUO:  // "1"
+    case BP_LDAQ:  // «2
+    case BP_RDAQ:  // 3»
+    case BP_LPRN:  // (4
+    case BP_RPRN:  // 5)
+    case BP_AT:    // @6
+    case BP_PLUS:  // +7
+    case BP_MINS:  // -8
+    case BP_SLSH:  // /9
+    case BP_ASTR:  // *0
+      if (layer_state_is(NUMPAD)) {
+        if (record->event.pressed) {
+          if (mod_state & MOD_MASK_SHIFT) {
+            // Si shift est pressé, l'enlever et envoyer le keycode normal
+            del_mods(MOD_MASK_SHIFT);
+            register_code(keycode);
+            set_mods(mod_state);
+          } else {
+            // Si shift n'est pas pressé, l'ajouter et envoyer le keycode
+            add_mods(MOD_MASK_SHIFT);
+            register_code(keycode);
+            del_mods(MOD_MASK_SHIFT);
+          }
+          return false;
+        } else {
+          unregister_code(keycode);
+          return false;
+        }
+      }
+      break;
     case CMC_0:
       if (record->event.pressed) {
         // '« '
@@ -450,23 +530,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       break;
-    case TD(D_5):
-      // Enter si double tap
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && !action->state.finished) 
-          switch (action->state.count) 
-              case 2: tap_code16(KC_ENTER); break;///\\\\æ€¨€€€¨€
-          
-      
-      break;
-    case TD(D_19):
-    case TD(D_20):
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && action->state.count && !action->state.finished) {
-          tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
-          tap_code16(tap_hold->tap);
-      }
-      break;
     /*case RGB_SLD:
         if (rawhid_state.rgb_control) {
             return false;
@@ -475,26 +538,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             rgblight_mode(1);
         }
         return false;*/
-    case TD(D_21):
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 0: layer_on(3); break;
-              case 1: layer_on(5); break;
-          }
-      }
-      break;
-    case TD(D_22):
-      // END si tap, HOME si double tap
-      action = &tap_dance_actions[TD_INDEX(keycode)];
-      if (!record->event.pressed && !action->state.finished) {
-          switch (action->state.count) {
-              case 1: tap_code16(KC_END); break;
-              case 2: tap_code16(KC_HOME); break;
-          }
-      }
-      break;
   }
   return true;
 }
-
