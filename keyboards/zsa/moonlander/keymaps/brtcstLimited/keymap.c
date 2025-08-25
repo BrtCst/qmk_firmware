@@ -8,21 +8,21 @@
 #include "sendstring_bepo.h"
 #include "tapdance.h"
 
-#define BP_E_LSFT MT(MOD_LSFT, BP_E)
-#define BP_T_RSFT MT(MOD_RSFT, BP_T)
-#define BP_I_LCTL MT(MOD_LCTL, BP_I)
-#define BP_S_RCTL MT(MOD_RCTL, BP_S)
-#define BP_U_LALT MT(MOD_LALT, BP_U)
-#define BP_R_LALT MT(MOD_LALT, BP_R)
-#define BP_A_LGUI MT(MOD_LGUI, BP_A)
-#define BP_N_RGUI MT(MOD_RGUI, BP_N)
+#define BP_E_MOD MT(MOD_LSFT, BP_E)
+#define BP_T_MOD MT(MOD_RSFT, BP_T)
+#define BP_I_MOD MT(MOD_LCTL, BP_I)
+#define BP_S_MOD MT(MOD_RCTL, BP_S)
+#define BP_U_MOD MT(MOD_LALT, BP_U)
+#define BP_R_MOD MT(MOD_LALT, BP_R)
+#define BP_A_MOD MT(MOD_LGUI, BP_A)
+#define BP_N_MOD MT(MOD_RGUI, BP_N)
 
 
 // Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) { 
     switch (keycode) {
-        case BP_E_LSFT:
-        case BP_T_RSFT:
+        case BP_E_MOD:
+        case BP_T_MOD:
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
     XXXXXXX,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
-    KC_TAB, BP_A_LGUI,    BP_U_LALT,    BP_I_LCTL,    BP_E_LSFT,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T_RSFT,    BP_S_RCTL,    BP_R_LALT,    BP_N_RGUI,    BP_M,
+    KC_TAB, BP_A_MOD,    BP_U_MOD,    BP_I_MOD,    BP_E_MOD,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T_MOD,    BP_S_MOD,    BP_R_MOD,    BP_N_MOD,    BP_M,
     CW_TOGG, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,MO(3),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   XXXXXXX,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
@@ -181,30 +181,30 @@ enum combo_events {
   QG_Ç
 };
 
-const uint16_t PROGMEM st_combo[] = { BP_T_RSFT, BP_S_RCTL, COMBO_END}; //short term
+const uint16_t PROGMEM st_combo[] = { BP_T_MOD, BP_S_MOD, COMBO_END}; //short term
 const uint16_t PROGMEM oép_combo[] = { BP_O, BP_EACU, BP_P, COMBO_END};
 const uint16_t PROGMEM vld_combo[] = { BP_V, BP_L, BP_D, COMBO_END};
 const uint16_t PROGMEM po_combo[] = { BP_P, BP_O, COMBO_END};
 const uint16_t PROGMEM vd_combo[] = { BP_V, BP_D, COMBO_END};
 const uint16_t PROGMEM ép_combo[] = { BP_EACU, BP_P, COMBO_END};
 const uint16_t PROGMEM dl_combo[] = { BP_D, BP_L, COMBO_END};
-const uint16_t PROGMEM idot_combo[] = { BP_I_LCTL, BP_DOT, COMBO_END};
-const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S_RCTL, COMBO_END};
-const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T_RSFT, COMBO_END};
-const uint16_t PROGMEM sr_combo[] = { BP_S_RCTL, BP_R_LALT, COMBO_END}; //short term
-const uint16_t PROGMEM ecomma_combo[] = { BP_E_LSFT, BP_COMM, COMBO_END};
-const uint16_t PROGMEM tsr_combo[] = { BP_T_RSFT, BP_S_RCTL, BP_R_LALT, COMBO_END};
-const uint16_t PROGMEM ui_combo[] = { BP_U_LALT, BP_I_LCTL, COMBO_END}; //short term
-const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E_LSFT, COMBO_END};
-const uint16_t PROGMEM td_combo[] = { BP_T_RSFT, BP_D, COMBO_END};
+const uint16_t PROGMEM idot_combo[] = { BP_I_MOD, BP_DOT, COMBO_END};
+const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S_MOD, COMBO_END};
+const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T_MOD, COMBO_END};
+const uint16_t PROGMEM sr_combo[] = { BP_S_MOD, BP_R_MOD, COMBO_END}; //short term
+const uint16_t PROGMEM ecomma_combo[] = { BP_E_MOD, BP_COMM, COMBO_END};
+const uint16_t PROGMEM tsr_combo[] = { BP_T_MOD, BP_S_MOD, BP_R_MOD, COMBO_END};
+const uint16_t PROGMEM ui_combo[] = { BP_U_MOD, BP_I_MOD, COMBO_END}; //short term
+const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E_MOD, COMBO_END};
+const uint16_t PROGMEM td_combo[] = { BP_T_MOD, BP_D, COMBO_END};
 const uint16_t PROGMEM home_up_combo[] = { KC_HOME, KC_UP, COMBO_END};
 const uint16_t PROGMEM left_down_combo[] = { KC_LEFT, KC_DOWN, COMBO_END};
-const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T_RSFT, COMBO_END};
+const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T_MOD, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = { BP_C, BP_V, COMBO_END};
-const uint16_t PROGMEM ek_combo[] = { BP_E, BP_K, COMBO_END};
-const uint16_t PROGMEM sl_combo[] = { BP_S, BP_L, COMBO_END}; //short term
-const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T_RSFT, BP_S, COMBO_END};
-const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I, BP_E_LSFT, COMBO_END};
+const uint16_t PROGMEM ek_combo[] = { BP_E_MOD, BP_K, COMBO_END};
+const uint16_t PROGMEM sl_combo[] = { BP_S_MOD, BP_L, COMBO_END}; //short term
+const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T_MOD, BP_S_MOD, COMBO_END};
+const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I_MOD, BP_E_MOD, COMBO_END};
 const uint16_t PROGMEM kdot_combo[] = { BP_K, BP_DOT, COMBO_END};
 const uint16_t PROGMEM qgh_combo[] = { BP_Q, BP_G, BP_H, COMBO_END};
 const uint16_t PROGMEM yx_combo[] = { BP_Y, BP_X, COMBO_END};
