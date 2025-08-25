@@ -104,15 +104,15 @@ char chordal_hold_handedness(keypos_t key) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, QK_LEAD,              BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
-    XXXXXXX,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
+    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,              XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, QK_LEAD,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     KC_TAB, BP_A_MOD,    BP_U_MOD,    BP_I_MOD,    BP_E_MOD,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T_MOD,    BP_S_MOD,    BP_R_MOD,    BP_N_MOD,    BP_M,
     CW_TOGG, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB,MO(3),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   XXXXXXX,
                                         KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
   ),
   [GAMING] = LAYOUT_moonlander( //gaming
-    _______, _______, _______, _______, _______, _______, BP_AT,                _______, _______, _______, _______, _______, _______, _______,
+    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC, BP_AT,   BP_PLUS, BP_MINS, BP_SLSH, BP_ASTR, BP_EQL,
     _______, _______, _______, _______, _______, _______, BP_DCIR,              _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, KC_ENTER,             _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                                _______, _______, _______, _______, _______, _______,
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______, _______, _______, _______, _______, XXXXXXX,              LSFT(LALT(LCTL(KC_F18))), XXXXXXX, BP_PLUS, BP_MINS, BP_SLSH, BP_EQL, BP_PERC,
     _______, _______,   _______, _______, _______, _______, BP_EQL,               LSFT(LALT(LCTL(KC_F17))), KC_PPLS, BP_LPRN,BP_RPRN, BP_AT, KC_PAST, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, CMC_6,   XXXXXXX,                                KC_PMNS, BP_DQUO, BP_LDAQ, BP_RDAQ, KC_PSLS, _______,
-    _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,_______, BP_ASTR, BP_DOT, BP_COMM, XXXXXXX,
+    _______, _______, _______, XXXXXXX, _______,          _______,              _______ ,BP_DLR, BP_ASTR, BP_DOT, BP_COMM, XXXXXXX,
                                         RALT(LSFT(KC_SPC)),_______, _______,    _______, _______, _______
     ),
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
@@ -246,15 +246,16 @@ combo_t key_combos[] = {
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /*switch (combo_index) {
-        case COMBO_30:
-            return layer_state_is(0) || layer_state_is(1);
-        default:
-            // all combos on layer 0
-            return layer_state_is(0);
-    }*/
-    // no combos on layer 1 (gaming)
-    return !layer_state_is(GAMING);
+  if (layer_state_is(GAMING))
+    switch(combo_index) {
+      case YX_ENTER:
+      case GH_ENTER:
+      case XDOT_W:
+      case QG_Ç:
+        return true;
+      default:
+        return false;
+    }
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
