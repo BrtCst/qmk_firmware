@@ -6,6 +6,7 @@
 #include "keymap_us_international.h"
 // pour que la méthode send_string utilise le layout bépo et pas l’ascii
 #include "sendstring_bepo.h"
+
 #include "tapdance.h"
 
 #define BP_E_MOD MT(MOD_LSFT, BP_E)
@@ -17,6 +18,19 @@
 #define BP_A_MOD MT(MOD_LGUI, BP_A)
 #define BP_N_MOD MT(MOD_RGUI, BP_N)
 
+enum custom_keycodes {
+  RGB_SLD = SAFE_RANGE,
+  CMC_0,
+  CMC_1,
+  CMC_6,
+  BP_LSPO,
+  BP_RSPC,
+  CMC_END_RETURN,
+  CMC_SLASH
+};
+
+// pour les dictionnaires de combos (combos.def)
+#include "g/keymap_combo.h"
 
 // Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) { 
@@ -50,17 +64,6 @@ bool is_flow_tap_key(uint16_t keycode) {
 }
 
 extern bool is_launching;
-
-enum custom_keycodes {
-  RGB_SLD = SAFE_RANGE,
-  CMC_0,
-  CMC_1,
-  CMC_6,
-  BP_LSPO,
-  BP_RSPC,
-  CMC_END_RETURN,
-  CMC_SLASH
-};
 
 enum tap_dance_codes {
   D_0,
@@ -148,103 +151,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-enum combo_events {
-  ST_HYPHEN,
-  OÉP_LBRACKET,
-  VLD_RBRACKET,
-  PO_LPARENTHESIS,
-  VD_LPARENTHESIS,
-  ÉP_LCURL,
-  DL_RCURL,
-  IDOT_CMC_0,
-  QS_CMC_1,
-  CT_PLUS,
-  SR_ASTERISK,
-  ECOMMA_SEMICOLON,
-  TSR_EQUALS,
-  UI_HASSH,
-  PE_LCHEVRON,
-  TD_RCHEVRON,
-  HOME_UO_PGUP,
-  LEFT_DOWN_PGDN,
-  QUOTE_T_ALTCOMMA,
-  CV_DOUBLEQUOTE,
-  EK_BACKTICK,
-  SL_AROBASE,
-  CTS_DEMICADRATIN,
-  UIE_DOLLAR,
-  KDOT_COLON,
-  QGH_END_RETURN,
-  YX_ENTER,
-  GH_ENTER,
-  XDOT_W,
-  QG_Ç
-};
-
-const uint16_t PROGMEM st_combo[] = { BP_T_MOD, BP_S_MOD, COMBO_END}; //short term
-const uint16_t PROGMEM oép_combo[] = { BP_O, BP_EACU, BP_P, COMBO_END};
-const uint16_t PROGMEM vld_combo[] = { BP_V, BP_L, BP_D, COMBO_END};
-const uint16_t PROGMEM po_combo[] = { BP_P, BP_O, COMBO_END};
-const uint16_t PROGMEM vd_combo[] = { BP_V, BP_D, COMBO_END};
-const uint16_t PROGMEM ép_combo[] = { BP_EACU, BP_P, COMBO_END};
-const uint16_t PROGMEM dl_combo[] = { BP_D, BP_L, COMBO_END};
-const uint16_t PROGMEM idot_combo[] = { BP_I_MOD, BP_DOT, COMBO_END};
-const uint16_t PROGMEM qs_combo[] = { BP_Q, BP_S_MOD, COMBO_END};
-const uint16_t PROGMEM ct_combo[] = { BP_C, BP_T_MOD, COMBO_END};
-const uint16_t PROGMEM sr_combo[] = { BP_S_MOD, BP_R_MOD, COMBO_END}; //short term
-const uint16_t PROGMEM ecomma_combo[] = { BP_E_MOD, BP_COMM, COMBO_END};
-const uint16_t PROGMEM tsr_combo[] = { BP_T_MOD, BP_S_MOD, BP_R_MOD, COMBO_END};
-const uint16_t PROGMEM ui_combo[] = { BP_U_MOD, BP_I_MOD, COMBO_END}; //short term
-const uint16_t PROGMEM pe_combo[] = { BP_P, BP_E_MOD, COMBO_END};
-const uint16_t PROGMEM td_combo[] = { BP_T_MOD, BP_D, COMBO_END};
-const uint16_t PROGMEM home_up_combo[] = { KC_HOME, KC_UP, COMBO_END};
-const uint16_t PROGMEM left_down_combo[] = { KC_LEFT, KC_DOWN, COMBO_END};
-const uint16_t PROGMEM quote_t_combo[] = { BP_QUOT, BP_T_MOD, COMBO_END};
-const uint16_t PROGMEM cv_combo[] = { BP_C, BP_V, COMBO_END};
-const uint16_t PROGMEM ek_combo[] = { BP_E_MOD, BP_K, COMBO_END};
-const uint16_t PROGMEM sl_combo[] = { BP_S_MOD, BP_L, COMBO_END}; //short term
-const uint16_t PROGMEM cts_combo[] = { BP_C, BP_T_MOD, BP_S_MOD, COMBO_END};
-const uint16_t PROGMEM uie_combo[] = { BP_U, BP_I_MOD, BP_E_MOD, COMBO_END};
-const uint16_t PROGMEM kdot_combo[] = { BP_K, BP_DOT, COMBO_END};
-const uint16_t PROGMEM qgh_combo[] = { BP_Q, BP_G, BP_H, COMBO_END};
-const uint16_t PROGMEM yx_combo[] = { BP_Y, BP_X, COMBO_END};
-const uint16_t PROGMEM gh_combo[] = { BP_G, BP_H, COMBO_END};
-const uint16_t PROGMEM xdot_combo[] = { BP_X, BP_DOT, COMBO_END};
-const uint16_t PROGMEM qg_combo[] = { BP_Q, BP_G, COMBO_END};
-
-combo_t key_combos[] = {
-  [ST_HYPHEN] = COMBO(st_combo, MT(MOD_RSFT|MOD_RCTL, BP_MINS)),
-  [OÉP_LBRACKET] = COMBO(oép_combo, BP_LBRC),
-  [VLD_RBRACKET] = COMBO(vld_combo, BP_RBRC),
-  [PO_LPARENTHESIS] = COMBO(po_combo, BP_LPRN),
-  [VD_LPARENTHESIS] = COMBO(vd_combo, BP_RPRN),
-  [ÉP_LCURL] = COMBO(ép_combo, BP_LCBR),
-  [DL_RCURL] = COMBO(dl_combo, BP_RCBR),
-  [IDOT_CMC_0] = COMBO(idot_combo, CMC_0),
-  [QS_CMC_1] = COMBO(qs_combo, CMC_1),
-  [CT_PLUS] = COMBO(ct_combo, BP_PLUS),
-  [SR_ASTERISK] = COMBO(sr_combo, BP_ASTR),
-  [ECOMMA_SEMICOLON] = COMBO(ecomma_combo, BP_SCLN),
-  [TSR_EQUALS] = COMBO(tsr_combo, BP_EQL),
-  [UI_HASSH] = COMBO(ui_combo, BP_HASH),
-  [PE_LCHEVRON] = COMBO(pe_combo, BP_LABK),
-  [TD_RCHEVRON] = COMBO(td_combo, BP_RABK),
-  [HOME_UO_PGUP] = COMBO(home_up_combo, KC_PGUP),
-  [LEFT_DOWN_PGDN] = COMBO(left_down_combo, KC_PGDN),
-  [QUOTE_T_ALTCOMMA] = COMBO(quote_t_combo, RALT(BP_COMM)),
-  [CV_DOUBLEQUOTE] = COMBO(cv_combo, BP_DQUO),
-  [EK_BACKTICK] = COMBO(ek_combo, BP_GRV),
-  [SL_AROBASE] = COMBO(sl_combo, BP_AT),
-  [CTS_DEMICADRATIN] = COMBO(cts_combo, BP_NDSH),
-  [UIE_DOLLAR] = COMBO(uie_combo, BP_DLR),
-  [KDOT_COLON] = COMBO(kdot_combo, BP_COLN),
-  [QGH_END_RETURN] = COMBO(qgh_combo, CMC_END_RETURN),
-  [YX_ENTER] = COMBO(yx_combo, KC_ENTER),
-  [GH_ENTER] = COMBO(gh_combo, KC_ENTER),
-  [XDOT_W] = COMBO(xdot_combo, BP_W),
-  [QG_Ç] = COMBO(qg_combo, BP_CCED),
-};
-
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
   if (layer_state_is(GAMING))
     switch(combo_index) {
@@ -256,6 +162,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
       default:
         return false;
     }
+  return true;
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
