@@ -212,7 +212,7 @@ const uint16_t PROGMEM gh_combo[] = { BP_G, BP_H, COMBO_END};
 const uint16_t PROGMEM xdot_combo[] = { BP_X, BP_DOT, COMBO_END};
 const uint16_t PROGMEM qg_combo[] = { BP_Q, BP_G, COMBO_END};
 
-combo_t key_combos[] = {  
+combo_t key_combos[] = {
   [ST_HYPHEN] = COMBO(st_combo, MT(MOD_RSFT|MOD_RCTL, BP_MINS)),
   [OÉP_LBRACKET] = COMBO(oép_combo, BP_LBRC),
   [VLD_RBRACKET] = COMBO(vld_combo, BP_RBRC),
