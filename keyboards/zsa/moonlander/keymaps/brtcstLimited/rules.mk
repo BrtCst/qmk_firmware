@@ -14,3 +14,6 @@ LEADER_ENABLE = yes
 USER_NAME = brtcst
 
 DYNAMIC_TAPPING_TERM_ENABLE = yes
+
+# pour gérer les dictionnaires de combos (combos.def)
+VPATH += keyboards/gboards
