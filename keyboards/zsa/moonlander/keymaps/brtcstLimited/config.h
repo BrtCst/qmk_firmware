@@ -44,3 +44,5 @@
 #define FLOW_TAP_TERM 100
 
 //#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+#define RETRO_TAPPING
