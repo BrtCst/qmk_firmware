@@ -43,4 +43,5 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data) {
         case DOUBLE_HOLD: unregister_code(dance->double_hold); break;
         case DOUBLE_SINGLE_TAP: unregister_code(dance->single_tap); break;
     }
+    dance->state = NONE;
 }
