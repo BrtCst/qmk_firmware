@@ -57,7 +57,7 @@ static tap dance_state[23];
 
 enum tap_dance_codes {
   D_0,
-  D_1,
+  D_ESC_LOCK,
   D_2,
   D_3,
   D_4,
@@ -87,8 +87,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     BP_W,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, XXXXXXX,              XXXXXXX, BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z,
     BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, TD(D_5),              XXXXXXX, BP_C,    BP_T,    BP_S,    BP_R,    BP_N,    BP_M,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                   BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,TD(D_21),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   KC_RCTL,
-                                        KC_SPC,  SH_MON,  TD(D_1),              TD(D_3), MO(2),   KC_RALT
+    KC_LCTL, KC_LGUI, KC_LALT, KC_TAB,MO(3),         LGUI(BP_SCLN),       TD(D_2),          KC_BSPC, KC_DEL,  CMC_SLASH, MO(4),   KC_RCTL,
+                                        KC_SPC,  SH_MON,  TD(D_ESC_LOCK),              TD(D_3), MO(2),   KC_RALT
   ),
   [1] = LAYOUT_moonlander( //gaming
     _______, _______, _______, _______, _______, _______, BP_AT,                _______, _______, _______, _______, _______, _______, _______,
