@@ -45,4 +45,4 @@
 
 //#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 
-#define RETRO_TAPPING
+//#define RETRO_TAPPING
