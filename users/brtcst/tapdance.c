@@ -106,3 +106,76 @@ bool caps_word_press_user(uint16_t keycode) {
     // Par défaut, on continue Caps Word
     return true;
 }
+
+// Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
+bool is_flow_tap_key(uint16_t keycode) {
+    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
+        return false; // Disable Flow Tap on hotkeys.
+    }
+    switch (get_tap_keycode(keycode)) {
+        case BP_B:     // b en BÉPO
+        case BP_EACU:     // é en BÉPO  
+        case BP_P:     // p en BÉPO
+        case BP_O:     // o en BÉPO
+        case BP_EGRV: // è en BÉPO
+        
+        // Rangée du milieu (BÉPO: auie,)
+        case BP_A:     // a en BÉPO
+        case BP_U:     // u en BÉPO
+        case BP_I:     // i en BÉPO
+        case BP_E:     // e en BÉPO
+            
+        // Rangée du bas (BÉPO: àyx.k)
+        case BP_AGRV: // à en BÉPO
+        case BP_Y:         // y en BÉPO
+        case BP_X:         // x en BÉPO
+        case BP_K:         // k en BÉPO
+        
+        // Autres lettres importantes en BÉPO
+        case BP_W:
+        case BP_CCED:
+
+        case BP_DCIR:
+        case BP_V:
+        case BP_D:
+        case BP_L:
+        case BP_J:
+        case BP_Z:
+
+        case BP_C:
+        case BP_T:
+        case BP_S:
+        case BP_R:
+        case BP_N:
+        case BP_M:
+
+        case BP_Q:
+        case BP_G:
+        case BP_H:
+        case BP_F:
+        case BP_DOT:
+        case BP_COMM:
+            return true;
+    }
+    return false;
+}
+
+// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (get_highest_layer(layer_state)) {
+        // permissive hold uniquement sur la couche de base
+        case BASE:
+            switch (keycode) {
+                case BP_E_MOD:
+                case BP_T_MOD:
+                    // Immediately select the hold action when another key is tapped.
+                    return true;
+                default:
+                    // Do not select the hold action when another key is tapped.
+                    return false;
+            }
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
