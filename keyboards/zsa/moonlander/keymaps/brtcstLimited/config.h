@@ -18,6 +18,7 @@
 
 //#define RGB_MATRIX_STARTUP_SPD 60
 
+//#define PERMISSIVE_HOLD
 #define PERMISSIVE_HOLD_PER_KEY
 
 /* custom */
@@ -41,7 +42,7 @@
 
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
-#define FLOW_TAP_TERM 100
+#define FLOW_TAP_TERM 150
 
 //#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 

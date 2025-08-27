@@ -11,6 +11,14 @@ typedef struct {
     int state;
 } tap_dance_custom_t;
 
+enum layers {
+    BASE,
+    GAMING,
+    NUMPAD,
+    FXARROWS,
+    ARROWSMACROS
+};
+
 enum {
     NONE,
     SINGLE_TAP,
@@ -20,6 +28,18 @@ enum {
     DOUBLE_SINGLE_TAP,
     MORE_TAPS
 };
+
+#define BP_E_MOD MT(MOD_LSFT, BP_E)
+#define BP_T_MOD MT(MOD_RSFT, BP_T)
+#define BP_I_MOD MT(MOD_LCTL, BP_I)
+#define BP_S_MOD MT(MOD_RCTL, BP_S)
+#define BP_U_MOD MT(MOD_LALT, BP_U)
+#define BP_R_MOD MT(MOD_LALT, BP_R)
+#define BP_A_MOD MT(MOD_RALT, BP_A)
+#define BP_N_MOD MT(MOD_RALT, BP_N)
+#define BP_TAB_MOD MT(MOD_LGUI, KC_TAB)
+#define BP_M_MOD MT(MOD_RGUI, BP_M)
+#define BP_SPC_LT LT(FXARROWS, KC_SPC)
 
 void on_dance_custom(tap_dance_state_t *state, void *user_data);
 

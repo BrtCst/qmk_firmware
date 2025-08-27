@@ -7,25 +7,8 @@
 #include "sendstring_bepo.h"
 
 #include "tapdance.h"
-enum layers {
-    BASE,
-    GAMING,
-    NUMPAD,
-    FXARROWS,
-    ARROWSMACROS
-};
 
-#define BP_E_MOD MT(MOD_LSFT, BP_E)
-#define BP_T_MOD MT(MOD_RSFT, BP_T)
-#define BP_I_MOD MT(MOD_LCTL, BP_I)
-#define BP_S_MOD MT(MOD_RCTL, BP_S)
-#define BP_U_MOD MT(MOD_LALT, BP_U)
-#define BP_R_MOD MT(MOD_LALT, BP_R)
-#define BP_A_MOD MT(MOD_RALT, BP_A)
-#define BP_N_MOD MT(MOD_RALT, BP_N)
-#define BP_TAB_MOD MT(MOD_LGUI, KC_TAB)
-#define BP_M_MOD MT(MOD_RGUI, BP_M)
-#define BP_SPC_LT LT(FXARROWS, KC_SPC)
+
 
 /*
 const key_override_t next_track_override = 
@@ -126,36 +109,7 @@ enum custom_keycodes {
 // pour les dictionnaires de combos (combos.def)
 #include "g/keymap_combo.h"
 
-// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) { 
-    switch (keycode) {
-        case BP_E_MOD:
-        case BP_T_MOD:
-            // Immediately select the hold action when another key is tapped.
-            return true;
-        default:
-            // Do not select the hold action when another key is tapped.
-            return false;
-    }
-}
 
-// par rapport à la configuration par défaut, on désactive la touche espace
-// https://docs.qmk.fm/tap_hold#flow-tap
-bool is_flow_tap_key(uint16_t keycode) {
-    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
-        return false; // Disable Flow Tap on hotkeys.
-    }
-    switch (get_tap_keycode(keycode)) {
-        //case KC_SPC:
-        case KC_A ... KC_Z:
-        case KC_DOT:
-        case KC_COMM:
-        case KC_SCLN:
-        case KC_SLSH:
-            return true;
-    }
-    return false;
-}
 
 extern bool is_launching;
 
@@ -513,3 +467,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+
