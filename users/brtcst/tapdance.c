@@ -55,6 +55,7 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data) {
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Lettres en BÉPO (basées sur leur position physique QWERTY)
+        
         // Rangée du haut (BÉPO: bépoè)
         case BP_B:     // b en BÉPO
         case BP_EACU:     // é en BÉPO  
@@ -78,7 +79,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case BP_W:
         case BP_CCED:
 
-        case BP_DCIR:
+        
         case BP_V:
         case BP_D:
         case BP_L:
@@ -96,19 +97,30 @@ bool caps_word_press_user(uint16_t keycode) {
         case BP_G:
         case BP_H:
         case BP_F:
+        add_weak_mods(MOD_BIT(KC_LSFT));
+        return true;
         
         // Caractères spéciaux utiles qui ne désactivent pas Caps Word
+        case BP_DCIR:
         case KC_BACKSPACE: // Pour corriger
         case KC_DELETE:    // Pour corriger
+        
         
         // Modificateurs autorisés (ne désactivent pas Caps Word)
         case KC_LSFT:
         case KC_RSFT:
+        case KC_RALT: // Autoriser RALT seul
             return true;
+
+        case KC_SPC:
+            // Autoriser seulement KC_SPC avec RALT
+            if (get_mods() & MOD_BIT(KC_RALT)) {
+                return true;
+            }
+            return false; // KC_SPC sans modificateur désactive Caps Word
     }
     
-    // Par défaut, on continue Caps Word
-    return true;
+    return false;
 }
 
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
