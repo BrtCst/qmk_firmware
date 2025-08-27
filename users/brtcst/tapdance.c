@@ -162,20 +162,28 @@ bool is_flow_tap_key(uint16_t keycode) {
 
 // Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (get_highest_layer(layer_state)) {
-        // permissive hold uniquement sur la couche de base
-        case BASE:
-            switch (keycode) {
-                case BP_E_MOD:
-                case BP_T_MOD:
-                    // Immediately select the hold action when another key is tapped.
-                    return true;
-                default:
-                    // Do not select the hold action when another key is tapped.
-                    return false;
-            }
+    switch (keycode) {
+        case BP_E_MOD:
+        case BP_T_MOD:
+            // Immediately select the hold action when another key is tapped.
+            return true;
         default:
             // Do not select the hold action when another key is tapped.
             return false;
+    }
+}
+
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t* other_record) {
+    // Exceptionally allow some one-handed chords for hotkeys.
+    switch (get_highest_layer(layer_state)) {
+        case BASE:
+            // on renvoie vers la règle par défaut
+            return get_chordal_hold_default(tap_hold_record, other_record);
+        default:
+            // on désactive pour les autres couche, pour éviter des déclenchements
+            // sur des appuis de deux touche mod-tap du même côté
+            // ex : altgr + shift du même côté du clavier sur la couche numpad
+            return true;
     }
 }
