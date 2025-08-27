@@ -4,8 +4,12 @@
 
 uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return SINGLE_TAP;
-        else return SINGLE_HOLD;
+        if (state->pressed
+#ifndef PERMISSIVE_HOLD
+            && !state->interrupted
+#endif
+        ) {return SINGLE_HOLD;}
+        else return SINGLE_TAP;
     } else if (state->count == 2) {
         if (state->interrupted) return DOUBLE_SINGLE_TAP;
         else if (state->pressed) return DOUBLE_HOLD;
@@ -160,7 +164,7 @@ bool is_flow_tap_key(uint16_t keycode) {
     return false;
 }
 
-// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods
+// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods et accélérer l’affichage des caractères
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case BP_E_MOD:
@@ -184,6 +188,6 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             // on désactive pour les autres couche, pour éviter des déclenchements
             // sur des appuis de deux touche mod-tap du même côté
             // ex : altgr + shift du même côté du clavier sur la couche numpad
-            return true;
+            return false;
     }
 }
