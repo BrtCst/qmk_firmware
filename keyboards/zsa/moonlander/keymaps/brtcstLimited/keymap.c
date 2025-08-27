@@ -201,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    BP_B,       BP_EACU,    BP_P,       BP_O,       BP_EGRV,    TD(D_ESC_LOCK),              TD(D_2),    BP_DCIR,    BP_V,       BP_D,       BP_L,       BP_J,       BP_Z,
     BP_TAB_MOD, BP_A_MOD,   BP_U_MOD,   BP_I_MOD,   BP_E_MOD,   BP_COMM,    QK_LEAD,              TD(D_3),    BP_C,       BP_T_MOD,   BP_S_MOD,   BP_R_MOD,   BP_N_MOD,   BP_M_MOD,
     CW_TOGG,    BP_AGRV,    BP_Y,       BP_X,       BP_DOT,     BP_K,                                         BP_QUOT,    BP_Q,       BP_G,       BP_H,       BP_F,       BP_SLSH,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_TAB,     XXXXXXX,           LGUI(BP_SCLN),       TD(D_2),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_TAB,           LGUI(BP_SCLN),       TD(D_2),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, XXXXXXX,
                                                     BP_SPC_LT,  SH_MON,     XXXXXXX,              XXXXXXX,    XXXXXXX,    MO(NUMPAD)
   ),
   [GAMING] = LAYOUT_moonlander( // Gaming layer
