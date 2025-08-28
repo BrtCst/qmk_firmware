@@ -2,6 +2,7 @@
 #define USERSPACE
 
 #include "quantum.h"
+#include "keymap_bepo.h"
 
 typedef struct {
     uint16_t single_tap;
@@ -11,7 +12,7 @@ typedef struct {
     int state;
 } tap_dance_custom_t;
 
-enum layers {
+enum /*layers*/ {
     BASE,
     GAMING,
     NUMPAD,
@@ -27,6 +28,31 @@ enum {
     DOUBLE_HOLD,
     DOUBLE_SINGLE_TAP,
     MORE_TAPS
+};
+
+enum /*tap_dance_codes*/ {
+  D_0,
+  D_ESC_LOCK,
+  D_2,
+  D_3,
+  D_4,
+  D_5,
+  D_F1_F13,
+  D_F2_F14,
+  D_F3_F15,
+  D_F4_F16,
+  D_F5_F17,
+  D_F6_F18,
+  D_F7_F19,
+  D_F8_F20,
+  D_F9_F21,
+  D_F10_F22,
+  D_F11_F23,
+  D_F12_F24,
+  D_PLAY_STOP,
+  D_20,
+  D_COPY_CUT,
+  D_PASTE_LSFT
 };
 
 #define BP_E_MOD MT(MOD_LSFT, BP_E)
@@ -53,5 +79,8 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data);
 #define CUSTOM_ACTION_TAP_DANCE_KEYCODES(tap_keycode, hold_keycode) \
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){tap_keycode, hold_keycode, tap_keycode, hold_keycode, NONE}), }
 
+static const uint16_t top_row[14] = {XXXXXXX, BP_B, BP_EACU, BP_P, BP_O, BP_EGRV, QK_LEAD, TD(D_2), BP_DCIR, BP_V, BP_D, BP_L, BP_J, BP_Z};
+static const uint16_t mid_row[14] = {TD(D_ESC_LOCK), BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M_MOD};
+static const uint16_t bot_row[14] = {CW_TOGG, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_SLSH};
 
 #endif

@@ -6,7 +6,7 @@
 // pour que la méthode send_string utilise le layout bépo et pas l’ascii
 #include "sendstring_bepo.h"
 
-#include "tapdance.h"
+#include "common_brtcst.h"
 
 
 
@@ -111,32 +111,6 @@ enum custom_keycodes {
 
 
 
-extern bool is_launching;
-
-enum tap_dance_codes {
-  D_0,
-  D_ESC_LOCK,
-  D_2,
-  D_3,
-  D_4,
-  D_5,
-  D_F1_F13,
-  D_F2_F14,
-  D_F3_F15,
-  D_F4_F16,
-  D_F5_F17,
-  D_F6_F18,
-  D_F7_F19,
-  D_F8_F20,
-  D_F9_F21,
-  D_F10_F22,
-  D_F11_F23,
-  D_F12_F24,
-  D_19,
-  D_20,
-  D_COPY_CUT,
-  D_PASTE_LSFT
-};
 
 char chordal_hold_handedness(keypos_t key) {
     //if (key.col == 0 || key.col == MATRIX_COLS - 1) {
@@ -147,56 +121,47 @@ char chordal_hold_handedness(keypos_t key) {
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [BASE] = LAYOUT_moonlander(
+    [BASE] = LAYOUT_split_3x6_3_ex2(
+        //,-----------------------------------------------------.
+        //,-----------------------------------------------------.
+        top_row[0], top_row[1], top_row[2], top_row[3], top_row[4], top_row[5], top_row[6],                top_row[7], top_row[8], top_row[9], top_row[10], top_row[11], top_row[12], top_row[13],
+        //|--------+--------+--------+--------+--------+--------|
+        //|--------+--------+--------+--------+--------+--------|
+        mid_row[0], mid_row[1], mid_row[2], mid_row[3], mid_row[4], mid_row[5], mid_row[6],                mid_row[7], mid_row[8], mid_row[9], mid_row[10], mid_row[11], mid_row[12], mid_row[13],
+        //|--------+--------+--------+--------+--------+--------|
+        //|--------+--------+--------+--------+--------+--------|
+        bot_row[0], bot_row[1], bot_row[2], bot_row[3], bot_row[4], bot_row[5],                                        bot_row[6], bot_row[7], bot_row[8], bot_row[9], bot_row[10], bot_row[11],
+        //|--------+--------+--------+--------+--------+--------+--------|
+        //|--------+--------+--------+--------+--------+--------+--------|
+        XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
+        //`--------------------------'  `--------------------------'
+
+        ),
+  [GAMING] = LAYOUT_split_3x6_3_ex2( // Gaming layer
     // Left Hand                                                                   // Right Hand
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    BP_B,       BP_EACU,    BP_P,       BP_O,       BP_EGRV,    TD(D_ESC_LOCK),              TD(D_2),    BP_DCIR,    BP_V,       BP_D,       BP_L,       BP_J,       BP_Z,
-    TD(D_ESC_LOCK), BP_A_MOD,   BP_U_MOD,   BP_I_MOD,   BP_E_MOD,   BP_COMM,    QK_LEAD,              TD(D_3),    BP_C,       BP_T_MOD,   BP_S_MOD,   BP_R_MOD,   BP_N_MOD,   BP_M_MOD,
-    CW_TOGG,    BP_AGRV,    BP_Y,       BP_X,       BP_DOT,     BP_K,                                         BP_QUOT,    BP_Q,       BP_G,       BP_H,       BP_F,       BP_SLSH,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    BP_TAB_MOD,           LGUI(BP_SCLN),       TD(D_2),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, XXXXXXX,
-                                                    BP_SPC_LT,  SH_MON,     XXXXXXX,              XXXXXXX,    XXXXXXX,    MO(NUMPAD)
+    BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
+    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
+    KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
+    _______,    _______, _______, _______, _______,    _______
   ),
-  [GAMING] = LAYOUT_moonlander( // Gaming layer
-    // Left Hand                                                                   // Right Hand
-    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC,    BP_AT,      BP_PLUS,    BP_MINS,    BP_SLSH,    BP_ASTR,    BP_EQL,
-    BP_W,    BP_B,    BP_EACU, BP_P,    BP_O,    BP_EGRV, BP_DCIR,              _______,    BP_DCIR,    BP_V,       BP_D,       BP_L,       BP_J,       BP_Z,
-    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,    BP_COMM, KC_ENTER,             _______,    BP_C,       BP_T,   BP_S,   BP_R,   BP_N,   BP_M,
-    KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                      BP_QUOT,    BP_Q,       BP_G,       BP_H,       BP_F,       KC_RSFT,
-    KC_LCTL,    _______,    KC_LALT,    KC_TAB,    _______,                _______,              TD(D_4),                KC_BSPC,    KC_DEL,     CMC_SLASH,  MO(ARROWSMACROS), KC_RCTL,
-                                                    KC_SPC,    _______,    _______,              _______,    _______,    _______
-  ),
-  [NUMPAD] = LAYOUT_moonlander( // Numpad layer
+  [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
     // Left Hand                                                                       // Right Hand
-    QK_BOOT,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    RGB_VAD,    RGB_VAI,              LGUI(LALT(BP_B)), XXXXXXX,    KC_NUM,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    _______,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  KC_VOLD,              XXXXXXX, XXXXXXX, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    _______,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
-    _______,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
-    _______,    _______,        _______,        XXXXXXX,        _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
-                                                                RALT(LSFT(KC_SPC)), _______, _______,        _______, _______, _______
+    _______,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
+    _______,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
+    _______,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, BP_COMM,
+    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, _______,     KC_KP_0,    BP_DOT
   ),
-    // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
-    // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
-    // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
-  [FXARROWS] = LAYOUT_moonlander( // Functions & Arrows layer
+  [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
-    DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    KC_VOLU,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    _______,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    KC_VOLD,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    _______,    XXXXXXX,    LCTL(BP_X),         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), XXXXXXX,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    _______,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
-    _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                _______, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
-                                                                    KC_MPRV,        TD(D_19),   KC_MNXT,              LGUI(LCTL(KC_LEFT)), TD(D_20), LGUI(LCTL(KC_RIGHT))
-  ),
-  [ARROWSMACROS] = LAYOUT_moonlander( // Arrows & Macros layer
-    // Left Hand                                                                       // Right Hand
-    _______,    _______,    _______,    _______,    _______,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
-    _______,    _______,    DM_REC1,    DM_RSTP,    DM_PLY1,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
-    _______,    _______,    DM_REC2,    DM_RSTP,    DM_PLY2,    _______,    _______,              _______,    _______,    _______,    _______,    KC_PGUP,    _______,    _______,
-    _______,    _______,    _______,    _______,    _______,    _______,                                      _______,    KC_HOME,    KC_UP,      KC_PGDN,    _______,    _______,
-    _______,    _______,    _______,    _______,    _______,                _______,              _______,                KC_LEFT,    KC_DOWN,    KC_RGHT,    _______,    _______,
-                                                    _______,    _______,    _______,              _______,    _______,    _______
+    QK_BOOT,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
+    _______,    XXXXXXX,    XXXXXXX,            RGB_VAD,            RGB_VAI,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
   )
-};
+      };
+
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
   if (layer_state_is(GAMING))
@@ -267,7 +232,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 void keyboard_post_init_user(void) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
 
@@ -290,9 +255,9 @@ tap_dance_action_t tap_dance_actions[] = {
         [D_F10_F22] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F10, KC_F22),
         [D_F11_F23] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F11, KC_F23),
         [D_F12_F24] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F12, KC_F24),
-        [D_19] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
+        [D_PLAY_STOP] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
         [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
-        [D_COPY_CUT] = ACTION_TAP_DANCE_DOUBLE(LCTL(BP_C), LCTL(BP_X)),
+        [D_COPY_CUT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_C), KC_LCTL, LCTL(BP_X), KC_LCTL),
         [D_PASTE_LSFT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(BP_V), KC_LSFT)
 };
 
@@ -349,15 +314,21 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // LEDs commencent à 36 en haut à droite
     // les thumbs noirs sont 68, 69, 70
     // le thumb rouge est 71
-    if (!is_launching) {
-        ML_LED_6(host_keyboard_led_state().caps_lock);
-        ML_LED_5(!host_keyboard_led_state().num_lock);
+    //if (!is_launching) {
+        //ML_LED_6(host_keyboard_led_state().caps_lock);
+        //ML_LED_5(!host_keyboard_led_state().num_lock);
 
         if (host_keyboard_led_state().caps_lock) {
             rgb_matrix_set_color(3, RGB_RED);
             rgb_matrix_set_color(39, RGB_RED);
         }
+    //}
+    hsv_t hsv =  {0, 255, 255};
+    if (hsv.v > rgb_matrix_get_val()) {
+        hsv.v = rgb_matrix_get_val();
     }
+    rgb_t rgb = hsv_to_rgb(hsv);
+    rgb_matrix_set_color(1, rgb.r, rgb.g, rgb.b);
     switch(get_highest_layer(layer_state)) {
             case GAMING:
                 rgb_matrix_set_color(71, RGB_RED);
@@ -371,16 +342,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 layer_state_t layer_state_set_user(layer_state_t state) {
   switch (get_highest_layer(state)) {
     case BASE:
-        ML_LED_1(false);
-        ML_LED_2(false);
-        ML_LED_3(false);
-        ML_LED_4(false);
+        //ML_LED_1(false);
+        //ML_LED_2(false);
+        //ML_LED_3(false);
+        //ML_LED_4(false);
         break;
     case GAMING:
-        ML_LED_1(false);
-        ML_LED_2(false);
-        ML_LED_3(true);
-        ML_LED_4(false);
+       // ML_LED_1(false);
+        //ML_LED_2(false);
+        //ML_LED_3(true);
+       // ML_LED_4(false);
         
         break;
     default: //  for any other layers, or the default layer
