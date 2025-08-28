@@ -12,10 +12,3 @@ COMBO_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 LEADER_ENABLE = yes
 USER_NAME = brtcst
-
-DYNAMIC_TAPPING_TERM_ENABLE = yes
-
-# pour gérer les dictionnaires de combos (combos.def)
-VPATH += keyboards/gboards
-
-KEY_OVERRIDE_ENABLE = yes
