@@ -8,6 +8,8 @@
 
 #undef RGB_DISABLE_TIMEOUT
 #define RGB_DISABLE_TIMEOUT 300000
+#define RGB_MATRIX_DEFAULT_ON true // Sets the default enabled state, if none has been set
+#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR // Sets the default mode, if none has been set
 
 //#define FIRMWARE_VERSION u8"VWLEe/9KbzN"
 //#define RAW_USAGE_PAGE 0xFF60
@@ -32,7 +34,6 @@
 #define RGB_MATRIX_DEFAULT_HUE 0
 #define RGB_MATRIX_DEFAULT_SAT 0
 // pour avoir les indicator leds en custom
-#define MOONLANDER_USER_LEDS
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
@@ -42,3 +43,7 @@
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
 #define FLOW_TAP_TERM 150
+#define CAPS_WORD_INVERT_ON_SHIFT
+
+// pour la synchro du caps_word qui ne fonctionne pas par défaut
+#define SPLIT_TRANSACTION_IDS_USER RPC_ID_USER_CAPS_WORD_SYNC

@@ -7,6 +7,7 @@
 #include "sendstring_bepo.h"
 
 #include "common_brtcst.h"
+#include "transactions.h"
 
 
 
@@ -157,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     QK_BOOT,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    _______,    XXXXXXX,    XXXXXXX,            RGB_VAD,            RGB_VAI,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    KC_CAPS,    XXXXXXX,   RM_VALD,            RM_VALU, CMC_6,       KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
     XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
   )
       };
@@ -230,9 +231,20 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 // }
 
 
+// Handler pour la synchro de l’état de caps_word entre les deux moitiés, qui ne fonctionne pas par défaut
+void caps_word_sync(uint8_t initiator2target_buffer_size, const void *initiator2target_buffer, uint8_t target2initiator_buffer_size, void *target2initiator_buffer) {
+       bool caps_word_active = *(bool*)initiator2target_buffer;
+       if (caps_word_active) {
+        caps_word_on();
+       } else {
+        caps_word_off();
+       }
+  }
+
 void keyboard_post_init_user(void) {
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    // enregistrement de la synchro de caps_word, qui ne fonctionne pas par défaut
+    transaction_register_rpc(RPC_ID_USER_CAPS_WORD_SYNC, caps_word_sync);
 }
 
 
@@ -262,6 +274,57 @@ tap_dance_action_t tap_dance_actions[] = {
 };
 
 /* custom */
+
+
+// The number of per-key LEDs on each side of a 5-column Corne.
+#define NUM_LEDS_PER_SIDE 24
+
+// keyboards/crkbd/rev1/rev1.c has a hard-coded g_led_config with 27 LEDs, so we
+// have to work around this.
+#define NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE 27
+
+// This is a thin wrapper around rgb_matrix_set_color which allows you to put
+// the same firmware on both halves of the keyboard (other than a #define for
+// `MASTER_LEFT` or `MASTER_RIGHT`) and still have the correct LEDs light up
+// regardless of which half has the USB cable in it.
+//
+// This complexity behind this logic is explained in the comments within the
+// function itself.
+/*void set_color_split(uint8_t key_code, uint8_t r, uint8_t g, uint8_t b) {
+    // When using defines for MASTER_LEFT and MASTER_RIGHT, is_keyboard_left()
+    // will be inaccurate. For example, (is_keyboard_left() &&
+    // !is_keyboard_master()) can NEVER be true.
+#ifdef MASTER_LEFT
+    bool is_left = true;
+#endif
+#ifdef MASTER_RIGHT
+    bool is_left = false;
+#endif
+
+    bool left_is_master = (is_keyboard_master() && is_left) || (!is_keyboard_master() && !is_left);
+
+    // Note on constants: 23 is the number of LEDs on each side (24) minus 1.
+    // 27 is the number of LEDs that the Corne normally has with six columns.
+
+    // Rule #1: you must set the LED based on what the master's range is. So if
+    // the USB cable is in the left half, then the range is 0-23, otherwise it's
+    // 27-50.
+
+    // Rule #2: each half of the keyboard can only set its own LEDs, it's just
+    // that the codes change according to Rule #1.
+
+    // Rule #2
+    if ((is_left && key_code >= NUM_LEDS_PER_SIDE) || (!is_left && key_code < NUM_LEDS_PER_SIDE)) {
+        return;
+    }
+
+    // Rule #1
+    if (left_is_master && key_code >= NUM_LEDS_PER_SIDE)
+        key_code -= NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
+    else if (!left_is_master && key_code < NUM_LEDS_PER_SIDE)
+        key_code += NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
+    rgb_matrix_set_color(key_code, r, g, b);
+}*/
 
 
 
@@ -304,40 +367,76 @@ void leader_end_user(void) {
     return false;
 }*/
 
+static hsv_t color_table[46] = {[0 ... 45] = {HSV_BLACK}};
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // MOITIÉ GAUCHE
-    // LEDs commencent à 0 en haut à gauche
-    // les thumbs noirs sont 32, 33, 34
-    // le thumb rouge est 35
-    // MOITIÉ DROITE
-    // LEDs commencent à 36 en haut à droite
-    // les thumbs noirs sont 68, 69, 70
-    // le thumb rouge est 71
-    //if (!is_launching) {
-        //ML_LED_6(host_keyboard_led_state().caps_lock);
-        //ML_LED_5(!host_keyboard_led_state().num_lock);
+void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
+    color_table[index] = (hsv_t){h, s, v};
+}
 
-        if (host_keyboard_led_state().caps_lock) {
-            rgb_matrix_set_color(3, RGB_RED);
-            rgb_matrix_set_color(39, RGB_RED);
+bool rgb_matrix_indicators_user() {
+  // Sens des leds : début moitité gauche, espace 0, puis serpentin vers la gauche. Les deux touches supplémentaires sont 21 (haut) et 22 (bas).
+  // ajouter 23 pour avoir la touche correspondante à droite
+
+  // NOTE IMPORTANTE : suite à bug ou mauvaise conf du firmware, les leds de la moitié gauche sont mirrorées à droite. Il faut
+  // donc les réinitialiser après avoir déclaré la moitié gauche
+
+  // NOTE : il faut flasher les deux moitiés du clavier pour que les leds fonctionnent correctement
+  
+  for (int i = 0; i <= 45; i++)
+  {
+    set_key_color(i, HSV_BLACK);
+  }
+
+  if (!host_keyboard_led_state().num_lock) {
+    set_key_color(26, HSV_GREEN); 
+  } else {
+     set_key_color(26, HSV_BLACK);
+  }
+
+if (is_caps_word_on()){
+  if (host_keyboard_led_state().caps_lock) {
+    set_key_color(22, HSV_PURPLE);
+    set_key_color(45, HSV_PURPLE);
+  } else {
+    set_key_color(22, HSV_BLUE);
+    set_key_color(45, HSV_BLUE);
+  }
+} else {
+  if (host_keyboard_led_state().caps_lock) {
+    set_key_color(22, HSV_RED);
+    set_key_color(45, HSV_RED);
+  }
+
+
+    switch(get_highest_layer(layer_state)) {
+            case GAMING:
+                set_key_color(44, HSV_RED);
+                break;
+            case NUMPAD:
+                for (int i = 27; i <= 37; i++) {
+                  set_key_color(i, HSV_GREEN);
+                }
         }
-    //}
-    hsv_t hsv =  {0, 255, 255};
+
+  for (size_t i = 0; i <= 45; i++) {
+    hsv_t hsv = color_table[i];
     if (hsv.v > rgb_matrix_get_val()) {
         hsv.v = rgb_matrix_get_val();
     }
     rgb_t rgb = hsv_to_rgb(hsv);
-    rgb_matrix_set_color(1, rgb.r, rgb.g, rgb.b);
-    switch(get_highest_layer(layer_state)) {
-            case GAMING:
-                rgb_matrix_set_color(71, RGB_RED);
-                break;
-            default:
-                break;
-        }
+    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+  }
+
 	return false;
 }
+
+// Gestion de l’état du caps_word, notamment la synchro des deux moitiés
+void caps_word_set_user(bool active) {
+      if (is_keyboard_master()) {
+          // Synchroniser l'état vers l'autre moitié
+          transaction_rpc_send(RPC_ID_USER_CAPS_WORD_SYNC, 1, &active);
+      }
+  }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   switch (get_highest_layer(state)) {
