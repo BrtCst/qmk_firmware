@@ -1,117 +1,20 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
-
+//#include "keymap_br_abnt2.h"
 #include "keymap_bepo.h"
-
+//#include "keymap_contributions.h"
+#include "keymap_us_international.h"
 // pour que la méthode send_string utilise le layout bépo et pas l’ascii
 #include "sendstring_bepo.h"
 
 #include "common_brtcst.h"
 
 
+extern bool is_launching;
 
-/*
-const key_override_t next_track_override = 
-	ko_make_with_layers_negmods_and_options(
-   		MOD_MASK_CTRL,       // Trigger modifiers: ctrl
-    	KC_MPLY,             // Trigger key: play/pause
-    	KC_MNXT,             // Replacement key
-    	~0,                  // Activate on all layers
-    	MOD_MASK_SA,         // Do not activate when shift or alt are pressed
-    	ko_option_no_reregister_trigger); // Specifies that the play key is not registered again after lifting ctrl
-      */
-     
-/*const key_override_t number_1_override = 
-	ko_make_with_layers_negmods_and_options(
-   		MOD_MASK_SHIFT,       // Trigger modifiers
-    	KC_KP_1,             // Trigger key
-    	KC_1,             // Replacement key
-    	NUMPAD,                  // Activate on all layers
-    	MOD_MASK_CTRL,         // Do not activate when *** are pressed
-    	ko_option_no_reregister_trigger);*/
-
-      const key_override_t number_1_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_1,KC_1);
-      const key_override_t number_1b_override =ko_make_basic(MOD_MASK_SA,KC_KP_1,LSFT(RALT(KC_1)));
-      const key_override_t number_1c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_1,RALT(KC_1));
-      const key_override_t number_2_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_2,KC_2);
-      const key_override_t number_2b_override =ko_make_basic(MOD_MASK_SA,KC_KP_2,LSFT(RALT(KC_2)));
-      const key_override_t number_2c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_2,RALT(KC_2));
-      const key_override_t number_3_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_3,KC_3);
-      const key_override_t number_3b_override =ko_make_basic(MOD_MASK_SA,KC_KP_3,LSFT(RALT(KC_3)));
-      const key_override_t number_3c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_3,RALT(KC_3));
-      const key_override_t number_4_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_4,KC_4);
-      const key_override_t number_4b_override =ko_make_basic(MOD_MASK_SA,KC_KP_4,LSFT(RALT(KC_4)));
-      const key_override_t number_4c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_4,RALT(KC_4));
-      const key_override_t number_5_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_5,KC_5);
-      const key_override_t number_5b_override =ko_make_basic(MOD_MASK_SA,KC_KP_5,LSFT(RALT(KC_5)));
-      const key_override_t number_5c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_5,RALT(KC_5));
-      const key_override_t number_6_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_6,KC_6);
-      const key_override_t number_6b_override =ko_make_basic(MOD_MASK_SA,KC_KP_6,LSFT(RALT(KC_6)));
-      const key_override_t number_6c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_6,RALT(KC_6));
-      const key_override_t number_7_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_7,KC_7);
-      const key_override_t number_7b_override =ko_make_basic(MOD_MASK_SA,KC_KP_7,LSFT(RALT(KC_7)));
-      const key_override_t number_7c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_7,RALT(KC_7));
-      const key_override_t number_8_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_8,KC_8);
-      const key_override_t number_8b_override =ko_make_basic(MOD_MASK_SA,KC_KP_8,LSFT(RALT(KC_8)));
-      const key_override_t number_8c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_8,RALT(KC_8));
-      const key_override_t number_9_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_9,KC_9);
-      const key_override_t number_9b_override =ko_make_basic(MOD_MASK_SA,KC_KP_9,LSFT(RALT(KC_9)));
-      const key_override_t number_9c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_9,RALT(KC_9));
-      const key_override_t number_0_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_0,KC_0);
-      const key_override_t number_0b_override =ko_make_basic(MOD_MASK_SA,KC_KP_0,LSFT(RALT(KC_0)));
-      const key_override_t number_0c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_0,RALT(KC_0));
-      
-
-const key_override_t *key_overrides[] = {
-  &number_0c_override,
-  &number_0b_override,
-  &number_0_override,
-  &number_1c_override,
-  &number_1b_override,
-  &number_1_override,
-  &number_2c_override,
-  &number_2b_override,
-  &number_2_override,
-  &number_3c_override,
-  &number_3b_override,
-  &number_3_override,
-  &number_4c_override,
-  &number_4b_override,
-  &number_4_override,
-  &number_5c_override,
-  &number_5b_override,
-  &number_5_override,
-  &number_6c_override,
-  &number_6b_override,
-  &number_6_override,
-  &number_7c_override,
-  &number_7b_override,
-  &number_7_override,
-  &number_8c_override,
-  &number_8b_override,
-  &number_8_override,
-  &number_9c_override,
-  &number_9b_override,
-  &number_9_override
-};
-
-enum custom_keycodes {
-  RGB_SLD = SAFE_RANGE,
-  CMC_0,
-  CMC_1,
-  CMC_6,
-  BP_LSPO,
-  BP_RSPC,
-  CMC_END_RETURN,
-  CMC_SLASH
-};
 
 // pour les dictionnaires de combos (combos.def)
 #include "g/keymap_combo.h"
-
-
-
-extern bool is_launching;
 
 
 char chordal_hold_handedness(keypos_t key) {
@@ -122,6 +25,41 @@ char chordal_hold_handedness(keypos_t key) {
     // left, and the other half are on the right.
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
+
+tap_dance_action_t tap_dance_actions[] = TAP_DANCE_LIST;
+
+const key_override_t *key_overrides[] = {
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_1,KC_1),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_1,LSFT(RALT(KC_1))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_1,RALT(KC_1)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_2,KC_2),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_2,LSFT(RALT(KC_2))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_2,RALT(KC_2)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_3,KC_3),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_3,LSFT(RALT(KC_3))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_3,RALT(KC_3)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_4,KC_4),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_4,LSFT(RALT(KC_4))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_4,RALT(KC_4)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_5,KC_5),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_5,LSFT(RALT(KC_5))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_5,RALT(KC_5)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_6,KC_6),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_6,LSFT(RALT(KC_6))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_6,RALT(KC_6)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_7,KC_7),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_7,LSFT(RALT(KC_7))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_7,RALT(KC_7)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_8,KC_8),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_8,LSFT(RALT(KC_8))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_8,RALT(KC_8)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_9,KC_9),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_9,LSFT(RALT(KC_9))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_9,RALT(KC_9)),
+  &ko_make_basic(MOD_MASK_SHIFT,KC_KP_0,KC_0),
+  &ko_make_basic(MOD_MASK_SA,KC_KP_0,LSFT(RALT(KC_0))),
+  &ko_make_basic(MOD_BIT(KC_RALT),KC_KP_0,RALT(KC_0))
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
@@ -139,17 +77,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
     BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
-    KC_LCTL,    KC_LGUI,    KC_LALT,    KC_TAB,    _______,                _______,              TD(D_4),                KC_BSPC,    KC_DEL,     CMC_SLASH,  MO(ARROWSMACROS), KC_RCTL,
+    KC_LCTL,    KC_LGUI,    KC_LALT,    KC_TAB,    _______,                _______,              TD(D_4),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, KC_RCTL,
                                                     KC_SPC,    _______,    _______,              _______,    _______,    _______
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
-    QK_BOOT,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    _______,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    _______,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
-    _______,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
+    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
+    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
+    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
     _______,    _______,        _______,        XXXXXXX,        _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
-                                                                RALT(LSFT(KC_SPC)), _______, _______,        _______, _______, _______
+                                                                MO(CONFIG), _______, XXXXXXX,        _______, _______, _______
   ),
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
     // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
@@ -157,35 +95,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [FXARROWS] = LAYOUT_moonlander( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
     DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    _______,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    _______,    XXXXXXX,    XXXXXXX,            RGB_VAD,            RGB_VAI,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    KC_CAPS,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
     _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                _______, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
-                                                                    XXXXXXX,        XXXXXXX,   XXXXXXX,              LGUI(LCTL(KC_LEFT)), TD(D_20), LGUI(LCTL(KC_RIGHT))
+                                                                    XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20), MO(CONFIG)
   ),
-  [ARROWSMACROS] = LAYOUT_moonlander( // Arrows & Macros layer
+  [CONFIG] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
-    _______,    _______,    _______,    _______,    _______,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
-    _______,    _______,    DM_REC1,    DM_RSTP,    DM_PLY1,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
-    _______,    _______,    DM_REC2,    DM_RSTP,    DM_PLY2,    _______,    _______,              _______,    _______,    _______,    _______,    KC_PGUP,    _______,    _______,
-    _______,    _______,    _______,    _______,    _______,    _______,                                      _______,    KC_HOME,    KC_UP,      KC_PGDN,    _______,    _______,
-    _______,    _______,    _______,    _______,    _______,                _______,              _______,                KC_LEFT,    KC_DOWN,    KC_RGHT,    _______,    _______,
-                                                    _______,    _______,    _______,              _______,    _______,    _______
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    QK_BOOT,    XXXXXXX,    DM_REC1,    DM_RSTP,    DM_PLY1,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RGB_VAI,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RGB_VAD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   )
 };
 
+
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-  if (layer_state_is(GAMING))
-    switch(combo_index) {
-      case YX_ENTER:
-      case GH_ENTER:
-      case XDOT_W:
-      case QG_Ç:
-        return true;
-      default:
-        return false;
-    }
-  return true;
+    /*switch (combo_index) {
+        case COMBO_30:
+            return layer_state_is(0) || layer_state_is(1);
+        default:
+            // all combos on layer 0
+            return layer_state_is(0);
+    }*/
+    // no combos on layer 1 (gaming)
+    return !layer_state_is(GAMING);
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
@@ -243,34 +180,10 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 void keyboard_post_init_user(void) {
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
 
-tap_dance_action_t tap_dance_actions[] = {
-        [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),
-        [D_ESC_LOCK] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_ESCAPE, KC_ESCAPE, KC_ESCAPE, LGUI(BP_L)),
-        [D_2] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), GAMING),
-        [D_3] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_INSERT, LGUI(LSFT(BP_S)), LGUI(LALT(BP_K)), KC_PSCR),
-        [D_4] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), BASE),
-        [D_5] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS_LOCK, KC_ENTER),
-        [D_F1_F13] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F1, KC_F13),
-        [D_F2_F14] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F2, KC_F14),
-        [D_F3_F15] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F3, KC_F15),
-        [D_F4_F16] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F4, KC_F16),
-        [D_F5_F17] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F5, KC_RALT, KC_F17, KC_RALT),
-        [D_F6_F18] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F6, KC_LALT, KC_F18, KC_LALT),
-        [D_F7_F19] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F7, KC_LCTL, KC_F19, KC_LCTL),
-        [D_F8_F20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F8, KC_LSFT, KC_F20, KC_LSFT),
-        [D_F9_F21] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F9, KC_F21),
-        [D_F10_F22] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F10, KC_F22),
-        [D_F11_F23] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F11, KC_F23),
-        [D_F12_F24] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_F12, KC_F24),
-        [D_PLAY_STOP] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),
-        [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),
-        [D_COPY_CUT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_C), KC_LCTL, LCTL(BP_X), KC_LCTL),
-        [D_PASTE_LSFT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(BP_V), KC_LSFT)
-};
 
 /* custom */
 
@@ -369,10 +282,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 uint8_t mod_state;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // Stockage de l'état des modificateurs
-  mod_state = get_mods();
 
-  
   switch (keycode) {
     case CMC_0:
       if (record->event.pressed) {
@@ -443,4 +353,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
