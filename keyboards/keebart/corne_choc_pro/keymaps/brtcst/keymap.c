@@ -112,7 +112,6 @@ char chordal_hold_handedness(keypos_t key) {
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_split_3x6_3_ex2(
         //,-----------------------------------------------------.
@@ -142,14 +141,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
     XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
-    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, _______,     _______,    KC_KP_0
+    XXXXXXX,    BP_TAB_MOD, MO(CONFIG), _______,     _______,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
-    XXXXXXX,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),     KC_MNXT,          KC_MUTE,   XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
     KC_CAPS,    XXXXXXX,   RM_VALD,            RM_VALU, CMC_6,       KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
-    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
+    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(CONFIG), KC_BSPC,    KC_DEL
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
     // Left Hand                                                                       // Right Hand
@@ -340,8 +339,8 @@ void leader_end_user(void) {
     ML_LED_6(led_state.caps_lock);
     return false;
 }*/
-
-static hsv_t color_table[46] = {[0 ... 45] = {HSV_BLACK}};
+#define MAX_LEDS 46
+static hsv_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {HSV_BLACK}};
 
 void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
     color_table[index] = (hsv_t){h, s, v};
@@ -356,13 +355,13 @@ bool rgb_matrix_indicators_user() {
 
   // NOTE : il faut flasher les deux moitiés du clavier pour que les leds fonctionnent correctement
   
-  for (int i = 0; i <= 45; i++)
+  for (int i = 0; i < MAX_LEDS; i++)
   {
     set_key_color(i, HSV_BLACK);
   }
 
   if (!host_keyboard_led_state().num_lock) {
-    set_key_color(26, HSV_GREEN); 
+    set_key_color(26, HSV_GREEN);
   } else {
      set_key_color(26, HSV_BLACK);
   }
@@ -387,14 +386,62 @@ if (is_caps_word_on()){
                 set_key_color(44, HSV_RED);
                 break;
             case NUMPAD:
-                for (int i = 27; i <= 37; i++) {
-                  set_key_color(i, HSV_GREEN);
-                }
-                set_key_color(30, HSV_BLACK);
-                break;
+              set_key_color(27, HSV_GREEN); //numpad
+              set_key_color(28, HSV_GREEN);
+              set_key_color(29, HSV_GREEN);
+              set_key_color(31, HSV_GREEN);
+              set_key_color(32, HSV_GREEN );
+              set_key_color(33, HSV_GREEN);
+              set_key_color(34, HSV_GREEN);
+              set_key_color(35, HSV_GREEN );
+              set_key_color(36, HSV_GREEN);
+              set_key_color(37, HSV_GREEN);
+              set_key_color(26, HSV_RED ); //numlock
+              // fn
+              set_key_color(4, HSV_BLUE);
+              set_key_color(5, HSV_BLUE);
+              set_key_color(6, HSV_BLUE);
+              set_key_color(9, HSV_BLUE);
+              set_key_color(10, HSV_BLUE);
+              set_key_color(11, HSV_BLUE);
+              set_key_color(12, HSV_BLUE);
+              set_key_color(13, HSV_BLUE);
+              set_key_color(14, HSV_BLUE);
+              set_key_color(15, HSV_BLUE);
+              set_key_color(16, HSV_BLUE);
+              set_key_color(17, HSV_BLUE);
+              break;
+            case FXARROWS:
+              set_key_color(28, HSV_RED); // arrows
+              set_key_color(33, HSV_RED);
+              set_key_color(34, HSV_RED);
+              set_key_color(36, HSV_RED );
+              set_key_color(27, HSV_YELLOW ); // home
+              set_key_color(29, HSV_YELLOW ); // end
+              set_key_color(35, HSV_YELLOW ); // pgup
+              set_key_color(37, HSV_YELLOW ); // pgdn
+
+              set_key_color(1, HSV_GREEN);
+              set_key_color(2, HSV_GREEN);
+               set_key_color(3, HSV_GREEN);
+               set_key_color(4, HSV_GREEN);
+               set_key_color(11, HSV_GREEN);
+               set_key_color(12, HSV_GREEN);
+              break;
+            case CONFIG:
+               set_key_color(12, HSV_RED); // bootloader
+               set_key_color(13, HSV_RED);
+               set_key_color(18, HSV_RED);
+               set_key_color(10, HSV_ORANGE);
+               set_key_color(11, HSV_ORANGE);
+               set_key_color(4, HSV_GREEN);
+               set_key_color(5, HSV_GREEN);
+               // brightness
+               set_key_color(1, HSV_YELLOW);
+               set_key_color(2, HSV_YELLOW);
         }
 
-  for (size_t i = 0; i <= 45; i++) {
+  for (size_t i = 0; i < MAX_LEDS; i++) {
     hsv_t hsv = color_table[i];
     if (hsv.v > rgb_matrix_get_val()) {
         hsv.v = rgb_matrix_get_val();

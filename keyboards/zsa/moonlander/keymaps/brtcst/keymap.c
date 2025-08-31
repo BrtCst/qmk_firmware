@@ -86,16 +86,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
     DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
-    _______,    _______,        _______,        XXXXXXX,        _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
+    _______,    _______,        _______,        XXXXXXX,                                                                                                                                                                           _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
                                                                 MO(CONFIG), _______, XXXXXXX,        _______, _______, _______
   ),
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
     // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
     // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
-  [FXARROWS] = LAYOUT_moonlander( // Functions & Arrows layer
+  [FXARROWS] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
     DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),        KC_MNXT,        KC_MUTE, XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
     KC_CAPS,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
     _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                _______, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
@@ -179,8 +179,8 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 
 
 void keyboard_post_init_user(void) {
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
 
@@ -228,10 +228,15 @@ void leader_end_user(void) {
     return false;
 }*/
 
+#define MAX_LEDS 72
+static hsv_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {HSV_BLACK}};
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
+    color_table[index] = (hsv_t){h, s, v};
+}
+bool rgb_matrix_indicators_user() {
     // MOITIÉ GAUCHE
-    // LEDs commencent à 0 en haut à gauche
+    // LEDs commencent à 0 en haut à gauche, puis vers le bas
     // les thumbs noirs sont 32, 33, 34
     // le thumb rouge est 35
     // MOITIÉ DROITE
@@ -243,17 +248,86 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         ML_LED_5(!host_keyboard_led_state().num_lock);
 
         if (host_keyboard_led_state().caps_lock) {
-            rgb_matrix_set_color(3, RGB_RED);
-            rgb_matrix_set_color(39, RGB_RED);
+            set_key_color(3, RGB_RED);
+            set_key_color(39, RGB_RED);
         }
     }
+
+      for (int i = 0; i < MAX_LEDS; i++)
+  {
+    set_key_color(i, HSV_BLACK);
+  }
     switch(get_highest_layer(layer_state)) {
             case GAMING:
-                rgb_matrix_set_color(71, RGB_RED);
+                set_key_color(71, HSV_RED);
                 break;
+            case NUMPAD:
+              set_key_color(47, HSV_GREEN); //numpad
+              set_key_color(48, HSV_GREEN);
+              set_key_color(49, HSV_GREEN);
+              set_key_color(52, HSV_GREEN);
+              set_key_color(53, HSV_GREEN);
+              set_key_color(54, HSV_GREEN );
+              set_key_color(55, HSV_GREEN);
+              set_key_color(57, HSV_GREEN);
+              set_key_color(58, HSV_GREEN);
+              set_key_color(59, HSV_GREEN );
+              set_key_color(62, HSV_RED ); //numlock
+              // fn
+              set_key_color(6, HSV_BLUE);
+              set_key_color(7, HSV_BLUE);
+              set_key_color(8, HSV_BLUE);
+              set_key_color(11, HSV_BLUE);
+              set_key_color(12, HSV_BLUE);
+              set_key_color(13, HSV_BLUE);
+              set_key_color(16, HSV_BLUE);
+              set_key_color(17, HSV_BLUE);
+              set_key_color(18, HSV_BLUE);
+              set_key_color(21, HSV_BLUE);
+              set_key_color(22, HSV_BLUE);
+              set_key_color(23, HSV_BLUE);
+              break;
+            case FXARROWS:
+              set_key_color(48, HSV_RED); // arrows
+              set_key_color(52, HSV_RED);
+              set_key_color(53, HSV_RED);
+              set_key_color(58, HSV_RED );
+              set_key_color(57, HSV_YELLOW ); // home
+              set_key_color(59, HSV_YELLOW ); // end
+              set_key_color(47, HSV_YELLOW ); // pgup
+              set_key_color(49, HSV_YELLOW ); // pgdn
+
+              set_key_color(11, HSV_GREEN);
+              set_key_color(16, HSV_GREEN);
+               set_key_color(21, HSV_GREEN);
+               set_key_color(26, HSV_GREEN);
+               set_key_color(27, HSV_GREEN);
+               set_key_color(28, HSV_GREEN);
+              break;
+            case CONFIG:
+               set_key_color(1, HSV_RED); // bootloader
+               set_key_color(11, HSV_RED);
+               set_key_color(12, HSV_RED);
+               set_key_color(16, HSV_ORANGE);
+               set_key_color(17, HSV_ORANGE);
+               set_key_color(21, HSV_GREEN);
+               set_key_color(22, HSV_GREEN);
+               // brightness
+               set_key_color(26, HSV_YELLOW);
+               set_key_color(27, HSV_YELLOW);
             default:
                 break;
         }
+
+  for (size_t i = 0; i < MAX_LEDS; i++) {
+    hsv_t hsv = color_table[i];
+    if (hsv.v > rgb_matrix_get_val()) {
+        hsv.v = rgb_matrix_get_val();
+    }
+    rgb_t rgb = hsv_to_rgb(hsv);
+    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+  }
+  
 	return false;
 }
 
@@ -270,11 +344,18 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         ML_LED_2(false);
         ML_LED_3(true);
         ML_LED_4(false);
-        
+        break;
+    case CONFIG:
+        ML_LED_1(false);
+        ML_LED_2(false);
+        ML_LED_3(false);
+        ML_LED_4(true);
         break;
     default: //  for any other layers, or the default layer
         break;
     }
+
+  rgb_matrix_indicators_user();
   return state;
 }
 
