@@ -7,7 +7,6 @@
 #include "sendstring_bepo.h"
 
 #include "common_brtcst.h"
-#include "transactions.h"
 
 
 
@@ -96,11 +95,11 @@ const key_override_t *key_overrides[] = {
   &number_9_override
 };
 
-
 // pour les dictionnaires de combos (combos.def)
 #include "g/keymap_combo.h"
 
 
+extern bool is_launching;
 
 
 char chordal_hold_handedness(keypos_t key) {
@@ -112,54 +111,56 @@ char chordal_hold_handedness(keypos_t key) {
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [BASE] = LAYOUT_split_3x6_3_ex2(
-        //,-----------------------------------------------------.
-        //,-----------------------------------------------------.
-        top_row[0], top_row[1], top_row[2], top_row[3], top_row[4], top_row[5], top_row[6],                top_row[7], top_row[8], top_row[9], top_row[10], top_row[11], top_row[12], top_row[13],
-        //|--------+--------+--------+--------+--------+--------|
-        //|--------+--------+--------+--------+--------+--------|
-        mid_row[0], mid_row[1], mid_row[2], mid_row[3], mid_row[4], mid_row[5], mid_row[6],                mid_row[7], mid_row[8], mid_row[9], mid_row[10], mid_row[11], mid_row[12], mid_row[13],
-        //|--------+--------+--------+--------+--------+--------|
-        //|--------+--------+--------+--------+--------+--------|
-        bot_row[0], bot_row[1], bot_row[2], bot_row[3], bot_row[4], bot_row[5],                                        bot_row[6], bot_row[7], bot_row[8], bot_row[9], bot_row[10], bot_row[11],
-        //|--------+--------+--------+--------+--------+--------+--------|
-        //|--------+--------+--------+--------+--------+--------+--------|
-        XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
-        //`--------------------------'  `--------------------------'
-
-        ),
-  [GAMING] = LAYOUT_split_3x6_3_ex2( // Gaming layer
+  [BASE] = LAYOUT_moonlander(
     // Left Hand                                                                   // Right Hand
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    top_row[0], top_row[1], top_row[2], top_row[3], top_row[4], top_row[5], top_row[6],              top_row[7], top_row[8], top_row[9], top_row[10], top_row[11], top_row[12], top_row[13],
+    mid_row[0], mid_row[1], mid_row[2], mid_row[3], mid_row[4], mid_row[5], mid_row[6],                mid_row[7], mid_row[8], mid_row[9], mid_row[10], mid_row[11], mid_row[12], mid_row[13],
+    bot_row[0], bot_row[1], bot_row[2], bot_row[3], bot_row[4], bot_row[5],                                        bot_row[6], bot_row[7], bot_row[8], bot_row[9], bot_row[10], bot_row[11],
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    BP_TAB_MOD,           LGUI(BP_SCLN),       TD(D_2),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, XXXXXXX,
+                                                    BP_SPC_LT,  SH_MON,     MO(FXARROWS),              XXXXXXX,    XXXXXXX,    MO(NUMPAD)
+  ),
+  [GAMING] = LAYOUT_moonlander( // Gaming layer
+    // Left Hand                                                                   // Right Hand
+    BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC,    BP_AT,      BP_PLUS,    BP_MINS,    BP_SLSH,    BP_ASTR,    BP_EQL,
     BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
     BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
-    _______,    _______, _______, _______, _______,    _______
+    KC_LCTL,    KC_LGUI,    KC_LALT,    KC_TAB,    _______,                _______,              TD(D_4),                KC_BSPC,    KC_DEL,     CMC_SLASH,  MO(ARROWSMACROS), KC_RCTL,
+                                                    KC_SPC,    _______,    _______,              _______,    _______,    _______
   ),
-  [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
+  [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
+    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
-    XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
-    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, _______,     _______,    KC_KP_0
+    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
+    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
+    _______,    _______,        _______,        XXXXXXX,        _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
+                                                                RALT(LSFT(KC_SPC)), _______, _______,        _______, _______, _______
   ),
-  [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
+    // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
+    // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
+    // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
+  [FXARROWS] = LAYOUT_moonlander( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
-    XXXXXXX,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    QK_BOOT,    XXXXXXX,    XXXXXXX,            KC_MPRV,        TD(D_PLAY_STOP),   KC_MNXT,    XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    KC_CAPS,    XXXXXXX,   RM_VALD,            RM_VALU, CMC_6,       KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
-    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
+    KC_CAPS,    XXXXXXX,    XXXXXXX,            RGB_VAD,            RGB_VAI,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                _______, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
+                                                                    XXXXXXX,        XXXXXXX,   XXXXXXX,              LGUI(LCTL(KC_LEFT)), TD(D_20), LGUI(LCTL(KC_RIGHT))
   ),
-  [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
+  [ARROWSMACROS] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
-    QK_BOOT,    XXXXXXX,    DM_REC1,    DM_RSTP,    DM_PLY1,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RGB_VAI,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RGB_VAD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(NUMPAD), KC_BSPC,    KC_DEL
+    _______,    _______,    _______,    _______,    _______,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    DM_REC1,    DM_RSTP,    DM_PLY1,    _______,    _______,              _______,    _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    DM_REC2,    DM_RSTP,    DM_PLY2,    _______,    _______,              _______,    _______,    _______,    _______,    KC_PGUP,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,    _______,                                      _______,    KC_HOME,    KC_UP,      KC_PGDN,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,                _______,              _______,                KC_LEFT,    KC_DOWN,    KC_RGHT,    _______,    _______,
+                                                    _______,    _______,    _______,              _______,    _______,    _______
   )
-      };
-
+};
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
   if (layer_state_is(GAMING))
@@ -228,77 +229,16 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 // }
 
 
-// Handler pour la synchro de l’état de caps_word entre les deux moitiés, qui ne fonctionne pas par défaut
-void caps_word_sync(uint8_t initiator2target_buffer_size, const void *initiator2target_buffer, uint8_t target2initiator_buffer_size, void *target2initiator_buffer) {
-       bool caps_word_active = *(bool*)initiator2target_buffer;
-       if (caps_word_active) {
-        caps_word_on();
-       } else {
-        caps_word_off();
-       }
-  }
-
 void keyboard_post_init_user(void) {
-    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    // enregistrement de la synchro de caps_word, qui ne fonctionne pas par défaut
-    transaction_register_rpc(RPC_ID_USER_CAPS_WORD_SYNC, caps_word_sync);
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
 
 
-tap_dance_action_t tap_dance_actions[] = TAP_DANCE_LIST;
+
+tap_dance_action_t tap_dance_actions[] = TAP_ACTIONS_LIST;
 
 /* custom */
-
-
-// The number of per-key LEDs on each side of a 5-column Corne.
-#define NUM_LEDS_PER_SIDE 24
-
-// keyboards/crkbd/rev1/rev1.c has a hard-coded g_led_config with 27 LEDs, so we
-// have to work around this.
-#define NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE 27
-
-// This is a thin wrapper around rgb_matrix_set_color which allows you to put
-// the same firmware on both halves of the keyboard (other than a #define for
-// `MASTER_LEFT` or `MASTER_RIGHT`) and still have the correct LEDs light up
-// regardless of which half has the USB cable in it.
-//
-// This complexity behind this logic is explained in the comments within the
-// function itself.
-/*void set_color_split(uint8_t key_code, uint8_t r, uint8_t g, uint8_t b) {
-    // When using defines for MASTER_LEFT and MASTER_RIGHT, is_keyboard_left()
-    // will be inaccurate. For example, (is_keyboard_left() &&
-    // !is_keyboard_master()) can NEVER be true.
-#ifdef MASTER_LEFT
-    bool is_left = true;
-#endif
-#ifdef MASTER_RIGHT
-    bool is_left = false;
-#endif
-
-    bool left_is_master = (is_keyboard_master() && is_left) || (!is_keyboard_master() && !is_left);
-
-    // Note on constants: 23 is the number of LEDs on each side (24) minus 1.
-    // 27 is the number of LEDs that the Corne normally has with six columns.
-
-    // Rule #1: you must set the LED based on what the master's range is. So if
-    // the USB cable is in the left half, then the range is 0-23, otherwise it's
-    // 27-50.
-
-    // Rule #2: each half of the keyboard can only set its own LEDs, it's just
-    // that the codes change according to Rule #1.
-
-    // Rule #2
-    if ((is_left && key_code >= NUM_LEDS_PER_SIDE) || (!is_left && key_code < NUM_LEDS_PER_SIDE)) {
-        return;
-    }
-
-    // Rule #1
-    if (left_is_master && key_code >= NUM_LEDS_PER_SIDE)
-        key_code -= NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
-    else if (!left_is_master && key_code < NUM_LEDS_PER_SIDE)
-        key_code += NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
-    rgb_matrix_set_color(key_code, r, g, b);
-}*/
 
 
 
@@ -341,92 +281,61 @@ void leader_end_user(void) {
     return false;
 }*/
 
-static hsv_t color_table[46] = {[0 ... 45] = {HSV_BLACK}};
+static bool is_macro_recording = false;
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    // MOITIÉ GAUCHE
+    // LEDs commencent à 0 en haut à gauche
+    // les thumbs noirs sont 32, 33, 34
+    // le thumb rouge est 35
+    // MOITIÉ DROITE
+    // LEDs commencent à 36 en haut à droite
+    // les thumbs noirs sont 68, 69, 70
+    // le thumb rouge est 71
+    if (!is_launching) {
+        ML_LED_6(host_keyboard_led_state().caps_lock);
+        ML_LED_5(!host_keyboard_led_state().num_lock);
 
-void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
-    color_table[index] = (hsv_t){h, s, v};
-}
-
-bool rgb_matrix_indicators_user() {
-  // Sens des leds : début moitité gauche, espace 0, puis serpentin vers la gauche. Les deux touches supplémentaires sont 21 (haut) et 22 (bas).
-  // ajouter 23 pour avoir la touche correspondante à droite
-
-  // NOTE IMPORTANTE : suite à bug ou mauvaise conf du firmware, les leds de la moitié gauche sont mirrorées à droite. Il faut
-  // donc les réinitialiser après avoir déclaré la moitié gauche
-
-  // NOTE : il faut flasher les deux moitiés du clavier pour que les leds fonctionnent correctement
-  
-  for (int i = 0; i <= 45; i++)
-  {
-    set_key_color(i, HSV_BLACK);
-  }
-
-  if (!host_keyboard_led_state().num_lock) {
-    set_key_color(26, HSV_GREEN); 
-  } else {
-     set_key_color(26, HSV_BLACK);
-  }
-
-if (is_caps_word_on()){
-  if (host_keyboard_led_state().caps_lock) {
-    set_key_color(22, HSV_PURPLE);
-    set_key_color(45, HSV_PURPLE);
-  } else {
-    set_key_color(22, HSV_BLUE);
-    set_key_color(45, HSV_BLUE);
-  }
-} else {
-  if (host_keyboard_led_state().caps_lock) {
-    set_key_color(22, HSV_RED);
-    set_key_color(45, HSV_RED);
-  }
-}
-
+        if (host_keyboard_led_state().caps_lock) {
+            rgb_matrix_set_color(3, RGB_RED);
+            rgb_matrix_set_color(39, RGB_RED);
+        }
+    }
     switch(get_highest_layer(layer_state)) {
             case GAMING:
-                set_key_color(44, HSV_RED);
+                rgb_matrix_set_color(71, RGB_RED);
                 break;
-            case NUMPAD:
-                for (int i = 27; i <= 37; i++) {
-                  set_key_color(i, HSV_GREEN);
-                }
-                set_key_color(30, HSV_BLACK);
+            default:
                 break;
         }
-
-  for (size_t i = 0; i <= 45; i++) {
-    hsv_t hsv = color_table[i];
-    if (hsv.v > rgb_matrix_get_val()) {
-        hsv.v = rgb_matrix_get_val();
-    }
-    rgb_t rgb = hsv_to_rgb(hsv);
-    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
-  }
-
+     if (is_macro_recording){
+      rgb_matrix_set_color(71, RGB_YELLOW);
+     }
 	return false;
 }
 
-// Gestion de l’état du caps_word, notamment la synchro des deux moitiés
-void caps_word_set_user(bool active) {
-      if (is_keyboard_master()) {
-          // Synchroniser l'état vers l'autre moitié
-          transaction_rpc_send(RPC_ID_USER_CAPS_WORD_SYNC, 1, &active);
-      }
-  }
+bool dynamic_macro_record_start_user(int8_t direction){
+      is_macro_recording = true;
+      return true;
+     }
+
+     bool dynamic_macro_record_end_user(int8_t direction){
+      is_macro_recording = false;
+      return true;
+     }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   switch (get_highest_layer(state)) {
     case BASE:
-        //ML_LED_1(false);
-        //ML_LED_2(false);
-        //ML_LED_3(false);
-        //ML_LED_4(false);
+        ML_LED_1(false);
+        ML_LED_2(false);
+        ML_LED_3(false);
+        ML_LED_4(false);
         break;
     case GAMING:
-       // ML_LED_1(false);
-        //ML_LED_2(false);
-        //ML_LED_3(true);
-       // ML_LED_4(false);
+        ML_LED_1(false);
+        ML_LED_2(false);
+        ML_LED_3(true);
+        ML_LED_4(false);
         
         break;
     default: //  for any other layers, or the default layer
@@ -442,7 +351,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // Stockage de l'état des modificateurs
   mod_state = get_mods();
 
-  
   switch (keycode) {
     case CMC_0:
       if (record->event.pressed) {
