@@ -12,16 +12,27 @@ typedef struct {
     int state;
 } tap_dance_custom_t;
 
-enum /*layers*/ {
-    BASE,
+enum layers {
+    BASE = 0,
     GAMING,
     NUMPAD,
     FXARROWS,
-    ARROWSMACROS
+    CONFIG
 };
 
-enum {
-    NONE,
+enum custom_keycodes {
+  RGB_SLD = SAFE_RANGE,
+  CMC_0,
+  CMC_1,
+  CMC_6,
+  BP_LSPO,
+  BP_RSPC,
+  CMC_END_RETURN,
+  CMC_SLASH
+};
+
+enum dance_taps {
+    NONE = 0,
     SINGLE_TAP,
     SINGLE_HOLD,
     DOUBLE_TAP,
@@ -30,8 +41,8 @@ enum {
     MORE_TAPS
 };
 
-enum /*tap_dance_codes*/ {
-  D_0,
+enum tap_dance_codes {
+  D_0 = 0,
   D_ESC_LOCK,
   D_2,
   D_3,
@@ -54,6 +65,7 @@ enum /*tap_dance_codes*/ {
   D_COPY_CUT,
   D_PASTE_LSFT
 };
+
 
 #define BP_E_MOD MT(MOD_LSFT, BP_E)
 #define BP_T_MOD MT(MOD_RSFT, BP_T)
@@ -80,7 +92,32 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data);
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){tap_keycode, hold_keycode, tap_keycode, hold_keycode, NONE}), }
 
 static const uint16_t top_row[14] = {XXXXXXX, BP_B, BP_EACU, BP_P, BP_O, BP_EGRV, QK_LEAD, TD(D_2), BP_DCIR, BP_V, BP_D, BP_L, BP_J, BP_Z};
-static const uint16_t mid_row[14] = {TD(D_ESC_LOCK), BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M_MOD};
+static const uint16_t mid_row[14] = {XXXXXXX, BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M_MOD};
 static const uint16_t bot_row[14] = {CW_TOGG, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_SLSH};
+
+#define TAP_DANCE_LIST {\
+        [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),\
+        [D_ESC_LOCK] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_ESCAPE, KC_ESCAPE, KC_ESCAPE, LGUI(BP_L)),\
+        [D_2] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), GAMING),\
+        [D_3] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_INSERT, LGUI(LSFT(BP_S)), LGUI(LALT(BP_K)), KC_PSCR),\
+        [D_4] = ACTION_TAP_DANCE_LAYER_MOVE(LALT(KC_SPACE), BASE),\
+        [D_5] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS_LOCK, KC_ENTER),\
+        [D_F1_F13] = ACTION_TAP_DANCE_DOUBLE(KC_F1, KC_F13),\
+        [D_F2_F14] = ACTION_TAP_DANCE_DOUBLE(KC_F2, KC_F14),\
+        [D_F3_F15] = ACTION_TAP_DANCE_DOUBLE(KC_F3, KC_F15),\
+        [D_F4_F16] = ACTION_TAP_DANCE_DOUBLE(KC_F4, KC_F16),\
+        [D_F5_F17] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F5, KC_RALT, KC_F17, KC_RALT),\
+        [D_F6_F18] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F6, KC_LALT, KC_F18, KC_LALT),\
+        [D_F7_F19] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F7, KC_LCTL, KC_F19, KC_LCTL),\
+        [D_F8_F20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F8, KC_LSFT, KC_F20, KC_LSFT),\
+        [D_F9_F21] = ACTION_TAP_DANCE_DOUBLE(KC_F9, KC_F21),\
+        [D_F10_F22] = ACTION_TAP_DANCE_DOUBLE(KC_F10, KC_F22),\
+        [D_F11_F23] = ACTION_TAP_DANCE_DOUBLE(KC_F11, KC_F23),\
+        [D_F12_F24] = ACTION_TAP_DANCE_DOUBLE(KC_F12, KC_F24),\
+        [D_PLAY_STOP] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),\
+        [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),\
+        [D_COPY_CUT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_C), KC_LCTL, LCTL(BP_X), KC_LCTL),\
+        [D_PASTE_LSFT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(BP_V), KC_LSFT)\
+}
 
 #endif

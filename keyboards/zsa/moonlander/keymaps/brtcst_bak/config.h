@@ -18,6 +18,7 @@
 
 //#define RGB_MATRIX_STARTUP_SPD 60
 
+#define PERMISSIVE_HOLD
 #define PERMISSIVE_HOLD_PER_KEY
 
 /* custom */
@@ -33,4 +34,12 @@
 #define RGB_MATRIX_DEFAULT_SAT 0
 // pour avoir les indicator leds en custom
 #define MOONLANDER_USER_LEDS
+
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 200
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 120
+
 #define CHORDAL_HOLD
+// https://docs.qmk.fm/tap_hold#flow-tap
+#define FLOW_TAP_TERM 150

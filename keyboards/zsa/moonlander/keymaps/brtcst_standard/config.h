@@ -33,3 +33,4 @@
 #define RGB_MATRIX_DEFAULT_SAT 0
 // pour avoir les indicator leds en custom
 #define MOONLANDER_USER_LEDS
+#define CHORDAL_HOLD
