@@ -18,3 +18,4 @@ DYNAMIC_TAPPING_TERM_ENABLE = yes
 VPATH += keyboards/gboards
 
 KEY_OVERRIDE_ENABLE = yes
+LAYER_LOCK_ENABLE = yes
