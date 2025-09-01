@@ -497,6 +497,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   
   switch (keycode) {
+    case CMC_CCED:
+      if (record->event.pressed) {
+        // 'ça'
+        
+      }
+      break;
     case CMC_0:
       if (record->event.pressed) {
         // '« '
