@@ -138,16 +138,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
     // Left Hand                                                                       // Right Hand
-    XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
-    XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
+    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),     KC_MNXT,          KC_MUTE,   XXXXXXX,              XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
+    _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,               XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
+    KC_CAPS,    XXXXXXX,   RM_VALD,            RM_VALU, CMC_6,       KC_VOLD,                                                       KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
     XXXXXXX,    BP_TAB_MOD, MO(CONFIG), _______,     _______,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
-    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),     KC_MNXT,          KC_MUTE,   XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    KC_CAPS,    XXXXXXX,   RM_VALD,            RM_VALU, CMC_6,       KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,             XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
+    XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                       XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
     XXXXXXX,    BP_TAB_MOD, BP_SPC_LT, MO(CONFIG), KC_BSPC,    KC_DEL
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
@@ -397,7 +397,23 @@ if (is_caps_word_on()){
               set_key_color(36, HSV_GREEN);
               set_key_color(37, HSV_GREEN);
               set_key_color(26, HSV_RED ); //numlock
-              // fn
+              set_key_color(1, HSV_GREEN);
+              set_key_color(2, HSV_GREEN);
+               set_key_color(3, HSV_GREEN);
+               set_key_color(4, HSV_GREEN);
+               set_key_color(11, HSV_GREEN);
+               set_key_color(12, HSV_GREEN);
+              break;
+            case FXARROWS:
+              set_key_color(28, HSV_RED); // arrows
+              set_key_color(33, HSV_RED);a
+              set_key_color(34, HSV_RED);
+              set_key_color(36, HSV_RED );
+              set_key_color(27, HSV_YELLOW ); // home
+              set_key_color(29, HSV_YELLOW ); // end
+              set_key_color(35, HSV_YELLOW ); // pgup
+              set_key_color(37, HSV_YELLOW ); // pgdn
+// fn
               set_key_color(4, HSV_BLUE);
               set_key_color(5, HSV_BLUE);
               set_key_color(6, HSV_BLUE);
@@ -410,23 +426,7 @@ if (is_caps_word_on()){
               set_key_color(15, HSV_BLUE);
               set_key_color(16, HSV_BLUE);
               set_key_color(17, HSV_BLUE);
-              break;
-            case FXARROWS:
-              set_key_color(28, HSV_RED); // arrows
-              set_key_color(33, HSV_RED);
-              set_key_color(34, HSV_RED);
-              set_key_color(36, HSV_RED );
-              set_key_color(27, HSV_YELLOW ); // home
-              set_key_color(29, HSV_YELLOW ); // end
-              set_key_color(35, HSV_YELLOW ); // pgup
-              set_key_color(37, HSV_YELLOW ); // pgdn
-
-              set_key_color(1, HSV_GREEN);
-              set_key_color(2, HSV_GREEN);
-               set_key_color(3, HSV_GREEN);
-               set_key_color(4, HSV_GREEN);
-               set_key_color(11, HSV_GREEN);
-               set_key_color(12, HSV_GREEN);
+              
               break;
             case CONFIG:
                set_key_color(12, HSV_RED); // bootloader
