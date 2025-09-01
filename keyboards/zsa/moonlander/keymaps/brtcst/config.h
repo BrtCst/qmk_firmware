@@ -29,8 +29,7 @@
 
 #define LEADER_TIMEOUT 300
 #define LEADER_NO_TIMEOUT
-#define RGB_MATRIX_DEFAULT_HUE 0
-#define RGB_MATRIX_DEFAULT_SAT 0
+#define RGB_MATRIX_VAL_STEP 10
 // pour avoir les indicator leds en custom
 #define MOONLANDER_USER_LEDS
 #define CHORDAL_HOLD
