@@ -424,6 +424,8 @@ if (is_caps_word_on()){
               set_key_color(29, HSV_YELLOW ); // end
               set_key_color(35, HSV_YELLOW ); // pgup
               set_key_color(37, HSV_YELLOW ); // pgdn
+              set_key_color(25, HSV_CYAN); // backspace
+              set_key_color(39, HSV_CYAN); // del
 
               set_key_color(1, HSV_GREEN);
               set_key_color(2, HSV_GREEN);
