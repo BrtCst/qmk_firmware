@@ -92,8 +92,8 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data);
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){tap_keycode, hold_keycode, tap_keycode, hold_keycode, NONE}), }
 
 static const uint16_t top_row[14] = {XXXXXXX, BP_B, BP_EACU, BP_P, BP_O, BP_EGRV, QK_LEAD, TD(D_2), BP_DCIR, BP_V, BP_D, BP_L, BP_J, BP_Z};
-static const uint16_t mid_row[14] = {XXXXXXX, BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M_MOD};
-static const uint16_t bot_row[14] = {CW_TOGG, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_SLSH};
+static const uint16_t mid_row[14] = {BP_SLSH, BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M_MOD};
+static const uint16_t bot_row[14] = {CW_TOGG, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, XXXXXXX};
 
 #define TAP_DANCE_LIST {\
         [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),\
