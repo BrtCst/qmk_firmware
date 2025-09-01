@@ -82,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
-    DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            ,        XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),        KC_MNXT,        KC_MUTE, XXXXXXX,                 XXXXXXX, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    _______,    KC_RALT,    KC_LALT,         KC_LCTL,     KC_LSFT, KC_VOLU,  XXXXXXX,                 XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
+    _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,                 XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
     KC_CAPS,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        KC_VOLD,                                           KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
     _______,    _______,        _______,        XXXXXXX,                                                                                                                                                                           _______,                _______,              _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
                                                                 MO(CONFIG), _______, XXXXXXX,        _______, _______, _______
@@ -96,8 +96,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,           XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), TD(D_COPY_CUT),  XXXXXXX,           XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), LCTL(BP_V),                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
+    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,           XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
+    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
     _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                _______, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                                     XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20), MO(CONFIG)
   ),
@@ -105,8 +105,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     QK_BOOT,    XXXXXXX,    DM_REC1,    DM_RSTP,    DM_PLY1,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RGB_VAI,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RGB_VAD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   )
@@ -273,22 +273,6 @@ bool rgb_matrix_indicators_user() {
               set_key_color(58, HSV_GREEN);
               set_key_color(59, HSV_GREEN );
               set_key_color(62, HSV_RED ); //numlock
-              set_key_color(11, HSV_GREEN);
-              set_key_color(16, HSV_GREEN);
-               set_key_color(21, HSV_GREEN);
-               set_key_color(26, HSV_GREEN);
-               set_key_color(27, HSV_GREEN);
-               set_key_color(28, HSV_GREEN);
-              break;
-            case FXARROWS:
-              set_key_color(48, HSV_RED); // arrows
-              set_key_color(52, HSV_RED);
-              set_key_color(53, HSV_RED);
-              set_key_color(58, HSV_RED );
-              set_key_color(57, HSV_YELLOW ); // home
-              set_key_color(59, HSV_YELLOW ); // end
-              set_key_color(47, HSV_YELLOW ); // pgup
-              set_key_color(49, HSV_YELLOW ); // pgdn
               // fn
               set_key_color(6, HSV_BLUE);
               set_key_color(7, HSV_BLUE);
@@ -302,7 +286,23 @@ bool rgb_matrix_indicators_user() {
               set_key_color(21, HSV_BLUE);
               set_key_color(22, HSV_BLUE);
               set_key_color(23, HSV_BLUE);
-              
+              break;
+            case FXARROWS:
+              set_key_color(48, HSV_RED); // arrows
+              set_key_color(52, HSV_RED);
+              set_key_color(53, HSV_RED);
+              set_key_color(58, HSV_RED );
+              set_key_color(57, HSV_YELLOW ); // home
+              set_key_color(59, HSV_YELLOW ); // end
+              set_key_color(47, HSV_YELLOW ); // pgup
+              set_key_color(49, HSV_YELLOW ); // pgdn
+
+              set_key_color(11, HSV_GREEN);
+              set_key_color(16, HSV_GREEN);
+               set_key_color(21, HSV_GREEN);
+               set_key_color(26, HSV_GREEN);
+               set_key_color(27, HSV_GREEN);
+               set_key_color(28, HSV_GREEN);
               break;
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader
