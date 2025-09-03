@@ -3,6 +3,9 @@
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 #define ORYX_CONFIGURATOR
+// pour avoir les indicator leds en custom
+#define MOONLANDER_USER_LEDS
+
 #undef ONESHOT_TIMEOUT
 #define ONESHOT_TIMEOUT 2000
 
@@ -30,6 +33,14 @@
 #define LEADER_TIMEOUT 300
 #define LEADER_NO_TIMEOUT
 #define RGB_MATRIX_VAL_STEP 10
-// pour avoir les indicator leds en custom
-#define MOONLANDER_USER_LEDS
+
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 200
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 120
+
 #define CHORDAL_HOLD
+// https://docs.qmk.fm/tap_hold#flow-tap
+#define FLOW_TAP_TERM 150
+#define CAPS_WORD_INVERT_ON_SHIFT
+
