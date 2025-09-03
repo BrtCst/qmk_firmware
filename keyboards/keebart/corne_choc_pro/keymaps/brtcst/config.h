@@ -3,8 +3,7 @@
   See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 #define ORYX_CONFIGURATOR
-#undef ONESHOT_TIMEOUT
-#define ONESHOT_TIMEOUT 2000
+
 
 #undef RGB_DISABLE_TIMEOUT
 #define RGB_DISABLE_TIMEOUT 300000
@@ -36,6 +35,7 @@
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 120
 
@@ -46,3 +46,6 @@
 
 // pour la synchro du caps_word qui ne fonctionne pas par défaut
 #define SPLIT_TRANSACTION_IDS_USER RPC_ID_USER_CAPS_WORD_SYNC
+
+#define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
+#define ONESHOT_TIMEOUT 250 
