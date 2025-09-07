@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         bot_row[0], bot_row[1], bot_row[2], bot_row[3], bot_row[4], bot_row[5],                                        bot_row[6], bot_row[7], bot_row[8], bot_row[9], bot_row[10], bot_row[11],
         //|--------+--------+--------+--------+--------+--------+--------|
         //|--------+--------+--------+--------+--------+--------+--------|
-        XXXXXXX,    MT(MOD_LSFT, KC_TAB),  LT(FXARROWS,KC_SPC), OS_RSFT, LT(NUMPAD, KC_BSPC), KC_DEL
+        thumb_row[0], thumb_row[1], thumb_row[2], thumb_row[3], thumb_row[4], thumb_row[5]
         //`--------------------------'  `--------------------------'
 
         ),
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
     XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
-    _______,    _______, MO(CONFIG), _______,     _______,    KC_KP_0
+    _______,    MO(CONFIG), _______, _______,     _______,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
@@ -363,20 +363,16 @@ bool rgb_matrix_indicators_user() {
      set_key_color(26, HSV_BLACK);
   }
 
-if (is_caps_word_on()){
-  if (host_keyboard_led_state().caps_lock) {
-    set_key_color(22, HSV_PURPLE);
-    set_key_color(45, HSV_PURPLE);
-  } else {
-    set_key_color(22, HSV_BLUE);
-    set_key_color(45, HSV_BLUE);
-  }
-} else {
-  if (host_keyboard_led_state().caps_lock) {
-    set_key_color(22, HSV_RED);
-    set_key_color(45, HSV_RED);
-  }
-}
+    hsv_t caps_color = {0, 0, 0};
+    if (is_caps_word_on()) {
+        caps_color = host_keyboard_led_state().caps_lock ? (hsv_t){HSV_PURPLE} : (hsv_t){HSV_BLUE};
+    } else if (host_keyboard_led_state().caps_lock) {
+        caps_color = (hsv_t){HSV_RED};
+    }
+    if (caps_color.h || caps_color.s || caps_color.v) {
+        set_key_color(22, caps_color.h, caps_color.s, caps_color.v);
+        set_key_color(45, caps_color.h, caps_color.s, caps_color.v);
+    }
 
     switch(get_highest_layer(layer_state)) {
             case GAMING:

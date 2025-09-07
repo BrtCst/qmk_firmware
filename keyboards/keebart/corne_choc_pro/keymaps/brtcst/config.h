@@ -41,11 +41,11 @@
 
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
-#define FLOW_TAP_TERM 150
+#define FLOW_TAP_TERM 120
 #define CAPS_WORD_INVERT_ON_SHIFT
 
 // pour la synchro du caps_word qui ne fonctionne pas par défaut
 #define SPLIT_TRANSACTION_IDS_USER RPC_ID_USER_CAPS_WORD_SYNC
 
 #define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
-#define ONESHOT_TIMEOUT 250 
+#define ONESHOT_TIMEOUT 250

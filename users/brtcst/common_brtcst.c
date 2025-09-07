@@ -1,7 +1,6 @@
 #include "common_brtcst.h"
 #include "keymap_bepo.h"
 
-
 uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->pressed
