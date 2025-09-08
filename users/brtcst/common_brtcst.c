@@ -103,7 +103,18 @@ bool caps_word_press_user(uint16_t keycode) {
         case BP_DCIR:
         case KC_BACKSPACE: // Pour corriger
         case KC_DELETE:    // Pour corriger
-        
+        case KC_KP_0: //numpad
+        case KC_KP_1:
+        case KC_KP_2:
+        case KC_KP_3:
+        case KC_KP_4:
+        case KC_KP_5:
+        case KC_KP_6:
+        case KC_KP_7:
+        case KC_KP_8:
+        case KC_KP_9:
+        case KC_KP_MINUS: //tirets
+        case BP_MINS:
         
         // Modificateurs autorisés (ne désactivent pas Caps Word)
         case KC_LSFT:
