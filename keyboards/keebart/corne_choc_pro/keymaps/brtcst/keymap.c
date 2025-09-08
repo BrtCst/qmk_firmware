@@ -137,14 +137,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, BP_DLR,
     XXXXXXX,   TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
-    _______,    MO(CONFIG), _______, _______,     _______,    KC_KP_0
+    _______,    KC_CAPS, MO(CONFIG), _______,     _______,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),     KC_MNXT,          KC_MUTE,   XXXXXXX,              XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
     XXXXXXX,    XXXXXXX,   XXXXXXX,            XXXXXXX, CMC_6,       KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
-    _______,   _______ , _______,  KC_CAPS, MO(CONFIG),    KC_DEL
+    _______,   _______ , _______,  MO(CONFIG), _______,    KC_DEL
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
     // Left Hand                                                                       // Right Hand
@@ -420,10 +420,12 @@ bool rgb_matrix_indicators_user() {
 
               set_key_color(1, HSV_GREEN);
               set_key_color(2, HSV_GREEN);
-               set_key_color(3, HSV_GREEN);
-               set_key_color(4, HSV_GREEN);
-               set_key_color(11, HSV_GREEN);
-               set_key_color(12, HSV_GREEN);
+              set_key_color(3, HSV_GREEN);
+              set_key_color(4, HSV_GREEN);
+              set_key_color(11, HSV_GREEN);
+              set_key_color(12, HSV_GREEN);
+              set_key_color(5, HSV_CYAN);
+              set_key_color(10, HSV_CYAN);
               break;
             case CONFIG:
                set_key_color(12, HSV_RED); // bootloader
