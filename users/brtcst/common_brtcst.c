@@ -127,7 +127,7 @@ bool caps_word_press_user(uint16_t keycode) {
             if (get_mods() & MOD_BIT(KC_RALT)) {
                 return true;
             }
-            return false; // KC_SPC sans modificateur désactive Caps Word
+            return false;
     }
     
     return false;
@@ -188,7 +188,7 @@ bool is_flow_tap_key(uint16_t keycode) {
 
 // Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods et accélérer l’affichage des caractères
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
+    /*switch (keycode) {
         case BP_E_MOD:
         case BP_T_MOD:
             // Immediately select the hold action when another key is tapped.
@@ -196,7 +196,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         default:
             // Do not select the hold action when another key is tapped.
             return false;
-    }
+    }*/
+    return true;
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
@@ -212,6 +213,13 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             // ex : altgr + shift du même côté du clavier sur la couche numpad
             return false;
     }
+}   
+
+bool get_speculative_hold(uint16_t keycode, keyrecord_t* record) {
+    dprint("taggle");
+  uint8_t mod = mod_config(QK_MOD_TAP_GET_MODS(keycode));
+  if ((mod & MOD_LSFT) != 0) {
+    return true;
+  }
+  return false;
 }
-
-
