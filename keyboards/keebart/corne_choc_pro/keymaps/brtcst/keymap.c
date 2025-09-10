@@ -171,14 +171,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 }
 
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-    // decide by combo->keycode
-    /*switch (combo->keycode) {
-        case BP_LCBR:
-        case BP_RCBR:
-            return COMBO_TERM_SHORT;
-    }*/
-
-    // or with combo index, i.e. its name from enum.
     switch (index) {
         case ST_HYPHEN:
         case SR_ASTERISK:
@@ -188,39 +180,6 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     }
     return COMBO_TERM;
 }
-
-// Combos plus complexe, code si besoin
-
-// enum combo_events {
-//   EM_EMAIL,
-//   BSPC_LSFT_CLEAR,
-// };
-
-// const uint16_t PROGMEM email_combo[] = {KC_E, KC_M, COMBO_END};
-// const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
-
-// combo_t key_combos[] = {
-//   [EM_EMAIL] = COMBO_ACTION(email_combo),
-//   [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
-// };
-// /* COMBO_ACTION(x) is same as COMBO(x, XXXXXXX) */
-
-// void process_combo_event(uint16_t combo_index, bool pressed) {
-//   switch(combo_index) {
-//     case EM_EMAIL:
-//       if (pressed) {
-//         SEND_STRING("john.doe@example.com");
-//       }
-//       break;
-//     case BSPC_LSFT_CLEAR:
-//       if (pressed) {
-//         tap_code16(KC_END);
-//         tap_code16(S(KC_HOME));
-//         tap_code16(KC_BSPC);
-//       }
-//       break;
-//   }
-// }
 
 // Handler pour la synchro de l’état de caps_word entre les deux moitiés, qui ne fonctionne pas par défaut
 void caps_word_sync(uint8_t initiator2target_buffer_size, const void *initiator2target_buffer, uint8_t target2initiator_buffer_size, void *target2initiator_buffer) {
@@ -240,7 +199,6 @@ void keyboard_post_init_user(void) {
 
 }
 
-
 tap_dance_action_t tap_dance_actions[] = TAP_DANCE_LIST;
 
 /* custom */
@@ -252,50 +210,6 @@ tap_dance_action_t tap_dance_actions[] = TAP_DANCE_LIST;
 // keyboards/crkbd/rev1/rev1.c has a hard-coded g_led_config with 27 LEDs, so we
 // have to work around this.
 #define NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE 27
-
-// This is a thin wrapper around rgb_matrix_set_color which allows you to put
-// the same firmware on both halves of the keyboard (other than a #define for
-// `MASTER_LEFT` or `MASTER_RIGHT`) and still have the correct LEDs light up
-// regardless of which half has the USB cable in it.
-//
-// This complexity behind this logic is explained in the comments within the
-// function itself.
-/*void set_color_split(uint8_t key_code, uint8_t r, uint8_t g, uint8_t b) {
-    // When using defines for MASTER_LEFT and MASTER_RIGHT, is_keyboard_left()
-    // will be inaccurate. For example, (is_keyboard_left() &&
-    // !is_keyboard_master()) can NEVER be true.
-#ifdef MASTER_LEFT
-    bool is_left = true;
-#endif
-#ifdef MASTER_RIGHT
-    bool is_left = false;
-#endif
-
-    bool left_is_master = (is_keyboard_master() && is_left) || (!is_keyboard_master() && !is_left);
-
-    // Note on constants: 23 is the number of LEDs on each side (24) minus 1.
-    // 27 is the number of LEDs that the Corne normally has with six columns.
-
-    // Rule #1: you must set the LED based on what the master's range is. So if
-    // the USB cable is in the left half, then the range is 0-23, otherwise it's
-    // 27-50.
-
-    // Rule #2: each half of the keyboard can only set its own LEDs, it's just
-    // that the codes change according to Rule #1.
-
-    // Rule #2
-    if ((is_left && key_code >= NUM_LEDS_PER_SIDE) || (!is_left && key_code < NUM_LEDS_PER_SIDE)) {
-        return;
-    }
-
-    // Rule #1
-    if (left_is_master && key_code >= NUM_LEDS_PER_SIDE)
-        key_code -= NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
-    else if (!left_is_master && key_code < NUM_LEDS_PER_SIDE)
-        key_code += NUM_LEDS_PER_SIDE_ON_NORMAL_CORNE;
-    rgb_matrix_set_color(key_code, r, g, b);
-}*/
-
 
 
 void leader_start_user(void) {
@@ -312,30 +226,8 @@ void leader_end_user(void) {
         // utilisé avec Autohotkey pour insérer la date du jour
         tap_code16(KC_F13);
     }
-    
-    /* else if (leader_sequence_two_keys(KC_D, KC_D)) {
-        // Leader, d, d => Ctrl+A, Ctrl+C
-        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
-        // Leader, d, d, s => Types the below string
-        SEND_STRING("https://start.duckduckgo.com\n");
-    } else if (leader_sequence_two_keys(KC_A, KC_S)) {
-        // Leader, a, s => GUI+S
-        tap_code16(LGUI(KC_S));
-    }*/
 }
 
-/* Gestion des leds */
-/*void led_update_ports(led_t led_state) {
-    //ML_LED_5(led_state.num_lock);
-    ML_LED_6(led_state.caps_lock);
-}*/
-
-/*bool led_update_user(led_t led_state) {
-    ML_LED_5(led_state.num_lock);
-    ML_LED_6(led_state.caps_lock);
-    return false;
-}*/
 #define MAX_LEDS 46
 static hsv_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {HSV_BLACK}};
 
@@ -430,9 +322,10 @@ bool rgb_matrix_indicators_user() {
               set_key_color(22, HSV_RED);
               break;
             case CONFIG:
-               set_key_color(12, HSV_RED); // bootloader
+               set_key_color(18, HSV_RED); // bootloader
+               set_key_color(19, HSV_ORANGE); // debug
+               set_key_color(12, HSV_RED);
                set_key_color(13, HSV_RED);
-               set_key_color(18, HSV_RED);
                set_key_color(10, HSV_ORANGE);
                set_key_color(11, HSV_ORANGE);
                set_key_color(4, HSV_GREEN);
@@ -462,37 +355,15 @@ void caps_word_set_user(bool active) {
       }
   }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-  switch (get_highest_layer(state)) {
-    case BASE:
-        //ML_LED_1(false);
-        //ML_LED_2(false);
-        //ML_LED_3(false);
-        //ML_LED_4(false);
-        break;
-    case GAMING:
-       // ML_LED_1(false);
-        //ML_LED_2(false);
-        //ML_LED_3(true);
-       // ML_LED_4(false);
-        
-        break;
-    default: //  for any other layers, or the default layer
-        break;
-    }
-  return state;
-}
-
 // pour stockage de l’état des modificateurs (shift, alt, ctrl…)
 uint8_t mod_state;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   #ifdef CONSOLE_ENABLE
     uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
-#endif 
+  #endif 
   // Stockage de l'état des modificateurs
   mod_state = get_mods();
-
   
   switch (keycode) {
     case OS_RSFT:
@@ -537,36 +408,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     case CMC_SLASH:
-      // / si pas de modifier
-      // \ si altGr
-      static bool agrav_registered;
-      static bool slash_registered;
       if (record->event.pressed) {
-        
-        if (mod_state == MOD_BIT(KC_RALT)) {
-          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-          // puisqu’il est activé ici
-          register_code(BP_AGRV);
-          agrav_registered = true;
-        } else if (mod_state & MOD_MASK_SHIFT) {
-          del_mods(MOD_MASK_SHIFT);
-          set_mods(MOD_RALT);
-          register_code(BP_AGRV);
-          del_mods(MOD_RALT);
-          agrav_registered = true;
-        } else if (mod_state == 0 ) {
-          register_code(BP_SLSH);
-          slash_registered = true;
+        if (mod_state & MOD_MASK_SHIFT) {
+          del_mods(mod_state);
+          register_code16(RALT(BP_AGRV));
+          set_mods(mod_state);
+        } else {
+          register_code16(BP_SLSH);
         }
         return false;
       } else {
-        if (agrav_registered) {
-          unregister_code(BP_AGRV);
-          agrav_registered = false;
-        }
-        if (slash_registered) {
-          unregister_code(BP_SLSH);
-          slash_registered = false;
+        if (mod_state & MOD_MASK_SHIFT) {
+          unregister_code16(RALT(BP_AGRV));
+        } else {
+          unregister_code16(BP_SLSH);
         }
       }
       break;
@@ -581,4 +436,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
