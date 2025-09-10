@@ -20,6 +20,7 @@
 
 #define PERMISSIVE_HOLD
 #define PERMISSIVE_HOLD_PER_KEY
+//#define HOLD_ON_OTHER_KEY_PRESS
 
 /* custom */
 #define COMBO_SHOULD_TRIGGER
@@ -41,7 +42,7 @@
 
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
-#define FLOW_TAP_TERM 80
+#define FLOW_TAP_TERM 40
 #define CAPS_WORD_INVERT_ON_SHIFT
 
 // pour la synchro du caps_word qui ne fonctionne pas par défaut
@@ -49,3 +50,5 @@
 
 #define ONESHOT_TAP_TOGGLE 2  /* Tapping this number of times holds the key until tapped once again. */
 #define ONESHOT_TIMEOUT 250
+
+#define SPECULATIVE_HOLD_DEBUG
