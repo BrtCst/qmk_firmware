@@ -68,8 +68,8 @@ enum tap_dance_codes {
   D_PASTE_LSFT
 };
 
-
-#define BP_E_MOD LSFT_T(BP_E)
+// on peut aussi écrire LSFT_T(BP_E)
+#define BP_E_MOD MT(MOD_LSFT, BP_E)
 #define BP_T_MOD MT(MOD_RSFT, BP_T)
 #define BP_I_MOD MT(MOD_LCTL, BP_I)
 #define BP_S_MOD MT(MOD_RCTL, BP_S)
@@ -94,7 +94,7 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data);
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){tap_keycode, hold_keycode, tap_keycode, hold_keycode, NONE}), }
 
 static const uint16_t top_row[14] = {XXXXXXX, BP_B, BP_EACU, BP_P, BP_O, BP_EGRV, QK_LEAD, TD(D_2), BP_DCIR, BP_V, BP_D, BP_L, BP_J, BP_Z};
-static const uint16_t mid_row[14] = {BP_SLSH, BP_A_MOD, BP_U_MOD, BP_I_MOD, LSFT_T(KC_F), BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M};
+static const uint16_t mid_row[14] = {CMC_SLASH, BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M};
 static const uint16_t bot_row[14] = {BP_W, BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_CCED};
 static const uint16_t thumb_row[6] = {KC_LGUI, KC_TAB,  BP_SPC_LT, MO(NUMPAD), KC_BSPC, KC_DEL};
 
