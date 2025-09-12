@@ -18,7 +18,7 @@ enum layers {
     NUMPAD,
     FXARROWS,
     CONFIG,
-    
+    LOCK
 };
 
 enum custom_keycodes {
@@ -65,7 +65,8 @@ enum tap_dance_codes {
   D_PLAY_STOP,
   D_20,
   D_COPY_CUT,
-  D_PASTE_LSFT
+  D_PASTE_LSFT,
+  D_UNLOCK
 };
 
 // on peut aussi écrire LSFT_T(BP_E)
@@ -86,6 +87,8 @@ void on_dance_custom(tap_dance_state_t *state, void *user_data);
 void dance_custom_finished(tap_dance_state_t *state, void *user_data);
 
 void dance_custom_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_unlock(tap_dance_state_t *state, void *user_data);
 
 #define CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(single_tap_keycode, single_hold_keycode, double_tap_keycode, double_hold_keycode) \
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){single_tap_keycode, single_hold_keycode, double_tap_keycode, double_hold_keycode, NONE}), }
@@ -120,7 +123,8 @@ static const uint16_t thumb_row[6] = {KC_LGUI, KC_TAB,  BP_SPC_LT, MO(NUMPAD), K
         [D_PLAY_STOP] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PLAY_PAUSE, KC_MEDIA_STOP),\
         [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),\
         [D_COPY_CUT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_C), KC_LCTL, LCTL(BP_X), KC_LCTL),\
-        [D_PASTE_LSFT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(BP_V), KC_LSFT)\
+        [D_PASTE_LSFT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(BP_V), KC_LSFT),\
+        [D_UNLOCK] = ACTION_TAP_DANCE_FN(dance_unlock)\
 }
 
 #endif

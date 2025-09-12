@@ -134,33 +134,16 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
-bool is_flow_tap_key(uint16_t keycode) {
-    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
-        return false; // Disable Flow Tap on hotkeys.
-    }
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
+                           uint16_t prev_keycode) {
     switch (get_tap_keycode(keycode)) {
-        case BP_B:     // b en BÉPO
-        case BP_EACU:     // é en BÉPO  
-        case BP_P:     // p en BÉPO
-        case BP_O:     // o en BÉPO
-        case BP_EGRV: // è en BÉPO
-        
-        // Rangée du milieu (BÉPO: auie,)
-        case BP_A:     // a en BÉPO
-        case BP_U:     // u en BÉPO
-        case BP_I:     // i en BÉPO
-        case BP_E:     // e en BÉPO
-            
-        // Rangée du bas (BÉPO: àyx.k)
-        case BP_AGRV: // à en BÉPO
-        case BP_Y:         // y en BÉPO
-        case BP_X:         // x en BÉPO
-        case BP_K:         // k en BÉPO
-        
-        // Autres lettres importantes en BÉPO
-        case BP_W:
-        case BP_CCED:
-
+        // pas besoin d’utiliser les codes en xxx_MOD
+        case BP_B:
+        case BP_EACU:
+        case BP_P:
+        case BP_O:
+        case BP_EGRV:
+        case BP_COMM:
         case BP_DCIR:
         case BP_V:
         case BP_D:
@@ -168,22 +151,33 @@ bool is_flow_tap_key(uint16_t keycode) {
         case BP_J:
         case BP_Z:
 
+        //case BP_A:      // pas ralt
+        case BP_U:
+        case BP_I:
+        //case BP_E:      // pas shift
         case BP_C:
-        case BP_T:
+        //case BP_T: // pas shift
         case BP_S:
         case BP_R:
-        case BP_N:
+        //case BP_N: // pas ralt
         case BP_M:
-
+            
+        // Rangée du bas
+        case BP_AGRV:
+        case BP_Y:
+        case BP_X:
+        case BP_DOT:
+        case BP_K:
         case BP_Q:
         case BP_G:
         case BP_H:
         case BP_F:
-        case BP_DOT:
-        case BP_COMM:
-            return true;
+
+        case BP_W:
+        case BP_CCED:
+            return FLOW_TAP_TERM;
     }
-    return false;
+    return 0;
 }
 
 // Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods et accélérer l’affichage des caractères
@@ -213,4 +207,11 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
             // ex : altgr + shift du même côté du clavier sur la couche numpad
             return false;
     }
-}   
+}
+
+void dance_unlock(tap_dance_state_t *state, void *user_data)
+{
+    if (state->count == 3) {
+        layer_invert(LOCK);
+    }
+}
