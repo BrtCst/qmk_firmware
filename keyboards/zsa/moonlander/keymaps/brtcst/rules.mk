@@ -20,3 +20,5 @@ VPATH += keyboards/gboards
 
 KEY_OVERRIDE_ENABLE = yes
 LAYER_LOCK_ENABLE = yes
+
+SECURE_ENABLE = yes

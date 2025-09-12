@@ -85,28 +85,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
-    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, _______,
-    _______,    _______,        _______,        _______,  MO(CONFIG),                _______,                    _______,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
-                                                                _______, _______, XXXXXXX,        _______, _______, _______
+    DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, XXXXXXX,
+    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,  XXXXXXX,                XXXXXXX,                    XXXXXXX,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
+                                                                MO(CONFIG), XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX
   ),
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
     // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
     // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
   [FXARROWS] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
-    DT_UP,      DT_DOWN,    DT_PRNT,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),        KC_MNXT,        KC_MUTE, XXXXXXX,                XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    _______,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  XXXXXXX,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
-    KC_CAPS,    XXXXXXX,    XXXXXXX,            XXXXXXX,            CMC_6,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    _______,
-    _______,    _______,    _______,            _______,            _______,                    XXXXXXX,              _______,                MO(CONFIG), XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
-                                                                    XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),_______
+    XXXXXXX,      XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    KC_MPRV,        TD(D_PLAY_STOP),        KC_MNXT,        KC_MUTE, TG(LOCK),                XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    KC_RALT,    KC_LALT,         TD(D_COPY_CUT),     TD(D_PASTE_LSFT), KC_VOLU,  KC_CAPS,              XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            CMC_6,        KC_VOLD,                                      XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,                    XXXXXXX,              XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
+                                                                    XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),MO(CONFIG)
   ),
   [CONFIG] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     QK_BOOT,    XXXXXXX,    DM_REC1,    DM_RSTP,    DM_PLY1,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RGB_VAI,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RGB_VAD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    DM_REC2,    DM_RSTP,    DM_PLY2,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
+  ),
+  [LOCK] = LAYOUT_moonlander( // Arrows & Macros layer
+    // Left Hand                                                                       // Right Hand
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TD(D_UNLOCK),              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   )
@@ -144,50 +153,10 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     return COMBO_TERM;
 }
 
-// Combos plus complexe, code si besoin
-
-// enum combo_events {
-//   EM_EMAIL,
-//   BSPC_LSFT_CLEAR,
-// };
-
-// const uint16_t PROGMEM email_combo[] = {KC_E, KC_M, COMBO_END};
-// const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
-
-// combo_t key_combos[] = {
-//   [EM_EMAIL] = COMBO_ACTION(email_combo),
-//   [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
-// };
-// /* COMBO_ACTION(x) is same as COMBO(x, XXXXXXX) */
-
-// void process_combo_event(uint16_t combo_index, bool pressed) {
-//   switch(combo_index) {
-//     case EM_EMAIL:
-//       if (pressed) {
-//         SEND_STRING("john.doe@example.com");
-//       }
-//       break;
-//     case BSPC_LSFT_CLEAR:
-//       if (pressed) {
-//         tap_code16(KC_END);
-//         tap_code16(S(KC_HOME));
-//         tap_code16(KC_BSPC);
-//       }
-//       break;
-//   }
-// }
-
-
 void keyboard_post_init_user(void) {
     //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     //rgb_matrix_sethsv_noeeprom(HSV_OFF);
 }
-
-
-
-/* custom */
-
-
 
 void leader_start_user(void) {
     // Do something when the leader key is pressed
@@ -202,31 +171,12 @@ void leader_end_user(void) {
     } else if (leader_sequence_one_key(BP_D)) {
         // utilisé avec Autohotkey pour insérer la date du jour
         tap_code16(KC_F13);
+    } else if (leader_sequence_four_keys(BP_U, BP_N, BP_L, BP_U)) {
+        // désactiver la couche lock
+        layer_off(LOCK);
     }
-    
-    /* else if (leader_sequence_two_keys(KC_D, KC_D)) {
-        // Leader, d, d => Ctrl+A, Ctrl+C
-        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
-        // Leader, d, d, s => Types the below string
-        SEND_STRING("https://start.duckduckgo.com\n");
-    } else if (leader_sequence_two_keys(KC_A, KC_S)) {
-        // Leader, a, s => GUI+S
-        tap_code16(LGUI(KC_S));
-    }*/
+
 }
-
-/* Gestion des leds */
-/*void led_update_ports(led_t led_state) {
-    //ML_LED_5(led_state.num_lock);
-    ML_LED_6(led_state.caps_lock);
-}*/
-
-/*bool led_update_user(led_t led_state) {
-    ML_LED_5(led_state.num_lock);
-    ML_LED_6(led_state.caps_lock);
-    return false;
-}*/
 
 #define MAX_LEDS 72
 static hsv_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {HSV_BLACK}};
@@ -330,6 +280,8 @@ bool rgb_matrix_indicators_user() {
                // brightness
                set_key_color(27, HSV_YELLOW);
                set_key_color(28, HSV_YELLOW);
+            case LOCK:
+               set_key_color(30, HSV_YELLOW);
             default:
                 break;
         }
@@ -366,6 +318,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         ML_LED_3(false);
         ML_LED_4(true);
         break;
+    case LOCK:
+      ML_LED_1(true);
+        ML_LED_2(false);
+        ML_LED_3(false);
+        ML_LED_4(false);
     default: //  for any other layers, or the default layer
         break;
     }
@@ -378,6 +335,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 uint8_t mod_state;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  #ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+  #endif
 
   switch (keycode) {
     case CMC_0:
@@ -405,36 +365,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     case CMC_SLASH:
-      // / si pas de modifier
-      // \ si altGr
-      static bool agrav_registered;
-      static bool slash_registered;
       if (record->event.pressed) {
-        mod_state = get_mods();
-        if (mod_state == MOD_BIT(KC_RALT)) {
-          // le backslash est sur altgr+à, on s’évite de désactiver un modifier altGr inutilement
-          // puisqu’il est activé ici
-          register_code(BP_AGRV);
-          agrav_registered = true;
-        } else if (mod_state & MOD_MASK_SHIFT) {
-          del_mods(MOD_MASK_SHIFT);
-          set_mods(MOD_RALT);
-          register_code(BP_AGRV);
-          del_mods(MOD_RALT);
-          agrav_registered = true;
-        } else if (mod_state == 0 ) {
-          register_code(BP_SLSH);
-          slash_registered = true;
+        if (mod_state & MOD_MASK_SHIFT) {
+          del_mods(mod_state);
+          register_code16(RALT(BP_AGRV));
+          set_mods(mod_state);
+        } else {
+          register_code16(BP_SLSH);
         }
         return false;
       } else {
-        if (agrav_registered) {
-          unregister_code(BP_AGRV);
-          agrav_registered = false;
-        }
-        if (slash_registered) {
-          unregister_code(BP_SLSH);
-          slash_registered = false;
+        if (mod_state & MOD_MASK_SHIFT) {
+          unregister_code16(RALT(BP_AGRV));
+        } else {
+          unregister_code16(BP_SLSH);
         }
       }
       break;
