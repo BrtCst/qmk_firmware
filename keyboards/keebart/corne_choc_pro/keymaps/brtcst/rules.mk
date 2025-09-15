@@ -20,3 +20,5 @@ VPATH += keyboards/gboards
 KEY_OVERRIDE_ENABLE = yes
 LAYER_LOCK_ENABLE = yes
 CONSOLE_ENABLE = yes
+
+SWAP_HANDS_ENABLE = yes
