@@ -123,7 +123,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------+--------|
         thumb_row[0], thumb_row[1], thumb_row[2], thumb_row[3], thumb_row[4], thumb_row[5]
         //`--------------------------'  `--------------------------'
-
         ),
   [GAMING] = LAYOUT_split_3x6_3_ex2( // Gaming layer
     // Left Hand                                                                   // Right Hand
@@ -153,8 +152,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX
   )
-      };
+};
 
+const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+  // Left
+	{{0, 4}, {1, 4}, {2, 4}, {3, 4}, {4, 4}, {5, 4}, {6, 4}},
+	{{0, 5}, {1, 5}, {2, 5}, {3, 5}, {4, 5}, {5, 5}, {6, 5}},
+	{{0, 6}, {1, 6}, {2, 6}, {3, 6}, {4, 6}, {5, 6}},
+	{{2, 7}, {4, 7}, {5, 7}},
+	// Right
+	{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}},
+	{{0, 1}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}},
+	{{0, 2}, {1, 2}, {2, 2}, {3, 2}, {4, 2}, {5, 2}},
+	{{5, 3}, {4, 3}, {3, 3}}
+};
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
   if (layer_state_is(GAMING))
@@ -263,6 +274,9 @@ bool rgb_matrix_indicators_user() {
     }
     if (caps_color.h || caps_color.s || caps_color.v) {
         set_key_color(22, caps_color.h, caps_color.s, caps_color.v);
+    }
+    if (is_swap_hands_on()) {
+      set_key_color(22, HSV_YELLOW);
     }
 
     switch(get_highest_layer(layer_state)) {
