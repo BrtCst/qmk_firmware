@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16), XXXXXXX,  XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, KC_KP_4,KC_KP_5, KC_KP_6, KC_PAST, XXXXXXX,
+    XXXXXXX,    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20), XXXXXXX,  XXXXXXX,              XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), XXXXXXX,
     DM_RSTP,    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24), XXXXXXX,                                        KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, XXXXXXX,
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,  XXXXXXX,                XXXXXXX,                    XXXXXXX,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
                                                                 MO(CONFIG), XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX

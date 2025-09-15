@@ -214,4 +214,4 @@ void dance_unlock(tap_dance_state_t *state, void *user_data)
     if (state->count == 3) {
         layer_invert(LOCK);
     }
-}
+ }
