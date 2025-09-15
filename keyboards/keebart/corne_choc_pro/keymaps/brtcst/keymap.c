@@ -263,7 +263,6 @@ bool rgb_matrix_indicators_user() {
     }
     if (caps_color.h || caps_color.s || caps_color.v) {
         set_key_color(22, caps_color.h, caps_color.s, caps_color.v);
-        set_key_color(45, caps_color.h, caps_color.s, caps_color.v);
     }
 
     switch(get_highest_layer(layer_state)) {
