@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX,   XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    KC_RALT,    KC_LALT,   KC_LCTL,    KC_LSFT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), BP_DLR,
     XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_6, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
-    XXXXXXX,   XXXXXXX , XXXXXXX,                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
+    XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
@@ -349,7 +349,7 @@ bool rgb_matrix_indicators_user() {
               set_key_color(7, HSV_GREEN);
               set_key_color(8, HSV_GREEN);
 
-              set_key_color(22, HSV_RED);
+              set_key_color(22, HSV_RED); // caps lock
               break;
             case CONFIG:
                set_key_color(18, HSV_RED); // bootloader
@@ -358,6 +358,12 @@ bool rgb_matrix_indicators_user() {
                // brightness
                set_key_color(1, HSV_YELLOW);
                set_key_color(2, HSV_YELLOW);
+              break;
+            case LOCK:
+               set_key_color(21, HSV_YELLOW);
+               break;
+            default:
+                break;
         }
 
   for (size_t i = 0; i < MAX_LEDS; i++) {
