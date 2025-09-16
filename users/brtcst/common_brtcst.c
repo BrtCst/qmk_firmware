@@ -215,3 +215,59 @@ void dance_unlock(tap_dance_state_t *state, void *user_data)
         layer_invert(LOCK);
     }
  }
+
+// pour stockage de l’état des modificateurs (shift, alt, ctrl…)
+uint8_t mod_state;
+
+// Mutualisation de la gestion des frappes clavier custom
+void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
+    #ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
+  #endif 
+  // Stockage de l'état des modificateurs
+  mod_state = get_mods();
+  
+  switch (keycode) {
+    case CMC_CHEVRON_L:
+      if (record->event.pressed) {
+        // '« '
+        SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
+      }
+      break;
+    case CMC_CHEVRON_R:
+      if (record->event.pressed) {
+        // ' »'
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
+      }
+      break;
+    case CMC_COLON:
+      // ' :'
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
+      }
+      break;
+    case CMC_END_RETURN:
+      // END puis enter
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
+      }
+      break;
+    case CMC_SLASH:
+      if (record->event.pressed) {
+        if (mod_state & MOD_MASK_SHIFT) {
+          del_mods(mod_state);
+          register_code16(RALT(BP_AGRV));
+          set_mods(mod_state);
+        } else {
+          register_code16(BP_SLSH);
+        }
+      } else {
+        if (mod_state & MOD_MASK_SHIFT) {
+          unregister_code16(RALT(BP_AGRV));
+        } else {
+          unregister_code16(BP_SLSH);
+        }
+      }
+      break;
+  }
+}
