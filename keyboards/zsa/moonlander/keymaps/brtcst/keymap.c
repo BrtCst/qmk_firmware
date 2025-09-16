@@ -235,19 +235,14 @@ bool rgb_matrix_indicators_user() {
               set_key_color(58, HSV_GREEN);
               set_key_color(59, HSV_GREEN );
               set_key_color(62, HSV_RED ); //numlock
-              // fn
-              set_key_color(6, HSV_BLUE);
-              set_key_color(7, HSV_BLUE);
-              set_key_color(8, HSV_BLUE);
-              set_key_color(11, HSV_BLUE);
-              set_key_color(12, HSV_BLUE);
-              set_key_color(13, HSV_BLUE);
-              set_key_color(16, HSV_BLUE);
-              set_key_color(17, HSV_BLUE);
-              set_key_color(18, HSV_BLUE);
-              set_key_color(21, HSV_BLUE);
-              set_key_color(22, HSV_BLUE);
-              set_key_color(23, HSV_BLUE);
+
+              // macros
+              set_key_color(1, HSV_RED);
+              set_key_color(6, HSV_RED);
+              set_key_color(11, HSV_ORANGE);
+              set_key_color(16, HSV_GREEN);
+              set_key_color(21, HSV_GREEN);
+              
               // layer lock
               set_key_color(66, HSV_PURPLE);
               break;
@@ -261,26 +256,43 @@ bool rgb_matrix_indicators_user() {
               set_key_color(47, HSV_YELLOW ); // pgup
               set_key_color(49, HSV_YELLOW ); // pgdn
 
-              set_key_color(11, HSV_GREEN);
-              set_key_color(16, HSV_GREEN);
-               set_key_color(21, HSV_GREEN);
-               set_key_color(26, HSV_GREEN);
-               set_key_color(27, HSV_GREEN);
-               set_key_color(28, HSV_GREEN);
+              // fn
+              set_key_color(1, HSV_BLUE);
+              set_key_color(2, HSV_BLUE);
+              set_key_color(3, HSV_BLUE);
+              set_key_color(6, HSV_BLUE);
+              set_key_color(7, HSV_BLUE);
+              set_key_color(8, HSV_BLUE);
+              set_key_color(11, HSV_BLUE);
+              set_key_color(12, HSV_BLUE);
+              set_key_color(13, HSV_BLUE);
+              set_key_color(16, HSV_BLUE);
+              set_key_color(17, HSV_BLUE);
+              set_key_color(18, HSV_BLUE);
+
+              //copy paste
+              set_key_color(22, HSV_CYAN);
+              set_key_color(23, HSV_CYAN);
+
+              // media
+              set_key_color(19, HSV_GREEN);
+              set_key_color(24, HSV_GREEN);
+              set_key_color(26, HSV_GREEN);
+              set_key_color(27, HSV_GREEN);
+              set_key_color(28, HSV_GREEN);
+
+              set_key_color(31, HSV_RED); // caps lock
               break;
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader
-               set_key_color(11, HSV_RED);
-               set_key_color(12, HSV_RED);
-               set_key_color(16, HSV_ORANGE);
-               set_key_color(17, HSV_ORANGE);
-               set_key_color(21, HSV_GREEN);
-               set_key_color(22, HSV_GREEN);
+               
                // brightness
                set_key_color(27, HSV_YELLOW);
                set_key_color(28, HSV_YELLOW);
+              break;
             case LOCK:
-               set_key_color(30, HSV_YELLOW);
+               set_key_color(21, HSV_YELLOW);
+               break;
             default:
                 break;
         }
