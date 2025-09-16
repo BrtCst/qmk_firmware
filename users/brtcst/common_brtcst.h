@@ -23,9 +23,9 @@ enum layers {
 
 enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
-  CMC_0,
-  CMC_1,
-  CMC_6,
+  CMC_CHEVRON_L,
+  CMC_CHEVRON_R,
+  CMC_COLON,
   BP_LSPO,
   BP_RSPC,
   CMC_END_RETURN,

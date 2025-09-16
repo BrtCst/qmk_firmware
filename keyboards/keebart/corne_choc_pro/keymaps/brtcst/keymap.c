@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX,   XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
     XXXXXXX,    KC_RALT,    KC_LALT,   KC_LCTL,    KC_LSFT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), BP_DLR,
-    XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_6, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
+    XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_COLON, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
     XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
   ),
   [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
@@ -386,84 +386,9 @@ void caps_word_set_user(bool active) {
       }
   }
 
-// pour stockage de l’état des modificateurs (shift, alt, ctrl…)
-uint8_t mod_state;
+void process_record_brtcst(uint16_t keycode, keyrecord_t *record);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  #ifdef CONSOLE_ENABLE
-    uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
-  #endif 
-  // Stockage de l'état des modificateurs
-  mod_state = get_mods();
-  
-  switch (keycode) {
-    case OS_RSFT:
-      if (mod_state & MOD_MASK_SHIFT){
-        clear_oneshot_mods();
-      }
-      break;
-    case KC_RSFT:
-      if (mod_state & MOD_MASK_SHIFT){
-        clear_oneshot_mods();
-      }
-      break;
-    
-    case CMC_CCED:
-      if (record->event.pressed) {
-        // 'ça'
-        
-      }
-      break;
-    case CMC_0:
-      if (record->event.pressed) {
-        // '« '
-        SEND_STRING(SS_TAP(X_2) SS_DELAY(5) SS_LSFT(SS_RALT(SS_TAP(X_SPACE))));
-      }
-      break;
-    case CMC_1:
-      if (record->event.pressed) {
-        // ' »'
-        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_TAP(X_3));
-      }
-      break;
-    case CMC_6:
-      // ' :'
-      if (record->event.pressed) {
-        SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
-      }
-      break;
-    case CMC_END_RETURN:
-      // END puis enter
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_END) SS_TAP(X_ENTER));
-      }
-      break;
-    case CMC_SLASH:
-      if (record->event.pressed) {
-        if (mod_state & MOD_MASK_SHIFT) {
-          del_mods(mod_state);
-          register_code16(RALT(BP_AGRV));
-          set_mods(mod_state);
-        } else {
-          register_code16(BP_SLSH);
-        }
-        return false;
-      } else {
-        if (mod_state & MOD_MASK_SHIFT) {
-          unregister_code16(RALT(BP_AGRV));
-        } else {
-          unregister_code16(BP_SLSH);
-        }
-      }
-      break;
-    /*case RGB_SLD:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-        }
-        return false;*/
-  }
+  process_record_brtcst(keycode, record);
   return true;
 }
