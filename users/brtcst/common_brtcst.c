@@ -180,7 +180,7 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
     return 0;
 }
 
-// Permissive hold sur les MT incluant Shift, pas sur les autres, pour éviter les faux mods et accélérer l’affichage des caractères
+// Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     /*switch (keycode) {
         case BP_E_MOD:
@@ -270,4 +270,11 @@ void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
       }
       break;
   }
+}
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        default:
+            return TAPPING_TERM;
+    }
 }
