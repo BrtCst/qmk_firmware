@@ -138,6 +138,8 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
     switch (get_tap_keycode(keycode)) {
         // pas besoin d’utiliser les codes en xxx_MOD
+        case KC_SPC:
+        
         case BP_B:
         case BP_EACU:
         case BP_P:
@@ -274,6 +276,15 @@ void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        //case BP_E_MOD:
+        //case BP_T_MOD:
+        case BP_I_MOD:
+        case BP_S_MOD:
+        //case BP_U_MOD:
+        //case BP_R_MOD:
+        case BP_A_MOD:
+        case BP_N_MOD:
+            return TAPPING_TERM_HOMEROW_MODS;
         default:
             return TAPPING_TERM;
     }
