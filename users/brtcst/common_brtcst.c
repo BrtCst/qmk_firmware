@@ -168,7 +168,7 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
         case BP_AGRV:
         case BP_Y:
         case BP_X:
-        case BP_DOT:
+        //case BP_DOT:
         case BP_K:
         case BP_Q:
         case BP_G:
@@ -276,12 +276,12 @@ void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        //case BP_E_MOD:
-        //case BP_T_MOD:
+        case BP_E_MOD:
+        case BP_T_MOD:
         case BP_I_MOD:
         case BP_S_MOD:
-        //case BP_U_MOD:
-        //case BP_R_MOD:
+        case BP_U_MOD:
+        case BP_R_MOD:
         case BP_A_MOD:
         case BP_N_MOD:
             return TAPPING_TERM_HOMEROW_MODS;
