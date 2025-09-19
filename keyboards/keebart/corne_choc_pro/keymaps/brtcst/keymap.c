@@ -100,9 +100,9 @@ const key_override_t *key_overrides[] = {
 #include "g/keymap_combo.h"
 
 char chordal_hold_handedness(keypos_t key) {
-    //if (key.col == 0 || key.col == MATRIX_COLS - 1) {
-    //    return '*';  // Exempt the outer columns.
-    //}
+    if (key.col == 5 || key.row == 3) { // espace
+        return '*';  // Exempt the outer columns.
+    }
     // On split keyboards, typically, the first half of the rows are on the
     // left, and the other half are on the right.
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R'; // vérifié en mode debug
