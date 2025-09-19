@@ -285,13 +285,14 @@ bool rgb_matrix_indicators_user() {
               break;
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader
+               set_key_color(2, HSV_YELLOW); // bootloader
                
                // brightness
                set_key_color(27, HSV_YELLOW);
                set_key_color(28, HSV_YELLOW);
               break;
             case LOCK:
-               set_key_color(21, HSV_YELLOW);
+               set_key_color(30, HSV_YELLOW);
                break;
             default:
                 break;
