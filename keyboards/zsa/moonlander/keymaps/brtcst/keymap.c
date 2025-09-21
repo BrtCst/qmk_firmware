@@ -68,17 +68,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     top_row[0], top_row[1], top_row[2], top_row[3], top_row[4], top_row[5], top_row[6],              top_row[7], top_row[8], top_row[9], top_row[10], top_row[11], top_row[12], top_row[13],
     mid_row[0], mid_row[1], mid_row[2], mid_row[3], mid_row[4], mid_row[5], mid_row[6],                mid_row[7], mid_row[8], mid_row[9], mid_row[10], mid_row[11], mid_row[12], mid_row[13],
     bot_row[0], bot_row[1], bot_row[2], bot_row[3], bot_row[4], bot_row[5],                                        bot_row[6], bot_row[7], bot_row[8], bot_row[9], bot_row[10], bot_row[11],
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    thumb_row[0],    thumb_row[1],           LGUI(BP_SCLN),       TD(D_2),                thumb_row[4],    thumb_row[5],     CMC_SLASH,  XXXXXXX, XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    thumb_row[0],    thumb_row[1],           LGUI(BP_SCLN),       TD(D_2),                thumb_row[4],    thumb_row[5],     XXXXXXX,  XXXXXXX, XXXXXXX,
                                                     thumb_row[2],  SH_MON,     XXXXXXX,              XXXXXXX,    XXXXXXX,    thumb_row[3]
   ),
   [GAMING] = LAYOUT_moonlander( // Gaming layer
     // Left Hand                                                                   // Right Hand
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC,    BP_AT,      BP_PLUS,    BP_MINS,    BP_SLSH,    BP_ASTR,    BP_EQL,
-    BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
-    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
-    KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
-    KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    KC_TAB,                _______,              TD(D_4),                KC_BSPC,    KC_DEL,     CMC_SLASH,  XXXXXXX, KC_RCTL,
-                                                    KC_SPC,    _______,    _______,              _______,    _______,    _______
+    KC_TAB, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
+    CMC_SLASH, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
+    KC_LSFT, _______, _______,    _______,    _______,  _______,                                     _______, _______, _______, _______, _______, _______,
+    KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    XXXXXXX,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
+                                                    _______,    _______,    KC_ESC,              _______,    _______,    _______
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
@@ -123,6 +123,15 @@ XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,            
 
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+  if (layer_state_is(GAMING)) {
+    switch (combo_index) {
+      case XDOT_W:
+        return true;
+      default:
+        return false;
+    }
+  }
+  return true;
     /*switch (combo_index) {
         case COMBO_30:
             return layer_state_is(0) || layer_state_is(1);

@@ -133,52 +133,77 @@ bool caps_word_press_user(uint16_t keycode) {
     return false;
 }
 
+bool is_flow_tap_key(uint16_t keycode) {
+    switch (get_tap_keycode(keycode)) {
+      case BP_E:
+      case BP_T:
+      case BP_E_MOD:
+      case BP_T_MOD:
+      case BP_A:
+      case BP_U:
+      case BP_I:
+      case BP_S:
+      case BP_R:
+      case BP_N:
+      case BP_A_MOD:
+      case BP_U_MOD:
+      case BP_I_MOD:
+      case BP_S_MOD:
+      case BP_R_MOD:
+      case BP_N_MOD:
+      
+      case KC_SPC:
+      
+      case BP_B:
+      case BP_EACU:
+      case BP_P:
+      case BP_O:
+      case BP_EGRV:
+      case BP_COMM:
+      case BP_DCIR:
+      case BP_V:
+      case BP_D:
+      case BP_L:
+      case BP_J:
+      case BP_Z:
+
+      case BP_C:
+
+      case BP_M:
+          
+      // Rangée du bas
+      case BP_AGRV:
+      case BP_Y:
+      case BP_X:
+      //case BP_DOT:
+      case BP_K:
+      case BP_Q:
+      case BP_G:
+      case BP_H:
+      case BP_F:
+
+      case BP_W:
+      case BP_CCED:
+          return true;
+    }
+    return false;
+}
+
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
+    if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
     switch (get_tap_keycode(keycode)) {
-        // pas besoin d’utiliser les codes en xxx_MOD
-        case KC_SPC:
-        
-        case BP_B:
-        case BP_EACU:
-        case BP_P:
-        case BP_O:
-        case BP_EGRV:
-        case BP_COMM:
-        case BP_DCIR:
-        case BP_V:
-        case BP_D:
-        case BP_L:
-        case BP_J:
-        case BP_Z:
-
-        //case BP_A:      // pas ralt
-        case BP_U:
-        case BP_I:
-        //case BP_E:      // pas shift
-        case BP_C:
-        //case BP_T: // pas shift
-        case BP_S:
-        case BP_R:
-        //case BP_N: // pas ralt
-        case BP_M:
-            
-        // Rangée du bas
-        case BP_AGRV:
-        case BP_Y:
-        case BP_X:
-        //case BP_DOT:
-        case BP_K:
-        case BP_Q:
-        case BP_G:
-        case BP_H:
-        case BP_F:
-
-        case BP_W:
-        case BP_CCED:
+      case BP_E:
+      case BP_T:
+      case BP_E_MOD:
+      case BP_T_MOD:
+        return FLOW_TAP_TERM_SHORT;
+      break;
+      default:
             return FLOW_TAP_TERM;
     }
+  }
     return 0;
 }
 
