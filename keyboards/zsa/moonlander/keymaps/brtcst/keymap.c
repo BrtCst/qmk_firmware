@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     XXXXXXX,      XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),TD(D_COPY_CUT), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_DEL,     XXXXXXX,
+    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),TD(D_COPY_CUT), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RSFT_T(KC_LEFT),    RCTL_T(KC_DOWN),    LALT_T(KC_RIGHT),   RALT_T(KC_DEL),     XXXXXXX,
     TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),LCTL(BP_V),    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,                    XXXXXXX,              XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                                     XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),MO(CONFIG)
