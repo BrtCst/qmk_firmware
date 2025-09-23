@@ -209,16 +209,13 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
 
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    /*switch (keycode) {
-        case BP_E_MOD:
-        case BP_T_MOD:
-            // Immediately select the hold action when another key is tapped.
-            return true;
-        default:
-            // Do not select the hold action when another key is tapped.
+    switch (keycode) {
+        case BP_I_MOD:
+        case BP_S_MOD:
             return false;
-    }*/
-    return true;
+        default:
+            return true;
+    }
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
