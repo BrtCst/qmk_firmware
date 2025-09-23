@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     CMC_SLASH, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
     KC_LSFT, _______, _______,    _______,    _______,  _______,                                     _______, _______, _______, _______, _______, _______,
     KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    XXXXXXX,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
-                                                    _______,    _______,    KC_ESC,              _______,    _______,    _______
+                                                    KC_SPC,    MO(FXARROWS),    KC_ESC,              _______,    _______,    _______
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
@@ -126,6 +126,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
   if (layer_state_is(GAMING)) {
     switch (combo_index) {
       case XDOT_W:
+      case GH_ENTER:
         return true;
       default:
         return false;
