@@ -71,12 +71,12 @@ enum tap_dance_codes {
 };
 
 // on peut aussi écrire LSFT_T(BP_E)
-#define BP_E_MOD MT(MOD_LSFT, BP_E)
-#define BP_T_MOD MT(MOD_RSFT, BP_T)
-#define BP_I_MOD MT(MOD_LCTL, BP_I)
-#define BP_S_MOD MT(MOD_RCTL, BP_S)
-#define BP_U_MOD MT(MOD_LALT, BP_U)
-#define BP_R_MOD MT(MOD_LALT, BP_R)
+#define BP_E_MOD MT(MOD_RALT, BP_E)
+#define BP_T_MOD MT(MOD_RALT, BP_T)
+#define BP_I_MOD MT(MOD_LSFT, BP_I)
+#define BP_S_MOD MT(MOD_RSFT, BP_S)
+#define BP_U_MOD MT(MOD_LCTL, BP_U)
+#define BP_R_MOD MT(MOD_RCTL, BP_R)
 #define BP_A_MOD MT(MOD_RALT, BP_A)
 #define BP_N_MOD MT(MOD_RALT, BP_N)
 #define BP_TAB_MOD MT(MOD_LGUI, KC_TAB)
