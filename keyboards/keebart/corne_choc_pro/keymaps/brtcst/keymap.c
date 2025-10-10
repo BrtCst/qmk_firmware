@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [GAMING] = LAYOUT_split_3x6_3_ex2( // Gaming layer
     // Left Hand                                                                   // Right Hand
     BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
-    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
+    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, _______,                      _______, _______, _______, _______, _______, _______, _______,
     KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
     _______,    _______, _______, _______, _______,    _______
   ),
@@ -138,12 +138,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_COLON, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
     XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
   ),
-  [FXARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
+  [ARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
-    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),TD(D_COPY_CUT), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RSFT_T(KC_LEFT),    RCTL_T(KC_DOWN),    LALT_T(KC_RIGHT),   RALT_T(KC_DEL),     XXXXXXX,
-    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),LCTL(BP_V),    KC_VOLD,                       XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
-    D_PREV_NEXT,    TD(D_PLAY_STOP), XXXXXXX,                                                                  MO(CONFIG), XXXXXXX,    KC_DEL
+    XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,   XXXXXXX,  XXXXXXX,  TD(D_COPY_CUT),LCTL(BP_V), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RSFT_T(KC_LEFT),    RCTL_T(KC_DOWN),    LALT_T(KC_RIGHT),   RALT_T(KC_DEL),     XXXXXXX,
+    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                       XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX, XXXXXXX,                                                                  MO(CONFIG), XXXXXXX,    KC_DEL
+  ),
+  [FN] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
+    // Left Hand                                                                       // Right Hand
+    XXXXXXX, TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    XXXXXXX,                  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX, TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),XXXXXXX, XXXXXXX,            XXXXXXX,    XXXXXXX,    KC_RALT,    KC_RSFT,    KC_RCTL,   KC_LALT,     XXXXXXX,
+    XXXXXXX, TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),    XXXXXXX,                       XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX,                                                                  XXXXXXX, XXXXXXX,    XXXXXXX
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
     // Left Hand                                                                       // Right Hand
@@ -312,7 +319,7 @@ bool rgb_matrix_indicators_user() {
               set_key_color(11, HSV_GREEN);
               set_key_color(4, HSV_GREEN);
               break;
-            case FXARROWS:
+            case ARROWS:
               set_key_color(28, HSV_RED); // arrows
               set_key_color(33, HSV_RED);
               set_key_color(34, HSV_RED);
@@ -324,7 +331,25 @@ bool rgb_matrix_indicators_user() {
               set_key_color(25, HSV_CYAN); // backspace
               set_key_color(39, HSV_CYAN); // del
 
+              //copy paste
+              set_key_color(5, HSV_CYAN);
+              set_key_color(10, HSV_CYAN);              
+
+              //media
+              set_key_color(1, HSV_GREEN);
+              set_key_color(2, HSV_GREEN);
+              set_key_color(3, HSV_GREEN);
+              set_key_color(4, HSV_GREEN);
+              set_key_color(11, HSV_GREEN);
+              set_key_color(12, HSV_GREEN);
+
+              set_key_color(22, HSV_RED); // caps lock
+              break;
+            case FN:
               // fn
+              set_key_color(4, HSV_BLUE);
+              set_key_color(5, HSV_BLUE);
+              set_key_color(6, HSV_BLUE);
               set_key_color(9, HSV_BLUE);
               set_key_color(10, HSV_BLUE);
               set_key_color(11, HSV_BLUE);
@@ -334,22 +359,6 @@ bool rgb_matrix_indicators_user() {
               set_key_color(15, HSV_BLUE);
               set_key_color(16, HSV_BLUE);
               set_key_color(17, HSV_BLUE);
-              set_key_color(18, HSV_BLUE);
-              set_key_color(19, HSV_BLUE);
-              set_key_color(20, HSV_BLUE);
-
-              //copy paste
-              set_key_color(5, HSV_CYAN);
-              set_key_color(6, HSV_CYAN);              
-
-              //media
-              set_key_color(1, HSV_GREEN);
-              set_key_color(2, HSV_GREEN);
-              set_key_color(3, HSV_GREEN);
-              set_key_color(7, HSV_GREEN);
-              set_key_color(8, HSV_GREEN);
-
-              set_key_color(22, HSV_RED); // caps lock
               break;
             case CONFIG:
                set_key_color(18, HSV_RED); // bootloader

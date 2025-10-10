@@ -75,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                   // Right Hand
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC,    BP_AT,      BP_PLUS,    BP_MINS,    BP_SLSH,    BP_ASTR,    BP_EQL,
     KC_TAB, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
-    CMC_SLASH, BP_A,    BP_U,    BP_I,    BP_E,     _______, KC_ENTER,                      _______, _______, _______, _______, _______, _______, _______,
+    CMC_SLASH, BP_A,    BP_U,    BP_I,    BP_E,     _______, _______,                      _______, _______, _______, _______, _______, _______, _______,
     KC_LSFT, _______, _______,    _______,    _______,  _______,                                     _______, _______, _______, _______, _______, _______,
     KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    XXXXXXX,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
-                                                    KC_SPC,    MO(FXARROWS),    KC_ESC,              _______,    _______,    _______
+                                                    KC_SPC,    MO(ARROWS),    KC_ESC,              _______,    _______,    _______
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
@@ -92,14 +92,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
     // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
     // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
-  [FXARROWS] = LAYOUT_moonlander( // Arrows layer
+  [ARROWS] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,      XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),TD(D_COPY_CUT), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
-    TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),LCTL(BP_V),    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,   XXXXXXX,  XXXXXXX,  TD(D_COPY_CUT),LCTL(BP_V), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
+    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,                    XXXXXXX,              XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                                     XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),MO(CONFIG)
+  ),
+  [FN] = LAYOUT_moonlander( // Functions & Arrows layer
+    // Left Hand                                                                       // Right Hand
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX, TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    XXXXXXX,                  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX, TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),XXXXXXX, XXXXXXX,            XXXXXXX,    XXXXXXX,    KC_RALT,    KC_RSFT,    KC_RCTL,   KC_LALT,     XXXXXXX,
+    XXXXXXX, TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),    XXXXXXX,                       XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+                                                    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
   [CONFIG] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
@@ -256,7 +265,7 @@ bool rgb_matrix_indicators_user() {
               // layer lock
               set_key_color(66, HSV_PURPLE);
               break;
-            case FXARROWS:
+            case ARROWS:
               set_key_color(48, HSV_RED); // arrows
               set_key_color(52, HSV_RED);
               set_key_color(53, HSV_RED);
@@ -266,10 +275,22 @@ bool rgb_matrix_indicators_user() {
               set_key_color(47, HSV_YELLOW ); // pgup
               set_key_color(49, HSV_YELLOW ); // pgdn
 
+              //copy paste
+              set_key_color(22, HSV_CYAN);
+              set_key_color(17, HSV_CYAN);
+
+              // media
+              set_key_color(11, HSV_GREEN);
+              set_key_color(16, HSV_GREEN);
+              set_key_color(21, HSV_GREEN);
+              set_key_color(26, HSV_GREEN);
+              set_key_color(27, HSV_GREEN);
+              set_key_color(28, HSV_GREEN);
+
+              set_key_color(31, HSV_RED); // caps lock
+              break;
+            case FN:
               // fn
-              set_key_color(1, HSV_BLUE);
-              set_key_color(2, HSV_BLUE);
-              set_key_color(3, HSV_BLUE);
               set_key_color(6, HSV_BLUE);
               set_key_color(7, HSV_BLUE);
               set_key_color(8, HSV_BLUE);
@@ -279,19 +300,9 @@ bool rgb_matrix_indicators_user() {
               set_key_color(16, HSV_BLUE);
               set_key_color(17, HSV_BLUE);
               set_key_color(18, HSV_BLUE);
-
-              //copy paste
-              set_key_color(22, HSV_CYAN);
-              set_key_color(23, HSV_CYAN);
-
-              // media
-              set_key_color(19, HSV_GREEN);
-              set_key_color(24, HSV_GREEN);
-              set_key_color(26, HSV_GREEN);
-              set_key_color(27, HSV_GREEN);
-              set_key_color(28, HSV_GREEN);
-
-              set_key_color(31, HSV_RED); // caps lock
+              set_key_color(21, HSV_BLUE);
+              set_key_color(22, HSV_BLUE);
+              set_key_color(23, HSV_BLUE);
               break;
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader

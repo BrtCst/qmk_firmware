@@ -16,7 +16,8 @@ enum layers {
     BASE = 0,
     GAMING,
     NUMPAD,
-    FXARROWS,
+    ARROWS,
+    FN,
     CONFIG,
     LOCK
 };
@@ -79,9 +80,9 @@ enum tap_dance_codes {
 #define BP_R_MOD MT(MOD_RCTL, BP_R)
 #define BP_A_MOD MT(MOD_RALT, BP_A)
 #define BP_N_MOD MT(MOD_RALT, BP_N)
-#define BP_TAB_MOD MT(MOD_LGUI, KC_TAB)
 #define BP_M_MOD MT(MOD_RGUI, BP_M)
-#define BP_SPC_LT LT(FXARROWS, KC_SPC)
+#define BP_SPC_LT LT(ARROWS, KC_SPC)
+#define BP_TAB_MOD LT(FN, KC_TAB)
 
 void on_dance_custom(tap_dance_state_t *state, void *user_data);
 
@@ -100,7 +101,7 @@ void dance_unlock(tap_dance_state_t *state, void *user_data);
 static const uint16_t top_row[14] = {XXXXXXX, BP_B, BP_EACU, BP_P, BP_O, BP_EGRV, QK_LEAD, TD(D_2), BP_DCIR, BP_V, BP_D, BP_L, BP_J, BP_Z};
 static const uint16_t mid_row[14] = {CMC_SLASH, BP_A_MOD, BP_U_MOD, BP_I_MOD, BP_E_MOD, BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD, BP_S_MOD, BP_R_MOD, BP_N_MOD, BP_M};
 static const uint16_t bot_row[14] = {SH_T(BP_W), BP_AGRV, BP_Y, BP_X, BP_DOT, BP_K, BP_QUOT, BP_Q, BP_G, BP_H, BP_F, BP_CCED};
-static const uint16_t thumb_row[6] = {KC_LGUI, KC_TAB,  BP_SPC_LT, MO(NUMPAD), KC_BSPC, KC_DEL};
+static const uint16_t thumb_row[6] = {KC_LGUI, BP_TAB_MOD,  BP_SPC_LT, MO(NUMPAD), KC_BSPC, KC_DEL};
 
 #define TAP_DANCE_LIST {\
         [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),\
@@ -114,9 +115,9 @@ static const uint16_t thumb_row[6] = {KC_LGUI, KC_TAB,  BP_SPC_LT, MO(NUMPAD), K
         [D_F3_F15] = ACTION_TAP_DANCE_DOUBLE(KC_F3, KC_F15),\
         [D_F4_F16] = ACTION_TAP_DANCE_DOUBLE(KC_F4, KC_F16),\
         [D_F5_F17] = ACTION_TAP_DANCE_DOUBLE(KC_F5, KC_F17),\
-        [D_F6_F18] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F6, KC_LALT, KC_F18, KC_LALT),\
-        [D_F7_F19] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F7, KC_LCTL, KC_F19, KC_LCTL),\
-        [D_F8_F20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(KC_F8, KC_LSFT, KC_F20, KC_LSFT),\
+        [D_F6_F18] = ACTION_TAP_DANCE_DOUBLE(KC_F6, KC_F18),\
+        [D_F7_F19] = ACTION_TAP_DANCE_DOUBLE(KC_F7, KC_F19),\
+        [D_F8_F20] = ACTION_TAP_DANCE_DOUBLE(KC_F8, KC_F20),\
         [D_F9_F21] = ACTION_TAP_DANCE_DOUBLE(KC_F9, KC_F21),\
         [D_F10_F22] = ACTION_TAP_DANCE_DOUBLE(KC_F10, KC_F22),\
         [D_F11_F23] = ACTION_TAP_DANCE_DOUBLE(KC_F11, KC_F23),\
