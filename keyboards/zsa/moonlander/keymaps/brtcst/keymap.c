@@ -113,9 +113,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [CONFIG] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    QK_BOOT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    DB_TOGG,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    QK_BOOT,    DT_PRNT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    DB_TOGG,    DT_UP,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    DT_DOWN,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
@@ -307,6 +307,11 @@ bool rgb_matrix_indicators_user() {
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader
                set_key_color(2, HSV_YELLOW); // bootloader
+
+               // dynamic tap term
+               set_key_color(6, HSV_CYAN);
+               set_key_color(7, HSV_CYAN);
+               set_key_color(8, HSV_CYAN);
                
                // brightness
                set_key_color(27, HSV_YELLOW);

@@ -154,9 +154,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
     // Left Hand                                                                       // Right Hand
-    QK_BOOT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    DB_TOGG,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    QK_BOOT,    DT_PRNT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    DB_TOGG,    DT_UP,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    DT_DOWN,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX
   ),
   [LOCK] = LAYOUT_split_3x6_3_ex2( // lock layer
@@ -363,6 +363,11 @@ bool rgb_matrix_indicators_user() {
             case CONFIG:
                set_key_color(18, HSV_RED); // bootloader
                set_key_color(19, HSV_ORANGE); // debug
+
+               // dynamic tap term
+               set_key_color(15, HSV_CYAN);
+               set_key_color(16, HSV_CYAN);
+               set_key_color(17, HSV_CYAN);
 
                // brightness
                set_key_color(1, HSV_YELLOW);
