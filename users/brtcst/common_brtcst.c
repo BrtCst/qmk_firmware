@@ -304,10 +304,10 @@ void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case BP_E_MOD:
-        case BP_T_MOD:
-        case BP_I_MOD:
-        case BP_S_MOD:
+        // case BP_E_MOD:
+        // case BP_T_MOD:
+        // case BP_I_MOD:
+        // case BP_S_MOD:
         case BP_U_MOD:
         case BP_R_MOD:
         case BP_A_MOD:
