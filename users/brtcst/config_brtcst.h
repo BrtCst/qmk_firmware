@@ -28,6 +28,6 @@
 
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
-#define FLOW_TAP_TERM TAPPING_TERM - 50
+#define FLOW_TAP_TERM TAPPING_TERM - 30
 #define FLOW_TAP_TERM_SHORT FLOW_TAP_TERM
 #define CAPS_WORD_INVERT_ON_SHIFT
