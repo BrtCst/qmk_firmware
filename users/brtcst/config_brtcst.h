@@ -20,7 +20,7 @@
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 160
-#define TAPPING_TERM_HOMEROW_MODS TAPPING_TERM
+#define TAPPING_TERM_HOMEROW_MODS 200
 #define TAPPING_TERM_PER_KEY
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
@@ -28,6 +28,6 @@
 
 #define CHORDAL_HOLD
 // https://docs.qmk.fm/tap_hold#flow-tap
-#define FLOW_TAP_TERM TAPPING_TERM - 30
+#define FLOW_TAP_TERM 150
 #define FLOW_TAP_TERM_SHORT FLOW_TAP_TERM
 #define CAPS_WORD_INVERT_ON_SHIFT
