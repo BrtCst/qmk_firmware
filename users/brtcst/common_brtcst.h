@@ -78,7 +78,7 @@ enum tap_dance_codes {
 #define BP_S_MOD MT(MOD_RSFT, BP_S)
 #define BP_U_MOD MT(MOD_LCTL, BP_U)
 #define BP_R_MOD MT(MOD_RCTL, BP_R)
-#define BP_A_MOD MT(MOD_RALT, BP_A)
+#define BP_A_MOD MT(MOD_LALT, BP_A)
 #define BP_N_MOD MT(MOD_RALT, BP_N)
 #define BP_M_MOD MT(MOD_RGUI, BP_M)
 #define BP_SPC_LT LT(ARROWS, KC_SPC)
