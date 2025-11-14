@@ -22,6 +22,7 @@
 #define TAPPING_TERM 180
 #define TAPPING_TERM_HOMEROW_MODS_SLOW TAPPING_TERM + 20
 #define TAPPING_TERM_HOMEROW_MODS_FAST TAPPING_TERM
+#define TAPPING_TERM_SHORT 150
 #define TAPPING_TERM_PER_KEY
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
