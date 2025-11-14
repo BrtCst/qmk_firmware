@@ -317,7 +317,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case BP_TAB_MOD:
         case BP_SPC_LT:
         case LT(NUMPAD, KC_BSPC):
-            return TAPPING_TERM_HOMEROW_MODS_FAST;
+            return TAPPING_TERM_SHORT;
         default:
             return TAPPING_TERM;
     }
