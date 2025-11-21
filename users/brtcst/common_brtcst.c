@@ -216,8 +216,11 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+      // pas de permissive pour ctrl et alt, pour éviter les raccourcis clavier intempestifs
         case BP_U_MOD:
         case BP_R_MOD:
+        case BP_A_MOD:
+        case BP_N_MOD:
             return false;
         default:
             return true;
@@ -308,12 +311,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case BP_T_MOD:
         case BP_I_MOD:
         case BP_S_MOD:
-          return TAPPING_TERM_HOMEROW_MODS_FAST;
+          return TAPPING_TERM;
         case BP_U_MOD:
         case BP_R_MOD:
         case BP_A_MOD:
         case BP_N_MOD:
-            return TAPPING_TERM_HOMEROW_MODS_SLOW;
+            return TAPPING_TERM;
         case BP_TAB_MOD:
         case BP_SPC_LT:
         case LT(NUMPAD, KC_BSPC):
