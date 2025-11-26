@@ -181,7 +181,6 @@ bool is_flow_tap_key(uint16_t keycode) {
       case BP_G:
       case BP_H:
       case BP_F:
-      case BP_K:
       case BP_QUOT:
 
       case BP_W:
