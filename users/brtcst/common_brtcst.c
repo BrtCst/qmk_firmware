@@ -203,8 +203,11 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
       case BP_T:
       case BP_E_MOD:
       case BP_T_MOD:
-      case KC_SPC:
         return FLOW_TAP_TERM_SHORT;
+      break;
+      case KC_SPC:
+      case BP_SPC_LT:
+        return 0;
       break;
       default:
             return FLOW_TAP_TERM;
