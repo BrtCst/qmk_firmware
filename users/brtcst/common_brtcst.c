@@ -229,7 +229,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
           case BP_R_MOD:
           case BP_A_MOD:
           case BP_N_MOD:
-          case BP_I_MOD:
           case BP_SPC_LT:
             return false;
           default:
@@ -245,6 +244,9 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
     // Exceptionally allow some one-handed chords for hotkeys.
     switch (get_highest_layer(layer_state)) {
         case BASE:
+          if (tap_hold_keycode == BP_SPC_LT) {
+              return false;
+          }
             // on renvoie vers la règle par défaut
             return get_chordal_hold_default(tap_hold_record, other_record);
         default:
