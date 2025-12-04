@@ -134,59 +134,63 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 bool is_flow_tap_key(uint16_t keycode) {
-    switch (get_tap_keycode(keycode)) {
-      case BP_E:
-      case BP_T:
-      case BP_E_MOD:
-      case BP_T_MOD:
-      case BP_A:
-      case BP_U:
-      case BP_A_MOD:
-      case BP_U_MOD:
-      case BP_I:
-      case BP_S:
-      case BP_I_MOD:
-      case BP_S_MOD:
-      case BP_R:
-      case BP_N:
-      case BP_R_MOD:
-      case BP_N_MOD:
-      
-      case KC_SPC:
-      
-      case BP_B:
-      case BP_EACU:
-      case BP_P:
-      case BP_O:
-      case BP_EGRV:
-      case BP_COMM:
-      case BP_DCIR:
-      case BP_V:
-      case BP_D:
-      case BP_L:
-      case BP_J:
-      case BP_Z:
+    switch (get_highest_layer(layer_state)) {
+        case BASE:
 
-      case BP_C:
+          switch (get_tap_keycode(keycode)) {
+            case BP_E:
+            case BP_T:
+            case BP_E_MOD:
+            case BP_T_MOD:
+            case BP_A:
+            case BP_U:
+            case BP_A_MOD:
+            case BP_U_MOD:
+            case BP_I:
+            case BP_S:
+            case BP_I_MOD:
+            case BP_S_MOD:
+            case BP_R:
+            case BP_N:
+            case BP_R_MOD:
+            case BP_N_MOD:
+            
+            case KC_SPC:
+            
+            case BP_B:
+            case BP_EACU:
+            case BP_P:
+            case BP_O:
+            case BP_EGRV:
+            case BP_COMM:
+            case BP_DCIR:
+            case BP_V:
+            case BP_D:
+            case BP_L:
+            case BP_J:
+            case BP_Z:
 
-      case BP_M:
-          
-      // Rangée du bas
-      case BP_AGRV:
-      case BP_Y:
-      case BP_X:
-      //case BP_DOT:
-      case BP_K:
-      case BP_Q:
-      case BP_G:
-      case BP_H:
-      case BP_F:
-      case BP_QUOT:
+            case BP_C:
 
-      case BP_W:
-      case BP_CCED:
-          return true;
-    }
+            case BP_M:
+                
+            // Rangée du bas
+            case BP_AGRV:
+            case BP_Y:
+            case BP_X:
+            //case BP_DOT:
+            case BP_K:
+            case BP_Q:
+            case BP_G:
+            case BP_H:
+            case BP_F:
+            case BP_QUOT:
+
+            case BP_W:
+            case BP_CCED:
+                return true;
+          }
+        }
     return false;
 }
 
@@ -204,11 +208,9 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
       case BP_T:
       case BP_E_MOD:
       case BP_T_MOD:
-        return FLOW_TAP_TERM_SHORT;
-      break;
       case KC_SPC:
       case BP_SPC_LT:
-        return 0;
+        return FLOW_TAP_TERM_SHORT;
       break;
       default:
             return FLOW_TAP_TERM;
@@ -219,16 +221,22 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
 
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-      // pas de permissive pour ctrl et alt, pour éviter les raccourcis clavier intempestifs
-        case BP_U_MOD:
-        case BP_R_MOD:
-        case BP_A_MOD:
-        case BP_N_MOD:
-            return false;
-        default:
-            return true;
-    }
+  //switch (get_highest_layer(layer_state)) {
+    //case BASE:
+      switch (keycode) {
+        // pas de permissive pour ctrl et alt, pour éviter les raccourcis clavier intempestifs
+          case BP_U_MOD:
+          case BP_R_MOD:
+          case BP_A_MOD:
+          case BP_N_MOD:
+          case BP_SPC_LT: // pour éviter les " ?" qui ne passent pas si on les tape trop vite et qui renvoient vers la couche déclenchée par espace
+              return false;
+          default:
+              return true;
+      }
+    //default:
+        //return false;
+    //}
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
@@ -257,7 +265,7 @@ void dance_unlock(tap_dance_state_t *state, void *user_data)
 uint8_t mod_state;
 
 // Mutualisation de la gestion des frappes clavier custom
-void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
+bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
     uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
   #endif 
@@ -306,7 +314,24 @@ void process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
         }
       }
       break;
-  }
+    case RALT_T(CMC_PASTE):
+      if (record->tap.count && record->event.pressed) {
+          tap_code16(C(BP_V));
+          return false; // Return false to ignore further processing of key
+      }
+      break;
+    case LSFT_T(CMC_COPY):
+      if (record->tap.count == 1 && record->event.pressed) {
+          tap_code16(C(BP_C));
+          return false; // Return false to ignore further processing of key
+      }
+      if (record->tap.count == 2 && record->event.pressed) {
+          tap_code16(C(BP_X));
+          return false; // Return false to ignore further processing of key
+      }
+      break;
+    }
+    return true;
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
