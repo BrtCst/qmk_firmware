@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Left Hand                                                                       // Right Hand
     XXXXXXX,      XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,   XXXXXXX,  XXXXXXX,  TD(D_COPY_CUT),LCTL(BP_V), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
+    XXXXXXX,   XXXXXXX,  XXXXXXX,  LSFT_T(CMC_COPY),RALT_T(CMC_PASTE), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
     XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,                    XXXXXXX,              XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                                     XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),MO(CONFIG)
@@ -369,9 +369,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 }
 
-void process_record_brtcst(uint16_t keycode, keyrecord_t *record);
+bool process_record_brtcst(uint16_t keycode, keyrecord_t *record);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  process_record_brtcst(keycode, record);
-  return true;
+  return process_record_brtcst(keycode, record);
 }
