@@ -191,7 +191,7 @@ bool is_flow_tap_key(uint16_t keycode) {
                 return true;
           }
         }
-    return false;
+    return true;
 }
 
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
@@ -229,8 +229,9 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
           case BP_R_MOD:
           case BP_A_MOD:
           case BP_N_MOD:
-          case BP_SPC_LT: // pour éviter les " ?" qui ne passent pas si on les tape trop vite et qui renvoient vers la couche déclenchée par espace
-              return false;
+          case BP_I_MOD:
+          case BP_SPC_LT:
+            return false;
           default:
               return true;
       }

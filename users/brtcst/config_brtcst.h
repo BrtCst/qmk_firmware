@@ -20,8 +20,6 @@
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
-#define TAPPING_TERM_HOMEROW_MODS_SLOW TAPPING_TERM + 20
-#define TAPPING_TERM_HOMEROW_MODS_FAST TAPPING_TERM
 #define TAPPING_TERM_SHORT 150
 #define TAPPING_TERM_PER_KEY
 
