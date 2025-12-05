@@ -248,7 +248,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
           case BP_R_MOD:
           case BP_A_MOD:
           case BP_N_MOD:
-          //case BP_SPC_LT:
+          case BP_SPC_LT:
           case BP_TAB_MOD:
             return false;
           default:
