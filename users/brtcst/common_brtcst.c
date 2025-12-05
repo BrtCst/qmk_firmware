@@ -270,6 +270,10 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
               // espace > shift > caractère == caractère shifté de la couche en LT sur espace
               return false;
           }
+          if (tap_hold_keycode == BP_TAB_MOD) {
+            
+            return false;
+          }
             // on renvoie vers la règle par défaut
             return get_chordal_hold_default(tap_hold_record, other_record);
         default:
