@@ -266,7 +266,7 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
           if (tap_hold_keycode == BP_SPC_LT && (get_mods() & MOD_MASK_SHIFT)) {
               // on désactive le chordal dès que shift est enfoncé, pour faciliter les combinaisons du type espace fine puis ponctuation (" ?")
               // par contre, on veut autoriser le permissive hold sur les raccourcis de la couche en LT sur espace (flèches, copier/coller, etc.)
-              // effet : shift > espace > caractère == espace fine > caractère shifté de la couche de base
+              // effet, avec permissive hold : shift > espace > caractère == espace fine > caractère shifté de la couche de base
               // espace > shift > caractère == caractère shifté de la couche en LT sur espace
               return false;
           }
