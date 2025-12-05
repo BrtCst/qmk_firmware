@@ -154,6 +154,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
 bool is_flow_tap_key(uint16_t keycode) {
     switch (get_highest_layer(layer_state)) {
         case BASE:
@@ -214,8 +215,7 @@ bool is_flow_tap_key(uint16_t keycode) {
     return false;
 }
 
-// Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
-uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
+/*uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
     switch (get_tap_keycode(keycode)) {
@@ -236,7 +236,7 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
     }
   }
     return 0;
-}
+}*/
 
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
