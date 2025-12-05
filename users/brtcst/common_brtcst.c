@@ -136,7 +136,6 @@ bool caps_word_press_user(uint16_t keycode) {
 bool is_flow_tap_key(uint16_t keycode) {
     switch (get_highest_layer(layer_state)) {
         case BASE:
-
           switch (get_tap_keycode(keycode)) {
             case BP_E:
             case BP_T:
@@ -154,8 +153,6 @@ bool is_flow_tap_key(uint16_t keycode) {
             case BP_N:
             case BP_R_MOD:
             case BP_N_MOD:
-            
-            case KC_SPC:
             
             case BP_B:
             case BP_EACU:
@@ -188,10 +185,12 @@ bool is_flow_tap_key(uint16_t keycode) {
 
             case BP_W:
             case BP_CCED:
+
+            case BP_SPC_LT:
                 return true;
           }
         }
-    return true;
+    return false;
 }
 
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
@@ -208,8 +207,6 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
       case BP_T:
       case BP_E_MOD:
       case BP_T_MOD:
-      case KC_SPC:
-      case BP_SPC_LT:
         return FLOW_TAP_TERM_SHORT;
       break;
       default:
@@ -229,7 +226,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
           case BP_R_MOD:
           case BP_A_MOD:
           case BP_N_MOD:
-          case BP_SPC_LT:
+          //case BP_SPC_LT:
+          case BP_TAB_MOD:
             return false;
           default:
               return true;
@@ -350,8 +348,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case BP_N_MOD:
             return TAPPING_TERM;
         case BP_TAB_MOD:
-        case BP_SPC_LT:
-        case LT(NUMPAD, KC_BSPC):
+        //case BP_SPC_LT:
+        //case LT(NUMPAD, KC_BSPC):
             return TAPPING_TERM_SHORT;
         default:
             return TAPPING_TERM;
