@@ -133,6 +133,27 @@ bool caps_word_press_user(uint16_t keycode) {
     return false;
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case BP_E_MOD:
+        case BP_T_MOD:
+        case BP_I_MOD:
+        case BP_S_MOD:
+          return TAPPING_TERM;
+        case BP_U_MOD:
+        case BP_R_MOD:
+        case BP_A_MOD:
+        case BP_N_MOD:
+            return TAPPING_TERM;
+        case BP_TAB_MOD:
+        //case BP_SPC_LT:
+        //case LT(NUMPAD, KC_BSPC):
+            return TAPPING_TERM_SHORT;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 bool is_flow_tap_key(uint16_t keycode) {
     switch (get_highest_layer(layer_state)) {
         case BASE:
@@ -175,7 +196,7 @@ bool is_flow_tap_key(uint16_t keycode) {
             case BP_AGRV:
             case BP_Y:
             case BP_X:
-            //case BP_DOT:
+            case BP_DOT:
             case BP_K:
             case BP_Q:
             case BP_G:
@@ -335,23 +356,4 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case BP_E_MOD:
-        case BP_T_MOD:
-        case BP_I_MOD:
-        case BP_S_MOD:
-          return TAPPING_TERM;
-        case BP_U_MOD:
-        case BP_R_MOD:
-        case BP_A_MOD:
-        case BP_N_MOD:
-            return TAPPING_TERM;
-        case BP_TAB_MOD:
-        //case BP_SPC_LT:
-        //case LT(NUMPAD, KC_BSPC):
-            return TAPPING_TERM_SHORT;
-        default:
-            return TAPPING_TERM;
-    }
-}
+
