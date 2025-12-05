@@ -18,9 +18,17 @@ extern bool is_launching;
 
 
 char chordal_hold_handedness(keypos_t key) {
-    if (key.col == 0 || key.row == 5) { // espace
-        return '*';  // Exempt the outer columns.
-    }
+  switch (key.row) {
+    // thumbs (espace 5:0)
+    case 5:
+     if (key.col == 0 || key.col == 1 || key.col == 2) {
+        return '*';
+     }
+    case 11:
+      if (key.col == 4 || key.col == 5 || key.col == 6) {
+        return '*';
+     }
+  }
     // On split keyboards, typically, the first half of the rows are on the
     // left, and the other half are on the right.
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
