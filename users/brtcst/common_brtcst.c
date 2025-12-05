@@ -207,7 +207,7 @@ bool is_flow_tap_key(uint16_t keycode) {
             case BP_W:
             case BP_CCED:
 
-            case BP_SPC_LT:
+            //case BP_SPC_LT:
                 return true;
           }
         }
@@ -248,7 +248,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
           case BP_R_MOD:
           case BP_A_MOD:
           case BP_N_MOD:
-          //case BP_SPC_LT:
           case BP_TAB_MOD:
             return false;
           default:
@@ -264,7 +263,9 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
     // Exceptionally allow some one-handed chords for hotkeys.
     switch (get_highest_layer(layer_state)) {
         case BASE:
-          if (tap_hold_keycode == BP_SPC_LT) {
+          if (tap_hold_keycode == BP_SPC_LT && (get_mods() & MOD_MASK_SHIFT)) {
+              // on désactive le chordal dès que shift est enfoncé, pour faciliter les combinaisons du type espace fine puis ponctuation (" ?")
+              // par contre, on veut autoriser le permissive hold sur les raccourcis de la couche en LT sur espace (flèches, copier/coller, etc.)
               return false;
           }
             // on renvoie vers la règle par défaut
