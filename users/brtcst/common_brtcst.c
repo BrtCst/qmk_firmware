@@ -159,18 +159,18 @@ bool is_flow_tap_key(uint16_t keycode) {
     switch (get_highest_layer(layer_state)) {
         case BASE:
           switch (get_tap_keycode(keycode)) {
-            case BP_E:
-            case BP_T:
-            case BP_E_MOD:
-            case BP_T_MOD:
+            //case BP_E:
+            //case BP_T:
+            //case BP_E_MOD:
+            //case BP_T_MOD:
             case BP_A:
             case BP_U:
             case BP_A_MOD:
             case BP_U_MOD:
-            case BP_I:
-            case BP_S:
-            case BP_I_MOD:
-            case BP_S_MOD:
+            //case BP_I:
+            //case BP_S:
+            //case BP_I_MOD:
+            //case BP_S_MOD:
             case BP_R:
             case BP_N:
             case BP_R_MOD:
