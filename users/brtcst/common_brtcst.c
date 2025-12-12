@@ -139,16 +139,16 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case BP_T_MOD:
         case BP_I_MOD:
         case BP_S_MOD:
-          return TAPPING_TERM;
+        case BP_TAB_MOD:
+          return TAPPING_TERM_SHORT;
         case BP_U_MOD:
         case BP_R_MOD:
         case BP_A_MOD:
         case BP_N_MOD:
-            return TAPPING_TERM;
-        case BP_TAB_MOD:
+            return TAPPING_TERM_SHORT;
+
         //case BP_SPC_LT:
         //case LT(NUMPAD, KC_BSPC):
-            return TAPPING_TERM_SHORT;
         default:
             return TAPPING_TERM;
     }
@@ -275,6 +275,20 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
         //return false;
     //}
 }
+
+/*bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+      case BP_I_MOD:
+      case BP_S_MOD:
+      case BP_E_MOD:
+      case BP_T_MOD:
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}*/
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                       uint16_t other_keycode, keyrecord_t* other_record) {
