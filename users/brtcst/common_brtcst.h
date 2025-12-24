@@ -33,7 +33,9 @@ enum custom_keycodes {
   CMC_SLASH,
   CMC_CCED,
   CMC_COPY,
-  CMC_PASTE
+  CMC_PASTE,
+  CMC_QUESTION,
+  CMC_EXCLAMATION
 };
 
 enum dance_taps {

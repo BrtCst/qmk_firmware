@@ -353,6 +353,18 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_LSFT(SS_RALT(SS_TAP(X_SPACE))) SS_DELAY(5) SS_LSFT(SS_TAP(X_V)));
       }
       break;
+    case CMC_QUESTION:
+      // ' ?'
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_SPACE)) SS_DELAY(5) SS_LSFT(SS_TAP(X_N)));
+      }
+      break;
+    case CMC_EXCLAMATION:
+      // ' !'
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_SPACE)) SS_DELAY(5) SS_LSFT(SS_TAP(X_Y)));
+      }
+      break;
     case CMC_END_RETURN:
       // END puis enter
       if (record->event.pressed) {
