@@ -40,15 +40,15 @@ const key_override_t next_track_override =
       const key_override_t number_3_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_3,KC_3);
       const key_override_t number_3b_override =ko_make_basic(MOD_MASK_SA,KC_KP_3,LSFT(RALT(KC_3)));
       const key_override_t number_3c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_3,RALT(KC_3));
-      const key_override_t number_4_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_4,KC_4);
-      const key_override_t number_4b_override =ko_make_basic(MOD_MASK_SA,KC_KP_4,LSFT(RALT(KC_4)));
-      const key_override_t number_4c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_4,RALT(KC_4));
-      const key_override_t number_5_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_5,KC_5);
-      const key_override_t number_5b_override =ko_make_basic(MOD_MASK_SA,KC_KP_5,LSFT(RALT(KC_5)));
-      const key_override_t number_5c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_5,RALT(KC_5));
-      const key_override_t number_6_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_6,KC_6);
-      const key_override_t number_6b_override =ko_make_basic(MOD_MASK_SA,KC_KP_6,LSFT(RALT(KC_6)));
-      const key_override_t number_6c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_6,RALT(KC_6));
+      const key_override_t number_4_override =ko_make_basic(MOD_MASK_SHIFT,RSFT_T(KC_KP_4),KC_4);
+      const key_override_t number_4b_override =ko_make_basic(MOD_MASK_SA,RSFT_T(KC_KP_4),LSFT(RALT(KC_4)));
+      const key_override_t number_4c_override =ko_make_basic(MOD_BIT(KC_RALT),RSFT_T(KC_KP_4),RALT(KC_4));
+      const key_override_t number_5_override =ko_make_basic(MOD_MASK_SHIFT,RCTL_T(KC_KP_5),KC_5);
+      const key_override_t number_5b_override =ko_make_basic(MOD_MASK_SA,RCTL_T(KC_KP_5),LSFT(RALT(KC_5)));
+      const key_override_t number_5c_override =ko_make_basic(MOD_BIT(KC_RALT),RCTL_T(KC_KP_5),RALT(KC_5));
+      const key_override_t number_6_override =ko_make_basic(MOD_MASK_SHIFT,LALT_T(KC_KP_6),KC_6);
+      const key_override_t number_6b_override =ko_make_basic(MOD_MASK_SA,LALT_T(KC_KP_6),LSFT(RALT(KC_6)));
+      const key_override_t number_6c_override =ko_make_basic(MOD_BIT(KC_RALT),LALT_T(KC_KP_6),RALT(KC_6));
       const key_override_t number_7_override =ko_make_basic(MOD_MASK_SHIFT,KC_KP_7,KC_7);
       const key_override_t number_7b_override =ko_make_basic(MOD_MASK_SA,KC_KP_7,LSFT(RALT(KC_7)));
       const key_override_t number_7c_override =ko_make_basic(MOD_BIT(KC_RALT),KC_KP_7,RALT(KC_7));
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
     // Left Hand                                                                       // Right Hand
     DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX,   XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    KC_RALT,    KC_LALT,   KC_LCTL,    KC_LSFT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), BP_DLR,
+    XXXXXXX,    KC_LALT,    KC_LCTL,   KC_LSFT,    KC_RALT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), BP_DLR,
     XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_COLON, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
     XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
   ),
