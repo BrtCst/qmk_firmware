@@ -5,8 +5,8 @@
 
 #define PERMISSIVE_HOLD
 #define PERMISSIVE_HOLD_PER_KEY
-#define HOLD_ON_OTHER_KEY_PRESS
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+//#define HOLD_ON_OTHER_KEY_PRESS
+//#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 #undef ONESHOT_TIMEOUT
 #define ONESHOT_TIMEOUT 2000
@@ -23,7 +23,7 @@
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 200
 #define TAPPING_TERM_SHORT 175
-#define TAPPING_TERM_PER_KEY
+//#define TAPPING_TERM_PER_KEY
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 120

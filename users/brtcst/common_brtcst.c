@@ -215,24 +215,10 @@ bool is_flow_tap_key(uint16_t keycode) {
     return false;
 }
 
-uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
+/*uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
     switch (get_tap_keycode(keycode)) {
-      // short term pour shift et ralt
-      /*case BP_I:
-      case BP_S:
-      case BP_I_MOD:
-      case BP_S_MOD:
-      case BP_E:
-      case BP_T:
-      case BP_E_MOD:
-      case BP_T_MOD:
-      case BP_SPC_LT:
-        return FLOW_TAP_TERM_SHORT;
-      break;
-      default:
-            return FLOW_TAP_TERM;*/
       case BP_I:
       case BP_S:
       case BP_I_MOD:
@@ -243,10 +229,13 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
       case BP_T_MOD:
         // flow tap sur shift et ralt uniquement si la touche précédente est un HRM ctrl ou alt
         // ainsi on fludifie les combinaisons avec shift et ralt tout en évitant les erreurs sur les mod-tap ctrl et alt
+        // => inutile au final, cf. la doc qui indique comment est faite la gestion quand le tap-hold est indécis
         if (prev_keycode == BP_A_MOD || prev_keycode == BP_U_MOD ||
             prev_keycode == BP_R_MOD || prev_keycode == BP_N_MOD) {
             return FLOW_TAP_TERM;
-        } else {
+        } else if (prev_keycode == BP_S)
+        
+        else {
             return 0;
         }
       default:
@@ -254,10 +243,10 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
     }
   }
     return 0;
-}
+}*/
 
 // Permissive hold
-/*bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   //switch (get_highest_layer(layer_state)) {
     //case BASE:
       switch (keycode) {
@@ -267,14 +256,14 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
           case BP_A_MOD:
           case BP_N_MOD:
           case BP_TAB_MOD:
-            return true;
+            return false;
           default:
               return true;
       }
     //default:
         //return false;
     //}
-}*/
+}
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                       uint16_t other_keycode, keyrecord_t* other_record) {
@@ -289,7 +278,6 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
               return false;
           }
           if (tap_hold_keycode == BP_TAB_MOD) {
-            
             return false;
           }
             // on renvoie vers la règle par défaut
