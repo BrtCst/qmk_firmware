@@ -215,7 +215,7 @@ bool is_flow_tap_key(uint16_t keycode) {
     return false;
 }
 
-/*uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
     switch (get_tap_keycode(keycode)) {
@@ -229,13 +229,10 @@ bool is_flow_tap_key(uint16_t keycode) {
       case BP_T_MOD:
         // flow tap sur shift et ralt uniquement si la touche précédente est un HRM ctrl ou alt
         // ainsi on fludifie les combinaisons avec shift et ralt tout en évitant les erreurs sur les mod-tap ctrl et alt
-        // => inutile au final, cf. la doc qui indique comment est faite la gestion quand le tap-hold est indécis
         if (prev_keycode == BP_A_MOD || prev_keycode == BP_U_MOD ||
             prev_keycode == BP_R_MOD || prev_keycode == BP_N_MOD) {
             return FLOW_TAP_TERM;
-        } else if (prev_keycode == BP_S)
-        
-        else {
+        } else {
             return 0;
         }
       default:
@@ -243,7 +240,7 @@ bool is_flow_tap_key(uint16_t keycode) {
     }
   }
     return 0;
-}*/
+}
 
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
