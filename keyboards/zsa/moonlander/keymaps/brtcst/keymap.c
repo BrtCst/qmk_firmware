@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
   [ARROWS] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
-    XXXXXXX,      XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,      XXXXXXX, LALT(LCTL(LSFT(KC_F9))), LALT(LCTL(LSFT(KC_F10))), LALT(LCTL(LSFT(KC_F11))),        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
     XXXXXXX,   XXXXXXX,  XXXXXXX,  LSFT_T(CMC_COPY),RALT_T(CMC_PASTE), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
     XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
