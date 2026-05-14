@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    _______,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
                                                     KC_SPC,    MO(ARROWS),    KC_ESC,              _______,    _______,    _______
   ),
-  [NUMPAD] = LAYOUT_moonlander( // Numpad layer
+  [NUM] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     numpad_top_row[0], numpad_top_row[1], numpad_top_row[2], numpad_top_row[3], numpad_top_row[4], numpad_top_row[5], numpad_top_row[6],   numpad_top_row[7], numpad_top_row[8], numpad_top_row[9], numpad_top_row[10], numpad_top_row[11], numpad_top_row[12], numpad_top_row[13],
@@ -266,7 +266,7 @@ bool rgb_matrix_indicators_user() {
             case GAMING:
                 set_key_color(71, HSV_RED);
                 break;
-            case NUMPAD:
+            case NUM:
               set_key_color(2, HSV_RED ); //numlock
               
               // layer lock
