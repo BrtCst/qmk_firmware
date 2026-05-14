@@ -82,19 +82,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [GAMING] = LAYOUT_moonlander( // Gaming layer
     // Left Hand                                                                   // Right Hand
     BP_DLR,  BP_DQUO, BP_LDAQ, BP_RDAQ, BP_LPRN, BP_RPRN, BP_AT,                BP_PERC,    BP_AT,      BP_PLUS,    BP_MINS,    BP_SLSH,    BP_ASTR,    BP_EQL,
-    KC_TAB, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
-    CMC_SLASH, BP_A,    BP_U,    BP_I,    BP_E,     _______, _______,                      _______, _______, _______, _______, _______, _______, _______,
-    KC_LSFT, _______, _______,    _______,    _______,  _______,                                     _______, _______, _______, _______, _______, _______,
+    gaming_top_row[0], gaming_top_row[1], gaming_top_row[2], gaming_top_row[3], gaming_top_row[4], gaming_top_row[5], gaming_top_row[6],   gaming_top_row[7], gaming_top_row[8], gaming_top_row[9], gaming_top_row[10], gaming_top_row[11], gaming_top_row[12], gaming_top_row[13],
+    gaming_mid_row[0], gaming_mid_row[1], gaming_mid_row[2], gaming_mid_row[3], gaming_mid_row[4], gaming_mid_row[5], gaming_mid_row[6],   gaming_mid_row[7], gaming_mid_row[8], gaming_mid_row[9], gaming_mid_row[10], gaming_mid_row[11], gaming_mid_row[12], gaming_mid_row[13],
+    gaming_bot_row[0], gaming_bot_row[1], gaming_bot_row[2], gaming_bot_row[3], gaming_bot_row[4], gaming_bot_row[5],                      gaming_bot_row[6], gaming_bot_row[7], gaming_bot_row[8], gaming_bot_row[9], gaming_bot_row[10], gaming_bot_row[11],
     KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    _______,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
                                                     KC_SPC,    MO(ARROWS),    KC_ESC,              _______,    _______,    _______
   ),
   [NUMPAD] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX,              LGUI(LALT(BP_B)), XXXXXXX, XXXXXXX    ,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX,   XXXXXXX,               QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    KC_LALT,    KC_LCTL,   KC_LSFT,    KC_RALT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RALT_T(KC_KP_4), RSFT_T(KC_KP_5), RCTL_T(KC_KP_6), LALT_T(KC_PAST), XXXXXXX,
-    XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_COLON, XXXXXXX,                                               KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, KC_PSLS, XXXXXXX,
-    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,  XXXXXXX,                XXXXXXX,                    XXXXXXX,                    BP_DLR,     KC_KP_0,    BP_DOT,     BP_COMM,    XXXXXXX,
+    numpad_top_row[0], numpad_top_row[1], numpad_top_row[2], numpad_top_row[3], numpad_top_row[4], numpad_top_row[5], numpad_top_row[6],   numpad_top_row[7], numpad_top_row[8], numpad_top_row[9], numpad_top_row[10], numpad_top_row[11], numpad_top_row[12], numpad_top_row[13],
+    numpad_mid_row[0], numpad_mid_row[1], numpad_mid_row[2], numpad_mid_row[3], numpad_mid_row[4], numpad_mid_row[5], numpad_mid_row[6],   numpad_mid_row[7], numpad_mid_row[8], numpad_mid_row[9], numpad_mid_row[10], numpad_mid_row[11], numpad_mid_row[12], numpad_mid_row[13],
+    numpad_bot_row[0], numpad_bot_row[1], numpad_bot_row[2], numpad_bot_row[3], numpad_bot_row[4], numpad_bot_row[5],                      numpad_bot_row[6], numpad_bot_row[7], numpad_bot_row[8], numpad_bot_row[9], numpad_bot_row[10], numpad_bot_row[11],
+    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,  XXXXXXX,                XXXXXXX,                    XXXXXXX,                    BP_DLR,     XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,
                                                                 MO(CONFIG), XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX
   ),
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
@@ -103,36 +103,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [ARROWS] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,      XXXXXXX, LALT(LCTL(LSFT(KC_F9))), LALT(LCTL(LSFT(KC_F10))), LALT(LCTL(LSFT(KC_F11))),        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,   XXXXXXX,  XXXXXXX,  LSFT_T(CMC_COPY),RALT_T(CMC_PASTE), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RALT_T(KC_LEFT),    RSFT_T(KC_DOWN),    RCTL_T(KC_RIGHT),   LALT_T(KC_DEL),     XXXXXXX,
-    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                                   XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
+    arrows_top_row[0], arrows_top_row[1], arrows_top_row[2], arrows_top_row[3], arrows_top_row[4], arrows_top_row[5], arrows_top_row[6],   arrows_top_row[7], arrows_top_row[8], arrows_top_row[9], arrows_top_row[10], arrows_top_row[11], arrows_top_row[12], arrows_top_row[13],
+    arrows_mid_row[0], arrows_mid_row[1], arrows_mid_row[2], arrows_mid_row[3], arrows_mid_row[4], arrows_mid_row[5], arrows_mid_row[6],   arrows_mid_row[7], arrows_mid_row[8], arrows_mid_row[9], arrows_mid_row[10], arrows_mid_row[11], arrows_mid_row[12], arrows_mid_row[13],
+    arrows_bot_row[0], arrows_bot_row[1], arrows_bot_row[2], arrows_bot_row[3], arrows_bot_row[4], arrows_bot_row[5],                      arrows_bot_row[6], arrows_bot_row[7], arrows_bot_row[8], arrows_bot_row[9], arrows_bot_row[10], arrows_bot_row[11],
     XXXXXXX,    XXXXXXX,    XXXXXXX,            XXXXXXX,            XXXXXXX,                    XXXXXXX,              XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                                     XXXXXXX,        XXXXXXX,   XXXXXXX,              XXXXXXX, TD(D_20),MO(CONFIG)
   ),
   [FN] = LAYOUT_moonlander( // Functions & Arrows layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX, TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    XXXXXXX,                  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX, TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),XXXXXXX, XXXXXXX,            XXXXXXX,    XXXXXXX,    KC_RALT,    KC_RSFT,    KC_RCTL,   KC_LALT,     XXXXXXX,
-    XXXXXXX, TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),    XXXXXXX,                       XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    fn_top_row[0], fn_top_row[1], fn_top_row[2], fn_top_row[3], fn_top_row[4], fn_top_row[5], fn_top_row[6],   fn_top_row[7], fn_top_row[8], fn_top_row[9], fn_top_row[10], fn_top_row[11], fn_top_row[12], fn_top_row[13],
+    fn_mid_row[0], fn_mid_row[1], fn_mid_row[2], fn_mid_row[3], fn_mid_row[4], fn_mid_row[5], fn_mid_row[6],   fn_mid_row[7], fn_mid_row[8], fn_mid_row[9], fn_mid_row[10], fn_mid_row[11], fn_mid_row[12], fn_mid_row[13],
+    fn_bot_row[0], fn_bot_row[1], fn_bot_row[2], fn_bot_row[3], fn_bot_row[4], fn_bot_row[5],                  fn_bot_row[6], fn_bot_row[7], fn_bot_row[8], fn_bot_row[9], fn_bot_row[10], fn_bot_row[11],
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
   [CONFIG] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    QK_BOOT,    DT_PRNT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    DB_TOGG,    DT_UP,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    DT_DOWN,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    config_top_row[0], config_top_row[1], config_top_row[2], config_top_row[3], config_top_row[4], config_top_row[5], config_top_row[6],   config_top_row[7], config_top_row[8], config_top_row[9], config_top_row[10], config_top_row[11], config_top_row[12], config_top_row[13],
+    config_mid_row[0], config_mid_row[1], config_mid_row[2], config_mid_row[3], config_mid_row[4], config_mid_row[5], config_mid_row[6],   config_mid_row[7], config_mid_row[8], config_mid_row[9], config_mid_row[10], config_mid_row[11], config_mid_row[12], config_mid_row[13],
+    config_bot_row[0], config_bot_row[1], config_bot_row[2], config_bot_row[3], config_bot_row[4], config_bot_row[5],                      config_bot_row[6], config_bot_row[7], config_bot_row[8], config_bot_row[9], config_bot_row[10], config_bot_row[11],
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   ),
   [LOCK] = LAYOUT_moonlander( // Arrows & Macros layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TD(D_UNLOCK),              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    lock_top_row[0], lock_top_row[1], lock_top_row[2], lock_top_row[3], lock_top_row[4], lock_top_row[5], lock_top_row[6],   lock_top_row[7], lock_top_row[8], lock_top_row[9], lock_top_row[10], lock_top_row[11], lock_top_row[12], lock_top_row[13],
+    lock_mid_row[0], lock_mid_row[1], lock_mid_row[2], lock_mid_row[3], lock_mid_row[4], lock_mid_row[5], lock_mid_row[6],   lock_mid_row[7], lock_mid_row[8], lock_mid_row[9], lock_mid_row[10], lock_mid_row[11], lock_mid_row[12], lock_mid_row[13],
+    lock_bot_row[0], lock_bot_row[1], lock_bot_row[2], lock_bot_row[3], lock_bot_row[4], lock_bot_row[5],                    lock_bot_row[6], lock_bot_row[7], lock_bot_row[8], lock_bot_row[9], lock_bot_row[10], lock_bot_row[11],
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                XXXXXXX,              XXXXXXX,                XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
                                                     XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX
   )
@@ -212,14 +212,30 @@ void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
     color_table[index] = (hsv_t){h, s, v};
 }
 bool rgb_matrix_indicators_user() {
-    // MOITIÉ GAUCHE
-    // LEDs commencent à 0 en haut à gauche, puis vers le bas
-    // les thumbs noirs sont 32, 33, 34
-    // le thumb rouge est 35
-    // MOITIÉ DROITE
-    // LEDs commencent à 36 en haut à droite
-    // les thumbs noirs sont 68, 69, 70
-    // le thumb rouge est 71
+/*
+ * Moonlander Mark I — RGB LED index map
+ *
+ * Left half                                    Right half
+ * .-----.-----.-----.-----.-----.-----.-----.  .-----.-----.-----.-----.-----.-----.-----.
+ * | 0   | 5   | 10  | 15  | 20  | 25  | 29  |  | 65  | 61  | 56  | 51  | 46  | 41  | 36  |
+ * +-----+-----+-----+-----+-----+-----+-----+  +-----+-----+-----+-----+-----+-----+-----+
+ * | 1   | 6   | 11  | 16  | 21  | 26  | 30  |  | 66  | 62  | 57  | 52  | 47  | 42  | 37  |
+ * +-----+-----+-----+-----+-----+-----+-----+  +-----+-----+-----+-----+-----+-----+-----+
+ * | 2   | 7   | 12  | 17  | 22  | 27  | 31  |  | 67  | 63  | 58  | 53  | 48  | 43  | 38  |
+ * +-----+-----+-----+-----+-----+-----+-----'  '-----+-----+-----+-----+-----+-----+-----+
+ * | 3   | 8   | 13  | 18  | 23  | 28  |              | 64  | 59  | 54  | 49  | 44  | 39  |
+ * +-----+-----+-----+-----+-----+-----+/\          /\+-----+-----+-----+-----+-----+-----+
+ * | 4   | 9   | 14  | 19  | 24  |     /  \        /  \     | 60  | 55  | 50  | 45  | 40  |
+ * '-----'-----'-----'-----+-----’    /\35 \      /71 /\    ’-----+-----'-----'-----'-----'
+ *                                   /  \   \    /   /  \
+ *                                  /32 /\  /    \  /\68 \
+ *                                  \  /  \/      \/  \  /
+ *                                   \/33 /\      /\69 \/
+ *                                    \  /  \    /  \  /
+ *                                     \/34 /    \70 \/
+ *                                      \  /      \  /
+ *                                       \/        \/
+ */
     if (!is_launching) {
         ML_LED_6(host_keyboard_led_state().caps_lock);
         ML_LED_5(!host_keyboard_led_state().num_lock);
@@ -251,24 +267,7 @@ bool rgb_matrix_indicators_user() {
                 set_key_color(71, HSV_RED);
                 break;
             case NUMPAD:
-              set_key_color(47, HSV_GREEN); //numpad
-              set_key_color(48, HSV_GREEN);
-              set_key_color(49, HSV_GREEN);
-              set_key_color(52, HSV_GREEN);
-              set_key_color(53, HSV_GREEN);
-              set_key_color(54, HSV_GREEN );
-              set_key_color(55, HSV_GREEN);
-              set_key_color(57, HSV_GREEN);
-              set_key_color(58, HSV_GREEN);
-              set_key_color(59, HSV_GREEN );
-              set_key_color(62, HSV_RED ); //numlock
-
-              // macros
-              set_key_color(1, HSV_RED);
-              set_key_color(6, HSV_RED);
-              set_key_color(11, HSV_ORANGE);
-              set_key_color(16, HSV_GREEN);
-              set_key_color(21, HSV_GREEN);
+              set_key_color(2, HSV_RED ); //numlock
               
               // layer lock
               set_key_color(66, HSV_PURPLE);
@@ -311,6 +310,13 @@ bool rgb_matrix_indicators_user() {
               set_key_color(21, HSV_BLUE);
               set_key_color(22, HSV_BLUE);
               set_key_color(23, HSV_BLUE);
+
+              // macros
+              set_key_color(62, HSV_RED);
+              set_key_color(57, HSV_RED);
+              set_key_color(52, HSV_ORANGE);
+              set_key_color(47, HSV_GREEN);
+              set_key_color(42, HSV_GREEN);
               break;
             case CONFIG:
                set_key_color(1, HSV_RED); // bootloader

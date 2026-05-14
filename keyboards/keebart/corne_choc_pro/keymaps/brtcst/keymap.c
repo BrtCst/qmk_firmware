@@ -128,45 +128,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //`--------------------------'  `--------------------------'
         ),
   [GAMING] = LAYOUT_split_3x6_3_ex2( // Gaming layer
-    // Left Hand                                                                   // Right Hand
-    BP_W, _______, _______, _______, _______, _______, BP_DCIR,              TD(D_4),  _______, _______, _______, _______, _______, _______,
-    BP_CCED, BP_A,    BP_U,    BP_I,    BP_E,     _______, _______,                      _______, _______, _______, _______, _______, _______, _______,
-    KC_LSFT, BP_AGRV, BP_Y,    BP_X,    BP_DOT,  BP_K,                                     _______, _______, _______, _______, _______, _______,
+    gaming_top_row[0], gaming_top_row[1], gaming_top_row[2], gaming_top_row[3], gaming_top_row[4], gaming_top_row[5], gaming_top_row[6],   gaming_top_row[7],  gaming_top_row[8],  gaming_top_row[9],  gaming_top_row[10], gaming_top_row[11], gaming_top_row[12], gaming_top_row[13],
+    gaming_mid_row[0], gaming_mid_row[1], gaming_mid_row[2], gaming_mid_row[3], gaming_mid_row[4], gaming_mid_row[5], gaming_mid_row[6],   gaming_mid_row[7],  gaming_mid_row[8],  gaming_mid_row[9],  gaming_mid_row[10], gaming_mid_row[11], gaming_mid_row[12], gaming_mid_row[13],
+    gaming_bot_row[0], gaming_bot_row[1], gaming_bot_row[2], gaming_bot_row[3], gaming_bot_row[4], gaming_bot_row[5],                      gaming_bot_row[6],  gaming_bot_row[7],  gaming_bot_row[8],  gaming_bot_row[9],  gaming_bot_row[10], gaming_bot_row[11],
     _______,    _______, _______, _______, _______,    _______
   ),
   [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
-    // Left Hand                                                                       // Right Hand
-    DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX,   XXXXXXX,              QK_LLCK, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, BP_EQL, BP_PERC,
-    XXXXXXX,    KC_LALT,    KC_LCTL,   KC_LSFT,    KC_RALT, XXXXXXX,  XXXXXXX,                XXXXXXX, KC_PPLS, RSFT_T(KC_KP_4), RCTL_T(KC_KP_5), LALT_T(KC_KP_6), RALT_T(KC_PAST), BP_DLR,
-    XXXXXXX,    XXXXXXX,   XXXXXXX,     XXXXXXX, CMC_COLON, XXXXXXX,                              KC_PMNS, KC_KP_1, KC_KP_2, KC_KP_3, BP_DOT, BP_COMM,
+    numpad_top_row[0], numpad_top_row[1], numpad_top_row[2], numpad_top_row[3], numpad_top_row[4], numpad_top_row[5], numpad_top_row[6],   numpad_top_row[7],  numpad_top_row[8],  numpad_top_row[9],  numpad_top_row[10], numpad_top_row[11], numpad_top_row[12], numpad_top_row[13],
+    numpad_mid_row[0], numpad_mid_row[1], numpad_mid_row[2], numpad_mid_row[3], numpad_mid_row[4], numpad_mid_row[5], numpad_mid_row[6],   numpad_mid_row[7],  numpad_mid_row[8],  numpad_mid_row[9],  numpad_mid_row[10], numpad_mid_row[11], numpad_mid_row[12], numpad_mid_row[13],
+    numpad_bot_row[0], numpad_bot_row[1], numpad_bot_row[2], numpad_bot_row[3], numpad_bot_row[4], numpad_bot_row[5],                      numpad_bot_row[6],  numpad_bot_row[7],  numpad_bot_row[8],  numpad_bot_row[9],  numpad_bot_row[10], numpad_bot_row[11],
     XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
   ),
   [ARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
-    // Left Hand                                                                       // Right Hand
-    XXXXXXX,   XXXXXXX,  KC_MEDIA_PREV_TRACK,  TD(D_PLAY_STOP) ,KC_MEDIA_NEXT_TRACK,    KC_MUTE,  TG(LOCK),                  XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_PGUP,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,   XXXXXXX,  XXXXXXX,  LSFT_T(CMC_COPY),RALT_T(CMC_PASTE), KC_VOLU,  KC_CAPS,            XXXXXXX,    KC_BSPC,    RSFT_T(KC_LEFT),    RCTL_T(KC_DOWN),    LALT_T(KC_RIGHT),   RALT_T(KC_DEL),     XXXXXXX,
-    XXXXXXX,   XXXXXXX,  XXXXXXX,  XXXXXXX,XXXXXXX,    KC_VOLD,                       XXXXXXX,    KC_END,     XXXXXXX,    KC_PGDN,    XXXXXXX,    XXXXXXX,
+    arrows_top_row[0], arrows_top_row[1], arrows_top_row[2], arrows_top_row[3], arrows_top_row[4], arrows_top_row[5], arrows_top_row[6],   arrows_top_row[7],  arrows_top_row[8],  arrows_top_row[9],  arrows_top_row[10], arrows_top_row[11], arrows_top_row[12], arrows_top_row[13],
+    arrows_mid_row[0], arrows_mid_row[1], arrows_mid_row[2], arrows_mid_row[3], arrows_mid_row[4], arrows_mid_row[5], arrows_mid_row[6],   arrows_mid_row[7],  arrows_mid_row[8],  arrows_mid_row[9],  arrows_mid_row[10], arrows_mid_row[11], arrows_mid_row[12], arrows_mid_row[13],
+    arrows_bot_row[0], arrows_bot_row[1], arrows_bot_row[2], arrows_bot_row[3], arrows_bot_row[4], arrows_bot_row[5],                      arrows_bot_row[6],  arrows_bot_row[7],  arrows_bot_row[8],  arrows_bot_row[9],  arrows_bot_row[10], arrows_bot_row[11],
     XXXXXXX,    XXXXXXX, XXXXXXX,                                                                  MO(CONFIG), XXXXXXX,    KC_DEL
   ),
   [FN] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
-    // Left Hand                                                                       // Right Hand
-    XXXXXXX, TD(D_F1_F13),   TD(D_F2_F14),   TD(D_F3_F15),   TD(D_F4_F16),XXXXXXX,    XXXXXXX,                  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX, TD(D_F5_F17),   TD(D_F6_F18),   TD(D_F7_F19),   TD(D_F8_F20),XXXXXXX, XXXXXXX,            XXXXXXX,    XXXXXXX,    KC_RALT,    KC_RSFT,    KC_RCTL,   KC_LALT,     XXXXXXX,
-    XXXXXXX, TD(D_F9_F21),   TD(D_F10_F22),  TD(D_F11_F23),  TD(D_F12_F24),    XXXXXXX,                       XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    fn_top_row[0], fn_top_row[1], fn_top_row[2], fn_top_row[3], fn_top_row[4], fn_top_row[5], fn_top_row[6],   fn_top_row[7],  fn_top_row[8],  fn_top_row[9],  fn_top_row[10], fn_top_row[11], fn_top_row[12], fn_top_row[13],
+    fn_mid_row[0], fn_mid_row[1], fn_mid_row[2], fn_mid_row[3], fn_mid_row[4], fn_mid_row[5], fn_mid_row[6],   fn_mid_row[7],  fn_mid_row[8],  fn_mid_row[9],  fn_mid_row[10], fn_mid_row[11], fn_mid_row[12], fn_mid_row[13],
+    fn_bot_row[0], fn_bot_row[1], fn_bot_row[2], fn_bot_row[3], fn_bot_row[4], fn_bot_row[5],                  fn_bot_row[6],  fn_bot_row[7],  fn_bot_row[8],  fn_bot_row[9],  fn_bot_row[10], fn_bot_row[11],
     XXXXXXX, XXXXXXX, XXXXXXX,                                                                  XXXXXXX, XXXXXXX,    XXXXXXX
   ),
   [CONFIG] = LAYOUT_split_3x6_3_ex2( // CONFIG
-    // Left Hand                                                                       // Right Hand
-    QK_BOOT,    DT_PRNT,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    DB_TOGG,    DT_UP,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALU,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    DT_DOWN,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RM_VALD,                                      XXXXXXX,    XXXXXXX,    XXXXXXX,      XXXXXXX,    XXXXXXX,    XXXXXXX,
+    config_top_row[0], config_top_row[1], config_top_row[2], config_top_row[3], config_top_row[4], config_top_row[5], config_top_row[6],   config_top_row[7],  config_top_row[8],  config_top_row[9],  config_top_row[10], config_top_row[11], config_top_row[12], config_top_row[13],
+    config_mid_row[0], config_mid_row[1], config_mid_row[2], config_mid_row[3], config_mid_row[4], config_mid_row[5], config_mid_row[6],   config_mid_row[7],  config_mid_row[8],  config_mid_row[9],  config_mid_row[10], config_mid_row[11], config_mid_row[12], config_mid_row[13],
+    config_bot_row[0], config_bot_row[1], config_bot_row[2], config_bot_row[3], config_bot_row[4], config_bot_row[5],                      config_bot_row[6],  config_bot_row[7],  config_bot_row[8],  config_bot_row[9],  config_bot_row[10], config_bot_row[11],
     XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX
   ),
   [LOCK] = LAYOUT_split_3x6_3_ex2( // lock layer
-    // Left Hand                                                                       // Right Hand
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    TD(D_UNLOCK),              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                      XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+    lock_top_row[0], lock_top_row[1], lock_top_row[2], lock_top_row[3], lock_top_row[4], lock_top_row[5], lock_top_row[6],   lock_top_row[7],  lock_top_row[8],  lock_top_row[9],  lock_top_row[10], lock_top_row[11], lock_top_row[12], lock_top_row[13],
+    lock_mid_row[0], lock_mid_row[1], lock_mid_row[2], lock_mid_row[3], lock_mid_row[4], lock_mid_row[5], lock_mid_row[6],   lock_mid_row[7],  lock_mid_row[8],  lock_mid_row[9],  lock_mid_row[10], lock_mid_row[11], lock_mid_row[12], lock_mid_row[13],
+    lock_bot_row[0], lock_bot_row[1], lock_bot_row[2], lock_bot_row[3], lock_bot_row[4], lock_bot_row[5],                    lock_bot_row[6],  lock_bot_row[7],  lock_bot_row[8],  lock_bot_row[9],  lock_bot_row[10], lock_bot_row[11],
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX
     )
 };
@@ -271,7 +265,18 @@ bool rgb_matrix_indicators_user() {
   // donc les réinitialiser après avoir déclaré la moitié gauche
 
   // NOTE : il faut flasher les deux moitiés du clavier pour que les leds fonctionnent correctement
-  
+/*
+  Left half                     Right half
+.----.----.----.----.----.----.           .----.----.----.----.----.----.
+| 18 | 17 | 12 | 11 | 4  | 3  |----. .----| 26 | 27 | 34 | 35 | 40 | 41 |
++----+----+----+----+----+----+ 21 | | 44 +----+----+----+----+----+----+
+| 19 | 16 | 13 | 10 | 5  | 2  |----+ +----| 25 | 28 | 33 | 36 | 39 | 42 |
++----+----+----+----+----+----+ 22 | | 45 +----+----+----+----+----+----+
+| 20 | 15 | 14 | 9  | 6  | 1  |----+ +----| 24 | 29 | 32 | 37 | 38 | 43 |
+'----'----'----'----+----+----+    | |    +----+----+----'----'----'----'
+                    | 8  | 7  | 0  | | 23 | 30 | 31 |
+                    +----+----+----’ ’----+----+----+
+*/
   for (int i = 0; i < MAX_LEDS; i++)
   {
     set_key_color(i, HSV_BLACK);
@@ -301,26 +306,10 @@ bool rgb_matrix_indicators_user() {
                 set_key_color(44, HSV_RED);
                 break;
             case NUMPAD:
-              set_key_color(27, HSV_GREEN); //numpad
-              set_key_color(28, HSV_GREEN);
-              set_key_color(29, HSV_GREEN);
-              set_key_color(31, HSV_GREEN);
-              set_key_color(32, HSV_GREEN);
-              set_key_color(33, HSV_GREEN);
-              set_key_color(34, HSV_GREEN);
-              set_key_color(35, HSV_GREEN );
-              set_key_color(36, HSV_GREEN);
-              set_key_color(37, HSV_GREEN);
-              set_key_color(26, HSV_RED ); //numlock
+              set_key_color(19, HSV_RED ); //numlock
               
               set_key_color(44, HSV_PURPLE); // layer lock
 
-              // macros
-              set_key_color(18, HSV_RED);
-              set_key_color(17, HSV_RED);
-              set_key_color(12, HSV_ORANGE);
-              set_key_color(11, HSV_GREEN);
-              set_key_color(4, HSV_GREEN);
               break;
             case ARROWS:
               set_key_color(28, HSV_RED); // arrows
@@ -362,6 +351,13 @@ bool rgb_matrix_indicators_user() {
               set_key_color(15, HSV_BLUE);
               set_key_color(16, HSV_BLUE);
               set_key_color(17, HSV_BLUE);
+
+              // macros
+              set_key_color(26, HSV_RED);
+              set_key_color(27, HSV_RED);
+              set_key_color(34, HSV_ORANGE);
+              set_key_color(35, HSV_GREEN);
+              set_key_color(40, HSV_GREEN);
               break;
             case CONFIG:
                set_key_color(18, HSV_RED); // bootloader
