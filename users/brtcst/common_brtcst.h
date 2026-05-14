@@ -15,7 +15,7 @@ typedef struct {
 enum layers {
     BASE = 0,
     GAMING,
-    NUMPAD,
+    NUM,
     ARROWS,
     FN,
     CONFIG,
@@ -71,7 +71,7 @@ enum tap_dance_codes {
   D_PREV_NEXT,
   D_20,
   D_COPY_CUT,
-  D_PASTE_RALT,
+  D_PST_RALT,
   D_UNLOCK
 };
 
@@ -105,34 +105,34 @@ void dance_unlock(tap_dance_state_t *state, void *user_data);
 #define CUSTOM_ACTION_TAP_DANCE_KEYCODES(tap_keycode, hold_keycode) \
     { .fn = {on_dance_custom, dance_custom_finished, dance_custom_reset, NULL}, .user_data = (void *)&((tap_dance_custom_t){tap_keycode, hold_keycode, tap_keycode, hold_keycode, NONE}), }
 
-static const uint16_t top_row[14]   = {XXXXXXX,    BP_B,    BP_EACU,  BP_P,    BP_O,      BP_EGRV, QK_LEAD,  TD(D_2), BP_DCIR, BP_V,    BP_D,    BP_L,    BP_J,    BP_Z};
-static const uint16_t mid_row[14]   = {CMC_SLASH,  BP_A_MOD,BP_U_MOD, BP_I_MOD,BP_E_MOD,  BP_COMM, TD(D_ESC_LOCK), TD(D_3), BP_C, BP_T_MOD,BP_S_MOD,BP_R_MOD,BP_N_MOD,BP_M};
-static const uint16_t bot_row[14]   = {SH_T(BP_W), BP_AGRV_MOD, BP_Y_MOD, BP_X_MOD, BP_DOT_MOD,    BP_K,    BP_QUOT, BP_Q,    BP_G,    BP_H,    BP_F,    BP_CCED};
-static const uint16_t thumb_row[6]  = {KC_LGUI,    BP_TAB_MOD, BP_SPC_LT, LT(NUMPAD, KC_BSPC), KC_DEL, XXXXXXX};
+static const uint16_t top_row[14]        = {XXXXXXX,         BP_B,            BP_EACU,         BP_P,            BP_O,            BP_EGRV,         QK_LEAD,         /*********/ TD(D_2),         BP_DCIR,         BP_V,            BP_D,            BP_L,            BP_J,            BP_Z};
+static const uint16_t mid_row[14]        = {CMC_SLASH,       BP_A_MOD,        BP_U_MOD,        BP_I_MOD,        BP_E_MOD,        BP_COMM,         TD(D_ESC_LOCK),  /*********/ TD(D_3),         BP_C,            BP_T_MOD,        BP_S_MOD,        BP_R_MOD,        BP_N_MOD,        BP_M};
+static const uint16_t bot_row[14]        = {SH_T(BP_W),      BP_AGRV_MOD,     BP_Y_MOD,        BP_X_MOD,        BP_DOT_MOD,      BP_K,                             /*********/                  BP_QUOT,         BP_Q,            BP_G,            BP_H,            BP_F,            BP_CCED};
+static const uint16_t thumb_row[6]       = {KC_LGUI,         BP_TAB_MOD,      BP_SPC_LT,       /*********/      LT(NUM, KC_BSPC),KC_DEL,          XXXXXXX};
 
-static const uint16_t gaming_top_row[14] = {BP_W,    _______,  _______,      _______,         _______,             _______,  BP_DCIR, TD(D_4), _______, _______, _______, _______, _______, _______};
-static const uint16_t gaming_mid_row[14] = {BP_CCED, BP_A,     BP_U,         BP_I,            BP_E,                _______, _______, _______, _______, _______, _______, _______, _______, _______};
-static const uint16_t gaming_bot_row[14] = {KC_LSFT, BP_AGRV,  BP_Y,         BP_X,            BP_DOT,              BP_K,    _______, _______, _______, _______, _______, _______};
+static const uint16_t gaming_top_row[14] = {BP_W,            _______,         _______,         _______,         _______,         _______,         BP_DCIR,         /*********/ TD(D_4),         _______,         _______,         _______,         _______,         _______,         _______};
+static const uint16_t gaming_mid_row[14] = {BP_CCED,         BP_A,            BP_U,            BP_I,            BP_E,            _______,         _______,         /*********/ _______,         _______,         _______,         _______,         _______,         _______,         _______};
+static const uint16_t gaming_bot_row[14] = {KC_LSFT,         BP_AGRV,         BP_Y,            BP_X,            BP_DOT,          BP_K,                             /*********/                  _______,         _______,         _______,         _______,         _______,         _______};
 
-static const uint16_t numpad_top_row[14] = {XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX,   XXXXXXX,               QK_LLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, BP_PERC};
-static const uint16_t numpad_mid_row[14] = {KC_NUM,    LALT_T(KC_KP_1), LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), KC_KP_5,  XXXXXXX,                KC_PPLS, KC_KP_6, RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
-static const uint16_t numpad_bot_row[14] = {XXXXXXX,    RALT_T(XXXXXXX),   LSFT_T(XXXXXXX),     LCTL_T(XXXXXXX), LALT_T(XXXXXXX), XXXXXXX,        KC_PMNS, XXXXXXX, BP_DOT, BP_COMM, KC_PSLS, XXXXXXX};
+static const uint16_t numpad_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         BP_PERC};
+static const uint16_t numpad_mid_row[14] = {KC_NUM,          LALT_T(KC_KP_1), LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), KC_KP_5,         XXXXXXX,         /*********/ KC_PPLS,         KC_KP_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
+static const uint16_t numpad_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         KC_LCTL,         KC_LALT        , XXXXXXX,                          /*********/                  KC_PMNS,         XXXXXXX,         BP_DOT,          BP_COMM,         KC_PSLS,         XXXXXXX};
 
-static const uint16_t arrows_top_row[14] = {XXXXXXX, XXXXXXX,  KC_MEDIA_PREV_TRACK, TD(D_PLAY_STOP), KC_MEDIA_NEXT_TRACK, KC_MUTE, TG(LOCK), XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_PGUP, XXXXXXX, XXXXXXX};
-static const uint16_t arrows_mid_row[14] = {XXXXXXX, KC_LALT,  KC_LCTL,  TD(D_COPY_CUT),TD(D_PASTE_RALT),   KC_VOLU, KC_CAPS, XXXXXXX, KC_BSPC, RSFT_T(KC_LEFT), RCTL_T(KC_DOWN), LALT_T(KC_RIGHT), RALT_T(KC_DEL), XXXXXXX};
-static const uint16_t arrows_bot_row[14] = {XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX,XXXXXXX,             KC_VOLD, XXXXXXX, KC_END,  XXXXXXX, KC_PGDN, XXXXXXX, XXXXXXX};
+static const uint16_t arrows_top_row[14] = {XXXXXXX,         XXXXXXX,         KC_MPRV,         TD(D_PLAY_STOP), KC_MNXT,         KC_MUTE,         TG(LOCK),        /*********/ XXXXXXX,         XXXXXXX,         KC_HOME,         KC_UP,           KC_PGUP,         XXXXXXX,         XXXXXXX};
+static const uint16_t arrows_mid_row[14] = {XXXXXXX,         KC_LALT,         KC_LCTL,         TD(D_COPY_CUT),  TD(D_PST_RALT),  KC_VOLU,         KC_CAPS,         /*********/ XXXXXXX,         KC_BSPC,         RSFT_T(KC_LEFT), RCTL_T(KC_DOWN), LALT_T(KC_RGHT), RALT_T(KC_DEL),  XXXXXXX};
+static const uint16_t arrows_bot_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,                          /*********/                  XXXXXXX,         KC_END,          XXXXXXX,         KC_PGDN,         XXXXXXX,         XXXXXXX};
 
-static const uint16_t fn_top_row[14]    = {XXXXXXX, TD(D_F1_F13), TD(D_F2_F14), TD(D_F3_F15), TD(D_F4_F16), XXXXXXX, XXXXXXX,        XXXXXXX, DM_REC1,    DM_REC2,    DM_RSTP,   DM_PLY1,    DM_PLY2, XXXXXXX};
-static const uint16_t fn_mid_row[14]    = {XXXXXXX, TD(D_F5_F17), TD(D_F6_F18), TD(D_F7_F19), TD(D_F8_F20), XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, KC_RALT, KC_RSFT, KC_RCTL, KC_LALT, XXXXXXX};
-static const uint16_t fn_bot_row[14]    = {XXXXXXX, TD(D_F9_F21), TD(D_F10_F22),TD(D_F11_F23),TD(D_F12_F24), XXXXXXX,                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t fn_top_row[14]     = {XXXXXXX,         TD(D_F1_F13),    TD(D_F2_F14),    TD(D_F3_F15),    TD(D_F4_F16),    XXXXXXX,         XXXXXXX,         /*********/ XXXXXXX,         DM_REC1,         DM_REC2,         DM_RSTP,         DM_PLY1,         DM_PLY2,         XXXXXXX};
+static const uint16_t fn_mid_row[14]     = {XXXXXXX,         TD(D_F5_F17),    TD(D_F6_F18),    TD(D_F7_F19),    TD(D_F8_F20),    XXXXXXX,         XXXXXXX,         /*********/ XXXXXXX,         XXXXXXX,         KC_RALT,         KC_RSFT,         KC_RCTL,         KC_LALT,         XXXXXXX};
+static const uint16_t fn_bot_row[14]     = {XXXXXXX,         TD(D_F9_F21),    TD(D_F10_F22),   TD(D_F11_F23),   TD(D_F12_F24),   XXXXXXX,                          /*********/                  XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX};
 
-static const uint16_t config_top_row[14] = {QK_BOOT, DT_PRNT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t config_mid_row[14] = {DB_TOGG, DT_UP,   XXXXXXX, XXXXXXX, XXXXXXX, RM_VALU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t config_bot_row[14] = {XXXXXXX, DT_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, RM_VALD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_top_row[14] = {QK_BOOT, DT_PRNT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_mid_row[14] = {DB_TOGG, DT_UP,   XXXXXXX, XXXXXXX, XXXXXXX, RM_VALU, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_bot_row[14] = {XXXXXXX, DT_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, RM_VALD,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
 
-static const uint16_t lock_top_row[14] = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TD(D_UNLOCK), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t lock_mid_row[14] = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t lock_bot_row[14] = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t lock_top_row[14]   = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TD(D_UNLOCK),     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t lock_mid_row[14]   = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t lock_bot_row[14]   = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
 
 #define TAP_DANCE_LIST {\
         [D_0] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(KC_TAB), LALT(LCTL(KC_TAB)), LCTL(LSFT(KC_TAB)), LGUI(KC_TAB)),\
@@ -157,7 +157,7 @@ static const uint16_t lock_bot_row[14] = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XX
         [D_PREV_NEXT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(KC_MEDIA_PREV_TRACK, KC_MEDIA_NEXT_TRACK),\
         [D_20] = CUSTOM_ACTION_TAP_DANCE_KEYCODES(LCTL(LGUI(BP_D)), LCTL(LGUI(KC_F4))),\
         [D_COPY_CUT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_C),KC_LSFT, LCTL(BP_X),KC_LSFT),\
-        [D_PASTE_RALT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_V), KC_RALT, LCTL(BP_V), KC_RALT),\
+        [D_PST_RALT] = CUSTOM_ACTION_TAP_DANCE_KEYCODES_ADVANCED(LCTL(BP_V), KC_RALT, LCTL(BP_V), KC_RALT),\
         [D_UNLOCK] = ACTION_TAP_DANCE_FN(dance_unlock)\
 }
 

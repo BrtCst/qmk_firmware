@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     gaming_bot_row[0], gaming_bot_row[1], gaming_bot_row[2], gaming_bot_row[3], gaming_bot_row[4], gaming_bot_row[5],                      gaming_bot_row[6],  gaming_bot_row[7],  gaming_bot_row[8],  gaming_bot_row[9],  gaming_bot_row[10], gaming_bot_row[11],
     _______,    _______, _______, _______, _______,    _______
   ),
-  [NUMPAD] = LAYOUT_split_3x6_3_ex2( // Numpad layer
+  [NUM] = LAYOUT_split_3x6_3_ex2( // Numpad layer
     numpad_top_row[0], numpad_top_row[1], numpad_top_row[2], numpad_top_row[3], numpad_top_row[4], numpad_top_row[5], numpad_top_row[6],   numpad_top_row[7],  numpad_top_row[8],  numpad_top_row[9],  numpad_top_row[10], numpad_top_row[11], numpad_top_row[12], numpad_top_row[13],
     numpad_mid_row[0], numpad_mid_row[1], numpad_mid_row[2], numpad_mid_row[3], numpad_mid_row[4], numpad_mid_row[5], numpad_mid_row[6],   numpad_mid_row[7],  numpad_mid_row[8],  numpad_mid_row[9],  numpad_mid_row[10], numpad_mid_row[11], numpad_mid_row[12], numpad_mid_row[13],
     numpad_bot_row[0], numpad_bot_row[1], numpad_bot_row[2], numpad_bot_row[3], numpad_bot_row[4], numpad_bot_row[5],                      numpad_bot_row[6],  numpad_bot_row[7],  numpad_bot_row[8],  numpad_bot_row[9],  numpad_bot_row[10], numpad_bot_row[11],
@@ -305,7 +305,7 @@ bool rgb_matrix_indicators_user() {
             case GAMING:
                 set_key_color(44, HSV_RED);
                 break;
-            case NUMPAD:
+            case NUM:
               set_key_color(19, HSV_RED ); //numlock
               
               set_key_color(44, HSV_PURPLE); // layer lock
