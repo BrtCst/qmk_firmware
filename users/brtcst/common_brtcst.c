@@ -231,7 +231,9 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
         // ainsi on fludifie les combinaisons avec shift et ralt tout en évitant les erreurs sur les mod-tap ctrl et alt
         if (prev_keycode == BP_A_MOD || prev_keycode == BP_U_MOD ||
             prev_keycode == BP_R_MOD || prev_keycode == BP_N_MOD) {
-            return FLOW_TAP_TERM;
+            //return FLOW_TAP_TERM;
+            // test 2026-04-27 pour éviter le flow tap intempestif sur maj
+            return 0;
         } else {
             return 0;
         }
@@ -359,13 +361,13 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
         }
       }
       break;
-    case RALT_T(CMC_PASTE):
+    case CMC_PASTE:
       if (record->tap.count && record->event.pressed) {
           tap_code16(C(BP_V));
           return false; // Return false to ignore further processing of key
       }
       break;
-    case LSFT_T(CMC_COPY):
+    case CMC_COPY:
       if (record->tap.count == 1 && record->event.pressed) {
           tap_code16(C(BP_C));
           return false; // Return false to ignore further processing of key
