@@ -137,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     numpad_top_row[0], numpad_top_row[1], numpad_top_row[2], numpad_top_row[3], numpad_top_row[4], numpad_top_row[5], numpad_top_row[6],   numpad_top_row[7],  numpad_top_row[8],  numpad_top_row[9],  numpad_top_row[10], numpad_top_row[11], numpad_top_row[12], numpad_top_row[13],
     numpad_mid_row[0], numpad_mid_row[1], numpad_mid_row[2], numpad_mid_row[3], numpad_mid_row[4], numpad_mid_row[5], numpad_mid_row[6],   numpad_mid_row[7],  numpad_mid_row[8],  numpad_mid_row[9],  numpad_mid_row[10], numpad_mid_row[11], numpad_mid_row[12], numpad_mid_row[13],
     numpad_bot_row[0], numpad_bot_row[1], numpad_bot_row[2], numpad_bot_row[3], numpad_bot_row[4], numpad_bot_row[5],                      numpad_bot_row[6],  numpad_bot_row[7],  numpad_bot_row[8],  numpad_bot_row[9],  numpad_bot_row[10], numpad_bot_row[11],
-    XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    KC_KP_0
+    XXXXXXX,   XXXXXXX , MO(CONFIG),                                                             XXXXXXX,     XXXXXXX,    XXXXXXX
   ),
-  [ARROWS] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
+  [NAV] = LAYOUT_split_3x6_3_ex2( // Functions & Arrows layer
     arrows_top_row[0], arrows_top_row[1], arrows_top_row[2], arrows_top_row[3], arrows_top_row[4], arrows_top_row[5], arrows_top_row[6],   arrows_top_row[7],  arrows_top_row[8],  arrows_top_row[9],  arrows_top_row[10], arrows_top_row[11], arrows_top_row[12], arrows_top_row[13],
     arrows_mid_row[0], arrows_mid_row[1], arrows_mid_row[2], arrows_mid_row[3], arrows_mid_row[4], arrows_mid_row[5], arrows_mid_row[6],   arrows_mid_row[7],  arrows_mid_row[8],  arrows_mid_row[9],  arrows_mid_row[10], arrows_mid_row[11], arrows_mid_row[12], arrows_mid_row[13],
     arrows_bot_row[0], arrows_bot_row[1], arrows_bot_row[2], arrows_bot_row[3], arrows_bot_row[4], arrows_bot_row[5],                      arrows_bot_row[6],  arrows_bot_row[7],  arrows_bot_row[8],  arrows_bot_row[9],  arrows_bot_row[10], arrows_bot_row[11],
@@ -311,7 +311,7 @@ bool rgb_matrix_indicators_user() {
               set_key_color(44, HSV_PURPLE); // layer lock
 
               break;
-            case ARROWS:
+            case NAV:
               set_key_color(28, HSV_RED); // arrows
               set_key_color(33, HSV_RED);
               set_key_color(34, HSV_RED);
