@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     gaming_mid_row[0], gaming_mid_row[1], gaming_mid_row[2], gaming_mid_row[3], gaming_mid_row[4], gaming_mid_row[5], gaming_mid_row[6],   gaming_mid_row[7], gaming_mid_row[8], gaming_mid_row[9], gaming_mid_row[10], gaming_mid_row[11], gaming_mid_row[12], gaming_mid_row[13],
     gaming_bot_row[0], gaming_bot_row[1], gaming_bot_row[2], gaming_bot_row[3], gaming_bot_row[4], gaming_bot_row[5],                      gaming_bot_row[6], gaming_bot_row[7], gaming_bot_row[8], gaming_bot_row[9], gaming_bot_row[10], gaming_bot_row[11],
     KC_LCTL,    KC_LGUI,    KC_LALT,    _______,    _______,                _______,              TD(D_4),                _______,    _______,     _______,  _______, KC_RCTL,
-                                                    KC_SPC,    MO(ARROWS),    KC_ESC,              _______,    _______,    _______
+                                                    KC_SPC,    MO(NAV),    KC_ESC,              _______,    _______,    _______
   ),
   [NUM] = LAYOUT_moonlander( // Numpad layer
     // Left Hand                                                                       // Right Hand
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // QK_DYNAMIC_TAPPING_TERM_PRINT	DT_PRNT	Types the current tapping term, in milliseconds
     // QK_DYNAMIC_TAPPING_TERM_UP	DT_UP	Increases the current tapping term by DYNAMIC_TAPPING_TERM_INCREMENTms (5ms by default)
     // QK_DYNAMIC_TAPPING_TERM_DOWN	DT_DOWN
-  [ARROWS] = LAYOUT_moonlander( // Arrows layer
+  [NAV] = LAYOUT_moonlander( // Arrows layer
     // Left Hand                                                                       // Right Hand
     XXXXXXX,      XXXXXXX, LALT(LCTL(LSFT(KC_F9))), LALT(LCTL(LSFT(KC_F10))), LALT(LCTL(LSFT(KC_F11))),        XXXXXXX,    XXXXXXX,              XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     arrows_top_row[0], arrows_top_row[1], arrows_top_row[2], arrows_top_row[3], arrows_top_row[4], arrows_top_row[5], arrows_top_row[6],   arrows_top_row[7], arrows_top_row[8], arrows_top_row[9], arrows_top_row[10], arrows_top_row[11], arrows_top_row[12], arrows_top_row[13],
@@ -236,6 +236,7 @@ bool rgb_matrix_indicators_user() {
  *                                      \  /      \  /
  *                                       \/        \/
  */
+    ML_LED_5(false);
     if (!is_launching) {
         ML_LED_6(host_keyboard_led_state().caps_lock);
         ML_LED_5(!host_keyboard_led_state().num_lock);
@@ -272,7 +273,7 @@ bool rgb_matrix_indicators_user() {
               // layer lock
               set_key_color(66, HSV_PURPLE);
               break;
-            case ARROWS:
+            case NAV:
               set_key_color(48, HSV_RED); // arrows
               set_key_color(52, HSV_RED);
               set_key_color(53, HSV_RED);
