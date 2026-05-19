@@ -304,11 +304,11 @@ bool process_num_internal(uint16_t keycode, keyrecord_t *record, uint8_t mod_sta
   if (record->tap.count && record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
     if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
       del_mods(MOD_MASK_SHIFT);
-      tap_code16(KC_1); // " uint16_t
+      tap_code16(keycode); // " uint16_t
       set_mods(mod_state);
       return false;
     } else {
-      tap_code16(S(KC_1)); // 1
+      tap_code16(S(keycode)); // 1
       return false;
     }
   }
@@ -327,15 +327,55 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
     case BP_KC_1_MOD:
       return process_num_internal(KC_1, record, mod_state);
       break;
+    case BP_KC_2_MOD:
+      return process_num_internal(KC_2, record, mod_state);
+      break;
+    case BP_KC_3_MOD:
+      return process_num_internal(KC_3, record, mod_state);
+      break;
+    case BP_KC_4_MOD:
+      return process_num_internal(KC_4, record, mod_state);
+      break;
+    case BP_KC_7_MOD:
+      return process_num_internal(KC_7, record, mod_state);
+      break;
+    case BP_KC_8_MOD:
+      return process_num_internal(KC_8, record, mod_state);
+      break;
+    case BP_KC_9_MOD:
+      return process_num_internal(KC_9, record, mod_state);
+      break;
+    case BP_KC_0_MOD:
+      return process_num_internal(KC_0, record, mod_state);
+      break;
     case CMC_KC_5:
-      if (record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
-        if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
+      if (record->event.pressed ) {
+        if ((mod_state == MOD_BIT(KC_RALT))) {
+          tap_code16(KC_5);
+          return false;
+        } else if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
           del_mods(MOD_MASK_SHIFT);
           tap_code16(KC_5);
           set_mods(mod_state);
           return false;
         } else {
           tap_code16(S(KC_5));
+          return false;
+        }
+      }
+      break;
+    case CMC_KC_6:
+      if (record->event.pressed ) {
+        if ((mod_state == MOD_BIT(KC_RALT))) {
+          tap_code16(KC_6);
+          return false;
+        } else if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
+          del_mods(MOD_MASK_SHIFT);
+          tap_code16(KC_6);
+          set_mods(mod_state);
+          return false;
+        } else {
+          tap_code16(S(KC_6));
           return false;
         }
       }

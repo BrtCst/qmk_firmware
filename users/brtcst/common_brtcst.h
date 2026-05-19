@@ -127,7 +127,7 @@ static const uint16_t gaming_bot_row[14] = {KC_LSFT,         BP_AGRV,         BP
 
 static const uint16_t numpad_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         BP_PERC};
 //static const uint16_t numpad_mid_row[14] = {KC_NUM,          LALT_T(KC_KP_1), LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), KC_KP_5,         XXXXXXX,         /*********/ KC_PPLS,         KC_KP_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
-static const uint16_t numpad_mid_row[14] = {KC_NUM,          BP_KC_1_MOD, LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), CMC_KC_5,         XXXXXXX,         /*********/ KC_PPLS,         CMC_KC_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
+static const uint16_t numpad_mid_row[14] = {KC_NUM,          BP_KC_1_MOD, BP_KC_2_MOD, BP_KC_3_MOD, BP_KC_4_MOD, CMC_KC_5,         XXXXXXX,         /*********/ KC_PPLS,         CMC_KC_6,         BP_KC_7_MOD, BP_KC_8_MOD, BP_KC_9_MOD, BP_KC_0_MOD, BP_EQL};
 static const uint16_t numpad_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         KC_LCTL,         KC_LALT        , XXXXXXX,                          /*********/                  KC_PMNS,         XXXXXXX,         BP_DOT,          BP_COMM,         KC_PSLS,         XXXXXXX};
 
 static const uint16_t arrows_top_row[14] = {XXXXXXX,         XXXXXXX,         KC_MPRV,         TD(D_PLAY_STOP), KC_MNXT,         KC_MUTE,         TG(LOCK),        /*********/ XXXXXXX,         XXXXXXX,         KC_HOME,         KC_UP,           KC_PGUP,         XXXXXXX,         XXXXXXX};
