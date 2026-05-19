@@ -308,6 +308,18 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
   mod_state = get_mods();
   
   switch (keycode) {
+    case BP_KC_1_MOD:
+      if (record->tap.count && record->event.pressed) {
+        if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
+          del_mods(MOD_MASK_SHIFT);
+          tap_code16(KC_1);
+          set_mods(mod_state);
+        } else {
+            tap_code16(KC_1);
+        }
+        return false;        // Return false to ignore further processing of key
+      }
+      break;
     case CMC_CHEVRON_L:
       if (record->event.pressed) {
         // '« '
