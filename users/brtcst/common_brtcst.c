@@ -299,6 +299,22 @@ void dance_unlock(tap_dance_state_t *state, void *user_data)
 // pour stockage de l’état des modificateurs (shift, alt, ctrl…)
 uint8_t mod_state;
 
+bool process_num_internal(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
+  // on veut inverser le comportement sur shift, mais pas shift + ralt
+  if (record->tap.count && record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
+    if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
+      del_mods(MOD_MASK_SHIFT);
+      tap_code16(KC_1); // " uint16_t
+      set_mods(mod_state);
+      return false;
+    } else {
+      tap_code16(S(KC_1)); // 1
+      return false;
+    }
+  }
+  return true;
+}
+
 // Mutualisation de la gestion des frappes clavier custom
 bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
@@ -309,15 +325,19 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
   
   switch (keycode) {
     case BP_KC_1_MOD:
-      if (record->tap.count && record->event.pressed) {
-        if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
+      return process_num_internal(KC_1, record, mod_state);
+      break;
+    case CMC_KC_5:
+      if (record->tap.count && record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
+        if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
           del_mods(MOD_MASK_SHIFT);
-          tap_code16(KC_1);
+          tap_code16(KC_5);
           set_mods(mod_state);
+          return false;
         } else {
-            tap_code16(KC_1);
+          tap_code16(S(KC_5));
+          return false;
         }
-        return false;        // Return false to ignore further processing of key
       }
       break;
     case CMC_CHEVRON_L:
