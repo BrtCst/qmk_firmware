@@ -35,7 +35,9 @@ enum custom_keycodes {
   CMC_COPY,
   CMC_PASTE,
   CMC_QUESTION,
-  CMC_EXCLAMATION
+  CMC_EXCLAMATION,
+  CMC_KC_5,
+  CMC_KC_6
 };
 
 enum dance_taps {
@@ -91,6 +93,14 @@ enum tap_dance_codes {
 #define BP_SPC_LT LT(NAV, KC_SPC)
 #define BP_TAB_MOD LT(FN, KC_TAB)
 #define BP_BKSP_MOD LT(NAV, KC_BSPC)
+#define BP_KC_1_MOD LALT_T(KC_1)
+#define BP_KC_2_MOD LCTL_T(KC_2)
+#define BP_KC_3_MOD LSFT_T(KC_3)
+#define BP_KC_4_MOD RALT_T(KC_4)
+#define BP_KC_7_MOD RALT_T(KC_7)
+#define BP_KC_8_MOD RCTL_T(KC_8)
+#define BP_KC_9_MOD RSFT_T(KC_9)
+#define BP_KC_0_MOD LALT_T(KC_0)
 
 void on_dance_custom(tap_dance_state_t *state, void *user_data);
 
@@ -116,7 +126,8 @@ static const uint16_t gaming_mid_row[14] = {BP_CCED,         BP_A,            BP
 static const uint16_t gaming_bot_row[14] = {KC_LSFT,         BP_AGRV,         BP_Y,            BP_X,            BP_DOT,          BP_K,                             /*********/                  _______,         _______,         _______,         _______,         _______,         _______};
 
 static const uint16_t numpad_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         BP_PERC};
-static const uint16_t numpad_mid_row[14] = {KC_NUM,          LALT_T(KC_KP_1), LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), KC_KP_5,         XXXXXXX,         /*********/ KC_PPLS,         KC_KP_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
+//static const uint16_t numpad_mid_row[14] = {KC_NUM,          LALT_T(KC_KP_1), LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), KC_KP_5,         XXXXXXX,         /*********/ KC_PPLS,         KC_KP_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
+static const uint16_t numpad_mid_row[14] = {KC_NUM,          BP_KC_1_MOD, LCTL_T(KC_KP_2), LSFT_T(KC_KP_3), RALT_T(KC_KP_4), CMC_KC_5,         XXXXXXX,         /*********/ KC_PPLS,         CMC_KC_6,         RALT_T(KC_KP_7), RSFT_T(KC_KP_8), RCTL_T(KC_KP_9), LALT_T(KC_KP_0), BP_EQL};
 static const uint16_t numpad_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         KC_LCTL,         KC_LALT        , XXXXXXX,                          /*********/                  KC_PMNS,         XXXXXXX,         BP_DOT,          BP_COMM,         KC_PSLS,         XXXXXXX};
 
 static const uint16_t arrows_top_row[14] = {XXXXXXX,         XXXXXXX,         KC_MPRV,         TD(D_PLAY_STOP), KC_MNXT,         KC_MUTE,         TG(LOCK),        /*********/ XXXXXXX,         XXXXXXX,         KC_HOME,         KC_UP,           KC_PGUP,         XXXXXXX,         XXXXXXX};
