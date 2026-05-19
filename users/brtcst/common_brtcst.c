@@ -328,7 +328,7 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
       return process_num_internal(KC_1, record, mod_state);
       break;
     case CMC_KC_5:
-      if (record->tap.count && record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
+      if (record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
         if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
           del_mods(MOD_MASK_SHIFT);
           tap_code16(KC_5);
