@@ -133,26 +133,28 @@ bool caps_word_press_user(uint16_t keycode) {
     return false;
 }
 
-/*uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case BP_E_MOD:
+        /*case BP_E_MOD:
         case BP_T_MOD:
         case BP_I_MOD:
         case BP_S_MOD:
-        case BP_TAB_MOD:
+        case BP_TAB_MOD:*/
+        case LT(NUM, KC_BSPC):
+        case LT(NAV, KC_SPC):
           return TAPPING_TERM_SHORT;
-        case BP_U_MOD:
+        /*case BP_U_MOD:
         case BP_R_MOD:
         case BP_A_MOD:
         case BP_N_MOD:
-            return TAPPING_TERM;
+            return TAPPING_TERM;*/
 
         //case BP_SPC_LT:
         //case LT(NUMPAD, KC_BSPC):
         default:
             return TAPPING_TERM;
     }
-}*/
+}
 
 // Le flow-tap est sur les touches qwerty par défaut, il faut l’adapter au bépo
 bool is_flow_tap_key(uint16_t keycode) {
