@@ -214,11 +214,9 @@ void caps_word_sync(uint8_t initiator2target_buffer_size, const void *initiator2
   }
 
 void keyboard_post_init_user(void) {
-    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    // rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     // enregistrement de la synchro de caps_word, qui ne fonctionne pas par défaut
     transaction_register_rpc(RPC_ID_USER_CAPS_WORD_SYNC, caps_word_sync);
-
-
 }
 
 tap_dance_action_t tap_dance_actions[] = TAP_DANCE_LIST;
@@ -384,7 +382,10 @@ bool rgb_matrix_indicators_user() {
         }
 
   for (size_t i = 0; i < MAX_LEDS; i++) {
-    if (!color_table[i].set) continue;
+    if (!color_table[i].set) {
+        rgb_matrix_set_color(i, 0, 0, 0);
+        continue;
+    }
     hsv_t hsv = color_table[i].hsv;
     if (hsv.v > rgb_matrix_get_val()) {
         hsv.v = rgb_matrix_get_val();

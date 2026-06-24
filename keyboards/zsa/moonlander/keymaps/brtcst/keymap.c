@@ -182,8 +182,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
 }
 
 void keyboard_post_init_user(void) {
-    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    //rgb_matrix_sethsv_noeeprom(HSV_OFF);
+    // rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
 }
 
 void leader_start_user(void) {
@@ -345,7 +344,10 @@ bool rgb_matrix_indicators_user() {
         }
 
   for (size_t i = 0; i < MAX_LEDS; i++) {
-    if (!color_table[i].set) continue;
+    if (!color_table[i].set) {
+        rgb_matrix_set_color(i, 0, 0, 0);
+        continue;
+    }
     hsv_t hsv = color_table[i].hsv;
     if (hsv.v > rgb_matrix_get_val()) {
         hsv.v = rgb_matrix_get_val();
