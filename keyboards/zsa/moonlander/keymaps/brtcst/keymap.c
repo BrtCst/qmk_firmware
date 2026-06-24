@@ -24,6 +24,7 @@ char chordal_hold_handedness(keypos_t key) {
      if (key.col == 0 || key.col == 1 || key.col == 2) {
         return '*';
      }
+     break;
     case 11:
       if (key.col == 4 || key.col == 5 || key.col == 6) {
         return '*';
@@ -376,6 +377,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         ML_LED_2(false);
         ML_LED_3(false);
         ML_LED_4(false);
+        break;
     default: //  for any other layers, or the default layer
         break;
     }
