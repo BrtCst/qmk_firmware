@@ -207,10 +207,14 @@ void leader_end_user(void) {
 }
 
 #define MAX_LEDS 72
-static hsv_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {HSV_BLACK}};
+typedef struct {
+    bool set;
+    hsv_t hsv;
+} led_color_t;
+static led_color_t color_table[MAX_LEDS] = {[0 ... MAX_LEDS-1] = {false, {HSV_BLACK}}};
 
 void set_key_color(uint8_t index, uint8_t h, uint8_t s, uint8_t v) {
-    color_table[index] = (hsv_t){h, s, v};
+    color_table[index] = (led_color_t){true, {h, s, v}};
 }
 bool rgb_matrix_indicators_user() {
 /*
@@ -250,7 +254,7 @@ bool rgb_matrix_indicators_user() {
 
       for (int i = 0; i < MAX_LEDS; i++)
   {
-    set_key_color(i, HSV_BLACK);
+    color_table[i].set = false;
   }
 
     hsv_t caps_color = {0, 0, 0};
@@ -341,7 +345,8 @@ bool rgb_matrix_indicators_user() {
         }
 
   for (size_t i = 0; i < MAX_LEDS; i++) {
-    hsv_t hsv = color_table[i];
+    if (!color_table[i].set) continue;
+    hsv_t hsv = color_table[i].hsv;
     if (hsv.v > rgb_matrix_get_val()) {
         hsv.v = rgb_matrix_get_val();
     }
