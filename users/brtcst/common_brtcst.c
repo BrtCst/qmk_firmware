@@ -428,11 +428,8 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
           register_code16(BP_SLSH);
         }
       } else {
-        if (mod_state & MOD_MASK_SHIFT) {
-          unregister_code16(RALT(BP_AGRV));
-        } else {
-          unregister_code16(BP_SLSH);
-        }
+        unregister_code16(RALT(BP_AGRV));
+        unregister_code16(BP_SLSH);
       }
       break;
     case CMC_PASTE:
