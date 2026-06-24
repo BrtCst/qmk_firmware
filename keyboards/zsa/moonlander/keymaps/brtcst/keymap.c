@@ -268,7 +268,7 @@ bool rgb_matrix_indicators_user() {
                 set_key_color(71, HSV_RED);
                 break;
             case NUM:
-              set_key_color(2, HSV_RED ); //numlock
+              set_key_color(67, HSV_RED ); //numlock
               
               // layer lock
               set_key_color(66, HSV_PURPLE);
@@ -324,9 +324,9 @@ bool rgb_matrix_indicators_user() {
                set_key_color(2, HSV_YELLOW); // bootloader
 
                // dynamic tap term
-               set_key_color(6, HSV_CYAN);
-               set_key_color(7, HSV_CYAN);
-               set_key_color(8, HSV_CYAN);
+               //set_key_color(6, HSV_CYAN);
+               //set_key_color(7, HSV_CYAN);
+               //set_key_color(8, HSV_CYAN);
                
                // brightness
                set_key_color(27, HSV_YELLOW);

@@ -127,7 +127,7 @@ static const uint16_t gaming_bot_row[14] = {KC_LSFT,         BP_AGRV,         BP
 static const uint16_t gaming_thumb_row[6] = {_______, _______, _______,    _______, _______, _______};
 
 static const uint16_t num_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         BP_PERC};
-static const uint16_t num_mid_row[14] = {KC_NUM,          BP_KC_1_MOD,     BP_KC_2_MOD,     BP_KC_3_MOD,     BP_KC_4_MOD,     CMC_KC_5,        XXXXXXX,         /*********/ KC_PPLS,         CMC_KC_6,        BP_KC_7_MOD,     BP_KC_8_MOD,     BP_KC_9_MOD,     BP_KC_0_MOD,     BP_EQL};
+static const uint16_t num_mid_row[14] = {_______,         BP_KC_1_MOD,     BP_KC_2_MOD,     BP_KC_3_MOD,     BP_KC_4_MOD,     CMC_KC_5,        XXXXXXX,         /*********/ KC_NUM,         CMC_KC_6,        BP_KC_7_MOD,     BP_KC_8_MOD,     BP_KC_9_MOD,     BP_KC_0_MOD,     BP_EQL};
 static const uint16_t num_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         LCTL_T(BP_COMM), LALT_T(BP_DOT),  XXXXXXX,                          /*********/                  XXXXXXX,         KC_KP_PLUS,      KC_KP_MINUS,     KC_KP_ASTERISK,  KC_KP_SLASH,     XXXXXXX};
 static const uint16_t num_thumb_row[6]    = {XXXXXXX, XXXXXXX, MO(CONFIG), XXXXXXX, XXXXXXX, XXXXXXX};
 
@@ -141,9 +141,9 @@ static const uint16_t fn_mid_row[14]     = {XXXXXXX,         TD(D_F5_F17),    TD
 static const uint16_t fn_bot_row[14]     = {XXXXXXX,         TD(D_F9_F21),    TD(D_F10_F22),   TD(D_F11_F23),   TD(D_F12_F24),   XXXXXXX,                          /*********/                  XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX};
 static const uint16_t fn_thumb_row[6]     = {XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX};
 
-static const uint16_t config_top_row[14] = {QK_BOOT, DT_PRNT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t config_mid_row[14] = {DB_TOGG, DT_UP,   XXXXXXX, XXXXXXX, XXXXXXX, RM_VALU, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
-static const uint16_t config_bot_row[14] = {XXXXXXX, DT_DOWN, XXXXXXX, XXXXXXX, XXXXXXX, RM_VALD,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_top_row[14] = {QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_mid_row[14] = {DB_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RM_VALU, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
+static const uint16_t config_bot_row[14] = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RM_VALD,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
 static const uint16_t config_thumb_row[6] = {XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX};
 
 static const uint16_t lock_top_row[14]   = {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TD(D_UNLOCK),     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX};
