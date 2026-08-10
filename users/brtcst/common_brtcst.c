@@ -113,8 +113,17 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_KP_7:
         case KC_KP_8:
         case KC_KP_9:
+        case KC_0:
+        case KC_1:
+        case KC_2:
+        case KC_3:
+        case KC_4:
+        case KC_5:
+        case KC_6:
+        case KC_7:
+        case KC_8:
+        case KC_9:
         case KC_KP_MINUS: //tirets
-        case BP_MINS:
         
         // Modificateurs autorisés (ne désactivent pas Caps Word)
         case KC_LSFT:
@@ -301,7 +310,7 @@ void dance_unlock(tap_dance_state_t *state, void *user_data)
 // pour stockage de l’état des modificateurs (shift, alt, ctrl…)
 uint8_t mod_state;
 
-bool process_num_internal(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
+bool process_num_internal_modtap(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
   // on veut inverser le comportement sur shift, mais pas shift + ralt
   if (record->tap.count && record->event.pressed && (mod_state != MOD_BIT(KC_RALT))) {
     if ((mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT))) {
@@ -317,6 +326,24 @@ bool process_num_internal(uint16_t keycode, keyrecord_t *record, uint8_t mod_sta
   return true;
 }
 
+bool process_num_internal(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
+  if (record->event.pressed ) {
+    if ((mod_state == MOD_BIT(KC_RALT))) {
+      tap_code16(keycode);
+      return false;
+    } else if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
+      del_mods(MOD_MASK_SHIFT);
+      tap_code16(keycode);
+      set_mods(mod_state);
+      return false;
+    } else {
+      tap_code16(S(keycode));
+      return false;
+    }
+  }
+  return true;
+}
+
 // Mutualisation de la gestion des frappes clavier custom
 bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
     #ifdef CONSOLE_ENABLE
@@ -326,61 +353,35 @@ bool process_record_brtcst(uint16_t keycode, keyrecord_t *record) {
   mod_state = get_mods();
   
   switch (keycode) {
-    case BP_KC_1_MOD:
+    case CMC_KC_1:
       return process_num_internal(KC_1, record, mod_state);
       break;
-    case BP_KC_2_MOD:
+    case CMC_KC_2:
       return process_num_internal(KC_2, record, mod_state);
       break;
-    case BP_KC_3_MOD:
+    case CMC_KC_3:
       return process_num_internal(KC_3, record, mod_state);
       break;
     case BP_KC_4_MOD:
-      return process_num_internal(KC_4, record, mod_state);
+      return process_num_internal_modtap(KC_4, record, mod_state);
       break;
-    case BP_KC_7_MOD:
+    case BP_KC_5_MOD:
+      return process_num_internal_modtap(KC_5, record, mod_state);
+      break;
+    case BP_KC_6_MOD:
+      return process_num_internal_modtap(KC_6, record, mod_state);
+      break;
+    case CMC_KC_7:
       return process_num_internal(KC_7, record, mod_state);
       break;
-    case BP_KC_8_MOD:
+    case CMC_KC_8:
       return process_num_internal(KC_8, record, mod_state);
       break;
-    case BP_KC_9_MOD:
+    case CMC_KC_9:
       return process_num_internal(KC_9, record, mod_state);
       break;
     case BP_KC_0_MOD:
-      return process_num_internal(KC_0, record, mod_state);
-      break;
-    case CMC_KC_5:
-      if (record->event.pressed ) {
-        if ((mod_state == MOD_BIT(KC_RALT))) {
-          tap_code16(KC_5);
-          return false;
-        } else if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
-          del_mods(MOD_MASK_SHIFT);
-          tap_code16(KC_5);
-          set_mods(mod_state);
-          return false;
-        } else {
-          tap_code16(S(KC_5));
-          return false;
-        }
-      }
-      break;
-    case CMC_KC_6:
-      if (record->event.pressed ) {
-        if ((mod_state == MOD_BIT(KC_RALT))) {
-          tap_code16(KC_6);
-          return false;
-        } else if (mod_state == MOD_BIT(KC_LSFT) || mod_state == MOD_BIT(KC_RSFT)) {
-          del_mods(MOD_MASK_SHIFT);
-          tap_code16(KC_6);
-          set_mods(mod_state);
-          return false;
-        } else {
-          tap_code16(S(KC_6));
-          return false;
-        }
-      }
+      return process_num_internal_modtap(KC_0, record, mod_state);
       break;
     case CMC_CHEVRON_L:
       if (record->event.pressed) {
