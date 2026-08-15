@@ -137,7 +137,7 @@ static const uint16_t num_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LS
 static const uint16_t num_thumb_row[6]    = {XXXXXXX, XXXXXXX, MO(CONFIG), XXXXXXX, XXXXXXX, XXXXXXX};
 
 static const uint16_t nav_top_row[14] = {XXXXXXX,         XXXXXXX,         KC_MPRV,         TD(D_PLAY_STOP), KC_MNXT,         KC_MUTE,         TG(LOCK),        /*********/ XXXXXXX,         XXXXXXX,         KC_HOME,         KC_UP,           KC_PGUP,         XXXXXXX,         XXXXXXX};
-static const uint16_t nav_mid_row[14] = {XXXXXXX,         LALT_T(KC_BSPC), LCTL_T(KC_DEL),  TD(D_COPY_CUT),  TD(D_PST_RALT),  KC_VOLU,         KC_CAPS,         /*********/ XXXXXXX,         KC_BSPC,         RSFT_T(KC_LEFT), RCTL_T(KC_DOWN), LALT_T(KC_RGHT), RALT_T(KC_DEL),  XXXXXXX};
+static const uint16_t nav_mid_row[14] = {XXXXXXX,         LALT_T(KC_BSPC), LCTL_T(KC_DEL),  TD(D_COPY_CUT),  TD(D_PST_RALT),  KC_VOLU,         KC_CAPS,         /*********/ XXXXXXX,         KC_BSPC,         RALT_T(KC_LEFT), RSFT_T(KC_DOWN), RCTL_T(KC_RGHT), LALT_T(KC_DEL),  XXXXXXX};
 static const uint16_t nav_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         KC_LCTL,         KC_LALT,         KC_VOLD,                          /*********/                  XXXXXXX,         KC_END,          XXXXXXX,         KC_PGDN,         XXXXXXX,         XXXXXXX};
 static const uint16_t nav_thumb_row[6]    = {XXXXXXX, XXXXXXX, XXXXXXX,    MO(CONFIG), XXXXXXX, KC_DEL};
 

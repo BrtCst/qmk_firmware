@@ -246,22 +246,17 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
 
 // Permissive hold
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  //switch (get_highest_layer(layer_state)) {
-    //case BASE:
-      switch (keycode) {
-        // pas de permissive pour ctrl et alt, pour éviter les raccourcis clavier intempestifs
-          case BP_U_MOD:
-          case BP_R_MOD:
-          case BP_A_MOD:
-          case BP_N_MOD:
-          case BP_TAB_MOD:
-            return false;
-          default:
-              return true;
-      }
-    //default:
-        //return false;
-    //}
+  switch (keycode) {
+    // pas de permissive pour ctrl et alt, pour éviter les raccourcis clavier intempestifs
+      case BP_U_MOD:
+      case BP_R_MOD:
+      case BP_A_MOD:
+      case BP_N_MOD:
+      case BP_TAB_MOD:
+        return false;
+      default:
+          return true;
+  }
 }
 
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
