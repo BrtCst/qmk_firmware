@@ -222,24 +222,15 @@ bool is_flow_tap_key(uint16_t keycode) {
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
                            uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
-    switch (get_tap_keycode(keycode)) {
-      case BP_I:
-      case BP_S:
-      case BP_E:
-      case BP_T:
-        // flow tap sur shift et ralt uniquement si la touche précédente est un HRM ctrl ou alt
-        // ainsi on fludifie les combinaisons avec shift et ralt tout en évitant les erreurs sur les mod-tap ctrl et alt
-        if (prev_keycode == BP_A_MOD || prev_keycode == BP_U_MOD ||
-            prev_keycode == BP_R_MOD || prev_keycode == BP_N_MOD) {
-            //return FLOW_TAP_TERM;
-            // test 2026-04-27 pour éviter le flow tap intempestif sur maj
-            return 0;
-        } else {
-            return 0;
-        }
-      default:
-            return FLOW_TAP_TERM;
-    }
+      switch (get_tap_keycode(keycode)) {
+        case BP_I:
+        case BP_S:
+        case BP_E:
+        case BP_T:
+          return 0;
+        default:
+          return FLOW_TAP_TERM;
+      }
   }
     return 0;
 }

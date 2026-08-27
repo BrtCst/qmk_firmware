@@ -13,7 +13,8 @@
 #define COMBO_SHOULD_TRIGGER
 #define COMBO_STRICT_TIMER
 #define COMBO_TERM 30 //28
-#define COMBO_TERM_SHORT 30 //16
+// pour combos sur home row
+#define COMBO_TERM_SHORT 18 //16
 #define COMBO_TERM_PER_COMBO
 
 #define LEADER_TIMEOUT 300
