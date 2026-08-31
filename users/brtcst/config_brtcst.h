@@ -23,7 +23,7 @@
 
 // Configure the global tapping term (default: 200ms)
 #define TAPPING_TERM 160
-#define TAPPING_TERM_SHORT 120
+#define TAPPING_TERM_SHORT 160   
 #define TAPPING_TERM_LONG 200
 #define TAPPING_TERM_PER_KEY
 
