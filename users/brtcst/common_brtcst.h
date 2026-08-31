@@ -129,7 +129,7 @@ static const uint16_t base_thumb_row[6]       = {SH_MON,          LT(FN,KC_TAB),
 static const uint16_t gaming_top_row[14] = {_______,         _______,         _______,         _______,         _______,         _______,         BP_DCIR,         /*********/ TD(D_4),         _______,         _______,         _______,         _______,         _______,         _______};
 static const uint16_t gaming_mid_row[14] = {BP_CCED,         BP_A,            BP_U,            BP_I,            BP_E,            _______,         _______,         /*********/ _______,         _______,         _______,         _______,         _______,         _______,         _______};
 static const uint16_t gaming_bot_row[14] = {KC_LSFT,         BP_AGRV,         BP_Y,            BP_X,            BP_DOT,          BP_K,                             /*********/                  _______,         _______,         _______,         _______,         _______,         _______};
-static const uint16_t gaming_thumb_row[6] = {_______, _______, _______,    _______, _______, _______};
+static const uint16_t gaming_thumb_row[6] = {_______, KC_TAB, KC_SPC,    _______, _______, _______};
 
 static const uint16_t num_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_KP_PLUS,      KC_KP_MINUS,     XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         CMC_KC_7,     CMC_KC_8,     CMC_KC_9,         XXXXXXX,         BP_PERC};
 static const uint16_t num_mid_row[14] = {_______,         LALT_T(KC_BSPC), CTL_T(KC_DEL),   LSFT_T(KC_KP_ASTERISK),RALT_T(KC_KP_SLASH), XXXXXXX, XXXXXXX,       /*********/ KC_NUM,          XXXXXXX,         BP_KC_4_MOD,  BP_KC_5_MOD,  BP_KC_6_MOD,  BP_KC_0_MOD,     BP_EQL};

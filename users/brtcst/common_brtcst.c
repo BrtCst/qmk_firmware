@@ -160,6 +160,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
         //case BP_SPC_LT:
         //case LT(NUMPAD, KC_BSPC):
+        // tap term long pour ctrl & alt
+        case BP_U_MOD:
+        case BP_R_MOD:
+        case BP_A_MOD:
+        case BP_N_MOD:
+          return TAPPING_TERM_LONG;
         default:
             return TAPPING_TERM;
     }
