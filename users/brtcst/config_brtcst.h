@@ -22,8 +22,8 @@
 #define RGB_MATRIX_VAL_STEP 10
 
 // Configure the global tapping term (default: 200ms)
-#define TAPPING_TERM 160
-#define TAPPING_TERM_SHORT 160   
+#define TAPPING_TERM 170
+#define TAPPING_TERM_SHORT 160
 #define TAPPING_TERM_LONG 200
 #define TAPPING_TERM_PER_KEY
 
