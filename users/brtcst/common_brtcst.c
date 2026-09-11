@@ -52,6 +52,12 @@ void dance_custom_reset(tap_dance_state_t *state, void *user_data) {
 }
 
 bool caps_word_press_user(uint16_t keycode) {
+  // AltGr actif = on est sur une combinaison de touche morte bépo :
+    // on laisse passer tel quel, sans ajouter de Shift dessus.
+    if (get_mods() & MOD_BIT(KC_RALT)) {
+        return true;
+    }
+   
     switch (keycode) {
         // Lettres en BÉPO (basées sur leur position physique QWERTY)
         

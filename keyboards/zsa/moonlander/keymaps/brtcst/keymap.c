@@ -240,10 +240,10 @@ bool rgb_matrix_indicators_user() {
  *                                      \  /      \  /
  *                                       \/        \/
  */
-    ML_LED_5(false);
+    //ML_LED_5(false);
     if (!is_launching) {
-        ML_LED_6(host_keyboard_led_state().caps_lock);
-        ML_LED_5(!host_keyboard_led_state().num_lock);
+        //ML_LED_6(host_keyboard_led_state().caps_lock);
+        //ML_LED_5(!host_keyboard_led_state().num_lock);
 
         if (host_keyboard_led_state().caps_lock) {
             set_key_color(3, RGB_RED);
