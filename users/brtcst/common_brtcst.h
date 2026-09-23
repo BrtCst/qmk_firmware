@@ -133,7 +133,7 @@ static const uint16_t gaming_thumb_row[6] = {_______, _______, KC_SPC,    ______
 
 static const uint16_t num_top_row[14] = {XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_KP_PLUS,      KC_KP_MINUS,     XXXXXXX,         XXXXXXX,         /*********/ QK_LLCK,         XXXXXXX,         CMC_KC_7,     CMC_KC_8,     CMC_KC_9,         XXXXXXX,         BP_PERC};
 static const uint16_t num_mid_row[14] = {_______,         LALT_T(KC_BSPC), CTL_T(KC_DEL),   LSFT_T(KC_KP_ASTERISK),RALT_T(KC_KP_SLASH), XXXXXXX, XXXXXXX,       /*********/ KC_NUM,          XXXXXXX,         BP_KC_4_MOD,  BP_KC_5_MOD,  BP_KC_6_MOD,  BP_KC_0_MOD,     BP_EQL};
-static const uint16_t num_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         LCTL_T(BP_COMM), LALT_T(BP_DOT),  XXXXXXX,                          /*********/                  XXXXXXX,         CMC_KC_1,     CMC_KC_2,     CMC_KC_3,         XXXXXXX,         XXXXXXX};
+static const uint16_t num_bot_row[14] = {XXXXXXX,         KC_RALT,         KC_LSFT,         LCTL_T(BP_COMM), LALT_T(BP_DOT),  XXXXXXX,                          /*********/                  XXXXXXX,         CMC_KC_1,     CMC_KC_2,     CMC_KC_3,        BP_DOT,           XXXXXXX};
 static const uint16_t num_thumb_row[6]    = {XXXXXXX, XXXXXXX, MO(CONFIG), XXXXXXX, XXXXXXX, XXXXXXX};
 
 static const uint16_t nav_top_row[14] = {XXXXXXX,         XXXXXXX,         KC_MPRV,         TD(D_PLAY_STOP), KC_MNXT,         KC_MUTE,         TG(LOCK),        /*********/ XXXXXXX,         XXXXXXX,         KC_HOME,         KC_UP,           KC_PGUP,         XXXXXXX,         XXXXXXX};
