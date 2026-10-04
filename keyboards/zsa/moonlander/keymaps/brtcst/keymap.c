@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     base_top_row[0], base_top_row[1], base_top_row[2], base_top_row[3], base_top_row[4], base_top_row[5], base_top_row[6],              base_top_row[7], base_top_row[8], base_top_row[9], base_top_row[10], base_top_row[11], base_top_row[12], base_top_row[13],
     base_mid_row[0], base_mid_row[1], base_mid_row[2], base_mid_row[3], base_mid_row[4], base_mid_row[5], base_mid_row[6],                base_mid_row[7], base_mid_row[8], base_mid_row[9], base_mid_row[10], base_mid_row[11], base_mid_row[12], base_mid_row[13],
     base_bot_row[0], base_bot_row[1], base_bot_row[2], base_bot_row[3], base_bot_row[4], base_bot_row[5],                                        base_bot_row[6], base_bot_row[7], base_bot_row[8], base_bot_row[9], base_bot_row[10], base_bot_row[11],
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    base_thumb_row[0],    base_thumb_row[1],           LGUI(BP_SCLN),       TD(D_2),                base_thumb_row[4],    base_thumb_row[5],     XXXXXXX,  XXXXXXX, XXXXXXX,
+    XXXXXXX,    XXXXXXX,    XXXXXXX,    base_thumb_row[0],    base_thumb_row[1],           LGUI(BP_SCLN),       TO(GAMING),                base_thumb_row[4],    base_thumb_row[5],     XXXXXXX,  XXXXXXX, XXXXXXX,
                                                     base_thumb_row[2],  SH_MON,     XXXXXXX,              XXXXXXX,    XXXXXXX,    base_thumb_row[3]
   ),
   [GAMING] = LAYOUT_moonlander( // Gaming layer
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     gaming_top_row[0], gaming_top_row[1], gaming_top_row[2], gaming_top_row[3], gaming_top_row[4], gaming_top_row[5], gaming_top_row[6],   gaming_top_row[7], gaming_top_row[8], gaming_top_row[9], gaming_top_row[10], gaming_top_row[11], gaming_top_row[12], gaming_top_row[13],
     gaming_mid_row[0], gaming_mid_row[1], gaming_mid_row[2], gaming_mid_row[3], gaming_mid_row[4], gaming_mid_row[5], gaming_mid_row[6],   gaming_mid_row[7], gaming_mid_row[8], gaming_mid_row[9], gaming_mid_row[10], gaming_mid_row[11], gaming_mid_row[12], gaming_mid_row[13],
     gaming_bot_row[0], gaming_bot_row[1], gaming_bot_row[2], gaming_bot_row[3], gaming_bot_row[4], gaming_bot_row[5],                      gaming_bot_row[6], gaming_bot_row[7], gaming_bot_row[8], gaming_bot_row[9], gaming_bot_row[10], gaming_bot_row[11],
-    KC_LCTL,    KC_LGUI,    KC_LALT,    gaming_thumb_row[0],    gaming_thumb_row[1],                _______,              TD(D_4),                gaming_thumb_row[4],    gaming_thumb_row[5],     _______,  _______, KC_RCTL,
+    KC_LCTL,    KC_LGUI,    KC_LALT,    gaming_thumb_row[0],    gaming_thumb_row[1],                _______,              TO(BASE),                gaming_thumb_row[4],    gaming_thumb_row[5],     _______,  _______, KC_RCTL,
                                                     gaming_thumb_row[2],    MO(NAV),    KC_ESC,              _______,    _______,    gaming_thumb_row[3]
   ),
   [NUM] = LAYOUT_moonlander( // Numpad layer
