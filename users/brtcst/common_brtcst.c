@@ -171,6 +171,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case BP_R_MOD:
         case BP_A_MOD:
         case BP_N_MOD:
+        case BP_X_MOD:
+        case BP_DOT_MOD:
+        case BP_Q_MOD:
+        case BP_G_MOD:
           return TAPPING_TERM_LONG;
         default:
             return TAPPING_TERM;
@@ -239,6 +243,10 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record,
         case BP_S:
         case BP_E:
         case BP_T:
+        case BP_AGRV:
+        case BP_Y:
+        case BP_H:
+        case BP_F:
           return 0;
         default:
           return FLOW_TAP_TERM;
@@ -255,6 +263,10 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
       case BP_R_MOD:
       case BP_A_MOD:
       case BP_N_MOD:
+      case BP_X_MOD:
+      case BP_DOT_MOD:
+      case BP_Q_MOD:
+      case BP_G_MOD:
       case BP_TAB_MOD:
         return false;
       default:
